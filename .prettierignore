@@ -1,0 +1,16 @@
+node_modules
+dist
+build
+public
+
+.prettierrc
+
+package.json
+package-lock.json
+tsconfig.json
+postcss.config.mjs
+next.config.ts
+next-env.d.ts
+
+CHANGELOG.md
+README.md
