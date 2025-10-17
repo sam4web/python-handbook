@@ -1,0 +1,15 @@
+import { Fira_Code, Inter, Poppins } from "next/font/google";
+
+export const inter = Inter({
+  weight: "variable",
+  subsets: ["latin"],
+});
+
+export const poppins = Poppins({
+  weight: ["100", "900"],
+  subsets: ["latin"],
+});
+
+export const firaCode = Fira_Code({
+  weight: "variable",
+});

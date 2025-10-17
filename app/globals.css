@@ -2,19 +2,19 @@
 
 :root {
   /* Base */
-  --background: #f9fafb;
-  --foreground: #1f2937;
+  --background: #f8fafc;
+  --foreground: #1e293b;
   --card: #ffffff;
   --border: #e5e7eb;
   --muted: #e5e7eb;
   --muted-foreground: #6b7280;
 
   /* Primary & Secondary */
-  --primary: #06b6d4;
+  --primary: #38bdf8;
   --primary-foreground: #ffffff;
   --secondary: #f3f4f6;
   --secondary-foreground: #1f2937;
-  --accent: #06b6d4;
+  --accent: #38bdf8;
   --accent-foreground: #ffffff;
 
   /* Status */
@@ -23,11 +23,11 @@
 }
 
 .dark {
-  --background: #1e1e1e;
-  --foreground: #e5e7eb;
+  --background: #0f172a;
+  --foreground: #e2e8f0;
   --card: #2a2a2a;
-  --border: #374151;
-  --muted: #374151;
+  --border: #182130;
+  --muted: #182130;
   --muted-foreground: #9ca3af;
 
   --primary: #06b6d4;
@@ -60,8 +60,17 @@
   --color-destructive-foreground: var(--destructive-foreground);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-inter);
+@layer base {
+  *,
+  *::before,
+  *::after {
+    transition: all 140ms linear;
+    @apply m-0 p-0 box-border;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-inter);
+  }
 }
