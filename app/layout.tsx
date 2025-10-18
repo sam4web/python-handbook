@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import { inter } from "@/lib/fonts";
 import ThemeProvider from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
-import { inter } from "@/lib/fonts";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Python Handbook",
