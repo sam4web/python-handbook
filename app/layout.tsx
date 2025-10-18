@@ -19,7 +19,7 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Navbar />
-          <main>{children}</main>
+          <main className="mt-20 w-full h-dvh relative">{children}</main>
         </ThemeProvider>
       </body>
     </html>
