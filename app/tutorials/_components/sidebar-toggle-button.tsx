@@ -2,9 +2,9 @@
 
 import Button from "@/components/ui/button";
 import { useSidebar } from "../_context/sidebar-context";
-import { BookOpen } from "lucide-react";
+import { BookOpen, X } from "lucide-react";
 
-export default function OpenSidebarButton() {
+export function OpenSidebarButton() {
   const { openTutorialSidebar } = useSidebar();
 
   return (
@@ -15,6 +15,21 @@ export default function OpenSidebarButton() {
       className="border-card! bg-border! fixed left-2"
     >
       <BookOpen />
+    </Button>
+  );
+}
+
+export function CloseSidebarButton() {
+  const { closeTutorialSidebar } = useSidebar();
+
+  return (
+    <Button
+      variant="icon"
+      title="Close tutorial sidebar"
+      onClick={closeTutorialSidebar}
+      className="[&>svg]:text-destructive! p-0.5!"
+    >
+      <X />
     </Button>
   );
 }
