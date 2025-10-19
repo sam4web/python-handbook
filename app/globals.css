@@ -75,15 +75,15 @@
     font-family: var(--font-inter);
   }
 
-  body::-webkit-scrollbar-track {
+  .styled-scrollbar::-webkit-scrollbar-track {
     @apply bg-muted;
   }
 
-  body::-webkit-scrollbar-thumb {
+  .styled-scrollbar::-webkit-scrollbar-thumb {
     @apply rounded-xs bg-muted-foreground;
   }
 
-  body::-webkit-scrollbar {
+  .styled-scrollbar::-webkit-scrollbar {
     @apply w-2;
   }
 }

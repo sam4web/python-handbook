@@ -40,7 +40,7 @@ export default function Dropdown({ id, title, items, active: isActive }: Props) 
               className={cx(
                 "hover:bg-muted-foreground/20 py-2 px-2.5 cursor-pointer block border-l-4 rounded-lg",
                 pathname.includes(item.slug)
-                  ? "text-primary border-primary rounded-l-xs bg-muted-foreground/15"
+                  ? "text-primary border-primary rounded-l-xs dark:bg-muted-foreground/15 bg-muted-foreground/5"
                   : "border-transparent"
               )}
               key={idx}

@@ -2,16 +2,22 @@ import { createContext, useContext, useState } from "react";
 
 interface SidebarContextType {
   activeDropdownList: string[];
+  showTutorialSidebar: boolean;
+  openTutorialSidebar: () => void;
+  closeTutorialSidebar: () => void;
   handleActiveDropdown: (dropdownId: string) => void;
 }
 const initialContextValue: SidebarContextType = {
   activeDropdownList: [],
+  showTutorialSidebar: false,
+  openTutorialSidebar: () => {},
+  closeTutorialSidebar: () => {},
   handleActiveDropdown: () => {},
 };
 
 const useSidebarSource = () => {
-  const [showSidebar, setShowSidebar] = useState(false);
   const [activeDropdownList, setActiveDropdownList] = useState<string[]>([]);
+  const [showTutorialSidebar, setShowTutorialSidebar] = useState(false);
 
   const handleActiveDropdown = (dropdownId: string) => {
     setActiveDropdownList((prev) => {
@@ -25,7 +31,15 @@ const useSidebarSource = () => {
     });
   };
 
-  return { activeDropdownList, handleActiveDropdown };
+  const openTutorialSidebar = () => {
+    setShowTutorialSidebar(true);
+  };
+
+  const closeTutorialSidebar = () => {
+    setShowTutorialSidebar(false);
+  };
+
+  return { activeDropdownList, handleActiveDropdown, showTutorialSidebar, openTutorialSidebar, closeTutorialSidebar };
 };
 
 const SidebarContext = createContext<SidebarContextType>(initialContextValue);
