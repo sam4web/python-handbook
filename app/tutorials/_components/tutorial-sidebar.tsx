@@ -46,10 +46,10 @@ export default function TutorialSidebar({ sidebarItems }: { sidebarItems: Sideba
         className={cx(
           "z-[5] overflow-y-auto bg-muted w-full h-full max-w-72 fixed top-0 left-0 select-none shadow-sm shadow-muted styled-scrollbar",
           isMobile ? "max-w-md!" : "",
-          !showTutorialSidebar && isMobile ? "-translate-x-full " : ""
+          !showTutorialSidebar && isMobile ? "-translate-x-full" : ""
         )}
       >
-        <div className="mt-20 px-4 py-2">
+        <div className="mt-16 px-4 py-3">
           <div className="mb-5 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <BookOpen className="text-accent size-5" />

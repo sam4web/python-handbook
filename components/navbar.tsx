@@ -56,19 +56,25 @@ export default function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+    if (showNavbar) {
+      setShowNavbar(false);
+    }
+  }, [pathname]);
+
   return (
     <header className="z-10 w-full fixed top-0 left-0">
       <div
         className={cx(
           "backdrop-blur-xs border-b shadow-sm shadow-muted",
-          scrollActive ? "bg-background/60 dark:bg-background/85" : "bg-background",
+          scrollActive ? "bg-background/60 dark:bg-background/80" : "bg-background",
           showNavbar ? "border-b-border" : "border-transparent"
         )}
       >
         <div
           className={cx(
             "flex justify-between items-center px-2.5 max-w-6xl mx-auto",
-            scrollActive ? "py-1.5" : "py-2.5"
+            !isHomePage || scrollActive ? "py-1" : "py-2.5"
           )}
         >
           <Link href={"/"}>

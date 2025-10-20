@@ -13,7 +13,7 @@ export default async function TutorialPage({ params }: { params: Promise<{ slug:
   const { slug } = await params;
 
   return (
-    <div className="px-4 py-2">
+    <div className="px-4 py-3">
       <h1>{slug}</h1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque non odit debitis dolorem totam ducimus officiis,

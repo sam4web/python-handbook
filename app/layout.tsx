@@ -19,7 +19,7 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased styled-scrollbar`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Navbar />
-          <main className="mt-20 w-full h-dvh relative">{children}</main>
+          <main className="mt-16 w-full h-dvh relative">{children}</main>
         </ThemeProvider>
       </body>
     </html>
