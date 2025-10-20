@@ -18,8 +18,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} antialiased styled-scrollbar`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <Navbar />
-          <main className="mt-16 w-full h-dvh relative">{children}</main>
+          <div className="w-full min-h-screen relative">
+            <Navbar />
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>

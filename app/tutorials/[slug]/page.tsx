@@ -1,12 +1,27 @@
 // export const dynamicParams = false;
 
-import { getAllTutorialSlugs } from "@/lib/tutorials";
+import { NotFoundError } from "@/lib/errors";
+import { getAllTutorialSlugs, getTutorialMetadata } from "@/lib/tutorials";
+import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
   const slugs = getAllTutorialSlugs();
   return slugs.map((slug) => ({
     slug: slug,
   }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  try {
+    getTutorialMetadata(slug);
+  } catch (error) {
+    if (error instanceof NotFoundError) {
+      notFound();
+    }
+    throw error;
+  }
+  return { title: slug, description: "dummy" };
 }
 
 export default async function TutorialPage({ params }: { params: Promise<{ slug: string }> }) {

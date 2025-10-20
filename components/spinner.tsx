@@ -5,7 +5,7 @@ export default function Spinner({ className }: { className?: string }) {
     <div role="status">
       <svg
         aria-hidden="true"
-        className={cx("inline size-20 text-muted animate-spin fill-primary", className ? className : "")}
+        className={cx("inline size-14 text-muted animate-spin fill-primary", className ? className : "")}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
