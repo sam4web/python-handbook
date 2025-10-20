@@ -3,6 +3,8 @@ import matter from "gray-matter";
 import path from "path";
 
 const tutorialsDir = path.join(process.cwd(), "contents", "tutorials");
+let PATH_INDEX: Map<string, string>;
+const MAX_ORDER_VALUE = 999999;
 
 export interface TutorialMetadata {
   title: string;
@@ -10,13 +12,12 @@ export interface TutorialMetadata {
 }
 
 export interface SidebarItem {
-  id: string;
-  order: number;
   title: string;
+  order: number;
   items: {
-    slug: string;
-    order: number;
     title: string;
+    order: number;
+    slug: string;
   }[];
 }
 
@@ -37,37 +38,62 @@ function splitNameAndOrder(name: string): { order: number; title: string } {
   return { order, title };
 }
 
-export function getSidebarItems(): SidebarItem[] {
-  const groups = fs.readdirSync(tutorialsDir);
-  let count = 0;
-  const allItems: SidebarItem[] = groups.map((group) => {
-    count += 1;
-    let { title, order } = splitNameAndOrder(group);
-    if (order === 0) {
-      order = count;
+function buildPathIndex(): Map<string, string> {
+  const pathIndex = new Map<string, string>();
+  const tutorialGroups = fs
+    .readdirSync(tutorialsDir, { withFileTypes: true })
+    .filter((dirent) => dirent.isDirectory())
+    .map((dirent) => dirent.name);
+  for (const group of tutorialGroups) {
+    const groupPath = path.join(tutorialsDir, group);
+    const tutorialFileNames = fs.readdirSync(groupPath);
+    for (const fileName of tutorialFileNames) {
+      if (fileName.endsWith(".md") || fileName.endsWith(".mdx")) {
+        const fullPath = path.join(groupPath, fileName);
+        const baseName = fileName.replace(/\.(md|mdx)$/, "");
+        const cleanSlug = baseName.slice(baseName.search("-") + 1);
+        pathIndex.set(cleanSlug, fullPath);
+      }
     }
-    const tutorialFileNames = fs.readdirSync(path.join(tutorialsDir, group));
-    const items = tutorialFileNames.map((fileName) => {
-      const id = fileName.replace(".md", "");
-      const { title, order } = splitNameAndOrder(id);
-      return { slug: id, order, title };
-    });
-    const sortedItems = items.sort((a, b) => (a.order > b.order ? 1 : -1));
-    return { id: group, order, title, items: sortedItems } as SidebarItem;
+  }
+  return pathIndex;
+}
+
+export function getSidebarItems(): SidebarItem[] {
+  const tutorialGroups = fs
+    .readdirSync(tutorialsDir, { withFileTypes: true })
+    .filter((dirent) => dirent.isDirectory())
+    .map((dirent) => dirent.name);
+  const allItems: SidebarItem[] = tutorialGroups.map((group) => {
+    const { title: categoryTitle, order: rawCategoryOrder } = splitNameAndOrder(group);
+    const categoryOrder = rawCategoryOrder || MAX_ORDER_VALUE;
+    const groupPath = path.join(tutorialsDir, group);
+    const tutorialFileNames = fs.readdirSync(groupPath);
+    const items = tutorialFileNames
+      .filter((filename) => filename.endsWith(".md") || filename.endsWith(".mdx"))
+      .map((fileName) => {
+        const baseName = fileName.replace(/\.(md|mdx)$/, "");
+        const { title: itemTitle, order: rawItemOrder } = splitNameAndOrder(baseName);
+        const itemOrder = rawItemOrder || MAX_ORDER_VALUE;
+        const slug = baseName.slice(baseName.search("-") + 1);
+        return { slug, title: itemTitle, order: itemOrder };
+      });
+    const sortedItems = items.sort((a, b) => a.order - b.order);
+    return {
+      title: categoryTitle,
+      order: categoryOrder,
+      items: sortedItems,
+    } as SidebarItem;
   });
-  return allItems.sort((a, b) => (a.order > b.order ? 1 : -1));
+  return allItems.sort((a, b) => a.order - b.order);
 }
 
 export function getAllTutorialSlugs(): string[] {
-  const tutorialGroups = fs.readdirSync(tutorialsDir);
-  const allTutorialSlugs = tutorialGroups.flatMap((group) => {
-    const tutorialFileNames = fs.readdirSync(path.join(tutorialsDir, group));
-    const slugs = tutorialFileNames
-      .filter((fileName) => fileName.endsWith(".md") || fileName.endsWith(".mdx"))
-      .map((fileName) => {
-        return fileName.replace(/\.(md|mdx)$/, "");
-      });
-    return slugs;
-  });
-  return allTutorialSlugs;
+  if (!PATH_INDEX) {
+    PATH_INDEX = buildPathIndex();
+  }
+  return Array.from(PATH_INDEX.keys());
 }
+
+// export function getTutorialContent(slug: string) {}
+// export function getTutorialMetadata(slug: string): TutorialMetadata {}
