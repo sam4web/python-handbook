@@ -2,13 +2,13 @@
 
 import { useSidebar } from "../_context/sidebar-context";
 import Dropdown from "./dropdown";
-import { TutorialData } from "@/lib/tutorials";
 import { BookOpen, X } from "lucide-react";
 import { cx } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Button from "@/components/ui/button";
+import { SidebarItem } from "@/lib/tutorials";
 
-export default function TutorialSidebar({ sidebarItems }: { sidebarItems: TutorialData[] }) {
+export default function TutorialSidebar({ sidebarItems }: { sidebarItems: SidebarItem[] }) {
   const isMobile = useIsMobile();
   const { showTutorialSidebar, activeDropdownList, closeTutorialSidebar, openTutorialSidebar } = useSidebar();
 
@@ -60,6 +60,7 @@ export default function TutorialSidebar({ sidebarItems }: { sidebarItems: Tutori
               </Button>
             ) : null}
           </div>
+
           <div className="space-y-1">
             {sidebarItems.map((item, idx) => (
               <Dropdown

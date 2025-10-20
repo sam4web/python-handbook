@@ -1,11 +1,17 @@
 // export const dynamicParams = false;
 
+import { getAllTutorialSlugs } from "@/lib/tutorials";
+
 export async function generateStaticParams() {
-  return [{ slug: "what-is-python" }, { slug: "hello-world-program" }, { slug: "strings" }, { slug: "lists" }];
+  const slugs = getAllTutorialSlugs();
+  return slugs.map((slug) => ({
+    slug: slug,
+  }));
 }
 
-export default async function TutorialContentPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function TutorialPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  getAllTutorialSlugs();
 
   return (
     <div className="px-4 py-2">

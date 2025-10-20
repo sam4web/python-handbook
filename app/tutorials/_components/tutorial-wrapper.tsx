@@ -3,15 +3,15 @@
 import { cx } from "@/lib/utils";
 import TutorialSidebar from "./tutorial-sidebar";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { TutorialData } from "@/lib/tutorials";
 import { SidebarProvider } from "../_context/sidebar-context";
+import { SidebarItem } from "@/lib/tutorials";
 
 export default function TutorialWrapper({
   children,
   sidebarItems,
 }: {
   children: Readonly<React.ReactNode>;
-  sidebarItems: TutorialData[];
+  sidebarItems: SidebarItem[];
 }) {
   const isMobile = useIsMobile();
 

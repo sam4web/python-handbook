@@ -9,16 +9,15 @@ export interface TutorialMetadata {
   description?: string;
 }
 
-export interface ParsedTutorialMetadata extends TutorialMetadata {
-  slug: string;
-  order: number;
-}
-
-export interface TutorialData {
+export interface SidebarItem {
   id: string;
   order: number;
   title: string;
-  items: ParsedTutorialMetadata[];
+  items: {
+    slug: string;
+    order: number;
+    title: string;
+  }[];
 }
 
 function toTitleCase(slug: string): string {
@@ -28,7 +27,7 @@ function toTitleCase(slug: string): string {
     .join(" ");
 }
 
-function splitName(name: string): { order: number; title: string } {
+function splitNameAndOrder(name: string): { order: number; title: string } {
   const parts = name.split("-");
   let order = Number(parts[0]);
   let slug = parts.slice(1).join("-");
@@ -38,27 +37,37 @@ function splitName(name: string): { order: number; title: string } {
   return { order, title };
 }
 
-export function getTutorialsData(): TutorialData[] {
-  const tutorialGroups = fs.readdirSync(tutorialsDir);
+export function getSidebarItems(): SidebarItem[] {
+  const groups = fs.readdirSync(tutorialsDir);
   let count = 0;
-  const allTutorialsData: TutorialData[] = tutorialGroups.map((group) => {
+  const allItems: SidebarItem[] = groups.map((group) => {
     count += 1;
-    let { title, order } = splitName(group);
+    let { title, order } = splitNameAndOrder(group);
     if (order === 0) {
       order = count;
     }
     const tutorialFileNames = fs.readdirSync(path.join(tutorialsDir, group));
-    const items: ParsedTutorialMetadata[] = tutorialFileNames.map((fileName) => {
+    const items = tutorialFileNames.map((fileName) => {
       const id = fileName.replace(".md", "");
-      const { order } = splitName(id);
-      const fullPath = path.join(tutorialsDir, group, fileName);
-      const fileContent = fs.readFileSync(fullPath, "utf8");
-      const matterResult = matter(fileContent);
-      const metadata = matterResult.data as TutorialMetadata;
-      return { slug: id, order, ...metadata };
+      const { title, order } = splitNameAndOrder(id);
+      return { slug: id, order, title };
     });
     const sortedItems = items.sort((a, b) => (a.order > b.order ? 1 : -1));
-    return { id: group, order, title, items: sortedItems } as TutorialData;
+    return { id: group, order, title, items: sortedItems } as SidebarItem;
   });
-  return allTutorialsData.sort((a, b) => (a.order > b.order ? 1 : -1));
+  return allItems.sort((a, b) => (a.order > b.order ? 1 : -1));
+}
+
+export function getAllTutorialSlugs(): string[] {
+  const tutorialGroups = fs.readdirSync(tutorialsDir);
+  const allTutorialSlugs = tutorialGroups.flatMap((group) => {
+    const tutorialFileNames = fs.readdirSync(path.join(tutorialsDir, group));
+    const slugs = tutorialFileNames
+      .filter((fileName) => fileName.endsWith(".md") || fileName.endsWith(".mdx"))
+      .map((fileName) => {
+        return fileName.replace(/\.(md|mdx)$/, "");
+      });
+    return slugs;
+  });
+  return allTutorialSlugs;
 }
