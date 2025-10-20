@@ -1,7 +1,13 @@
 import { getSidebarItems } from "@/lib/tutorials";
-import TutorialWrapper from "./_components/tutorial-wrapper";
+import TutorialSidebar from "./_components/tutorial-sidebar";
 
 export default function TutorialsLayout({ children }: { children: React.ReactNode }) {
   const sidebarItems = getSidebarItems();
-  return <TutorialWrapper sidebarItems={sidebarItems}>{children}</TutorialWrapper>;
+
+  return (
+    <>
+      <TutorialSidebar sidebarItems={sidebarItems} />
+      <article className="ml-10 md:ml-72">{children}</article>
+    </>
+  );
 }

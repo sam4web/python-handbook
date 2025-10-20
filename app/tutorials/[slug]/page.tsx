@@ -11,7 +11,6 @@ export async function generateStaticParams() {
 
 export default async function TutorialPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  getAllTutorialSlugs();
 
   return (
     <div className="px-4 py-2">

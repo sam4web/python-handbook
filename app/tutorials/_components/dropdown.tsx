@@ -5,28 +5,23 @@ import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { useSidebar } from "../_context/sidebar-context";
 
 interface Props {
-  id: string;
   title: string;
   items: { title: string; slug: string }[];
   active?: boolean;
+  closeTutorialSidebar: () => void;
 }
 
-export default function Dropdown({ id, title, items, active: isActive }: Props) {
+export default function Dropdown({ title, items, active: isActive, closeTutorialSidebar }: Props) {
   const pathname = usePathname();
   const [active, setActive] = useState(isActive || false);
-  const { handleActiveDropdown, closeTutorialSidebar } = useSidebar();
 
   return (
     <>
       <div
         className="flex justify-between items-center hover:bg-muted-foreground/20 py-2 px-2.5 rounded-lg"
-        onClick={() => {
-          handleActiveDropdown(id);
-          setActive((prev) => !prev);
-        }}
+        onClick={() => setActive((prev) => !prev)}
       >
         <p>{title}</p>
         <ChevronRight className={cx("size-4 text-secondary-foreground", active ? "rotate-90" : "")} />
@@ -36,6 +31,7 @@ export default function Dropdown({ id, title, items, active: isActive }: Props) 
         <div className="ml-6 mt-0.5 space-y-0.5">
           {items.map((item, idx) => (
             <Link
+              key={idx}
               onClick={closeTutorialSidebar}
               href={`/tutorials/${item.slug}`}
               className={cx(
@@ -44,7 +40,6 @@ export default function Dropdown({ id, title, items, active: isActive }: Props) 
                   ? "text-primary border-primary rounded-l-xs dark:bg-muted-foreground/15 bg-muted-foreground/5"
                   : "border-transparent"
               )}
-              key={idx}
             >
               {item.title}
             </Link>

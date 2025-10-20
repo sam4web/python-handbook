@@ -1,16 +1,24 @@
 "use client";
 
-import { useSidebar } from "../_context/sidebar-context";
 import Dropdown from "./dropdown";
 import { BookOpen, X } from "lucide-react";
 import { cx } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Button from "@/components/ui/button";
 import { SidebarItem } from "@/lib/tutorials";
+import { useState } from "react";
 
 export default function TutorialSidebar({ sidebarItems }: { sidebarItems: SidebarItem[] }) {
   const isMobile = useIsMobile();
-  const { showTutorialSidebar, activeDropdownList, closeTutorialSidebar, openTutorialSidebar } = useSidebar();
+  const [showTutorialSidebar, setShowTutorialSidebar] = useState(false);
+
+  const openTutorialSidebar = () => {
+    setShowTutorialSidebar(true);
+  };
+
+  const closeTutorialSidebar = () => {
+    setShowTutorialSidebar(false);
+  };
 
   return (
     <>
@@ -64,11 +72,11 @@ export default function TutorialSidebar({ sidebarItems }: { sidebarItems: Sideba
           <div className="space-y-1">
             {sidebarItems.map((item, idx) => (
               <Dropdown
-                key={item.id}
-                id={item.id}
+                key={idx}
                 title={item.title}
                 items={item.items}
-                active={idx === 0 || activeDropdownList.includes(item.id)}
+                closeTutorialSidebar={closeTutorialSidebar}
+                active={idx === 0}
               />
             ))}
           </div>
