@@ -17,7 +17,7 @@ interface Props {
 export default function Dropdown({ id, title, items, active: isActive }: Props) {
   const pathname = usePathname();
   const [active, setActive] = useState(isActive || false);
-  const { handleActiveDropdown } = useSidebar();
+  const { handleActiveDropdown, closeTutorialSidebar } = useSidebar();
 
   return (
     <>
@@ -36,6 +36,7 @@ export default function Dropdown({ id, title, items, active: isActive }: Props) 
         <div className="ml-6 mt-0.5 space-y-0.5">
           {items.map((item, idx) => (
             <Link
+              onClick={closeTutorialSidebar}
               href={`/tutorials/${item.slug}`}
               className={cx(
                 "hover:bg-muted-foreground/20 py-2 px-2.5 cursor-pointer block border-l-4 rounded-lg",
