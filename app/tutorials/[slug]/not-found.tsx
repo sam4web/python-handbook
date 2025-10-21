@@ -1,3 +1,9 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "not found",
+};
+
 export default function TutorialNotFoundPage() {
   return (
     <div className="w-full h-[85vh] flex justify-center items-center">

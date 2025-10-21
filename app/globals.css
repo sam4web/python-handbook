@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
@@ -85,5 +87,48 @@
 
   .styled-scrollbar::-webkit-scrollbar {
     @apply w-2;
+  }
+
+  .porse-force {
+    &,
+    & * {
+      color: currentColor !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      padding: 0 !important;
+    }
+
+    & blockquote {
+      padding-left: 4px !important;
+      border-left-color: var(--accent) !important;
+      border-left-width: 0.25rem !important;
+
+      & p:first-of-type::before {
+        content: none !important;
+      }
+
+      & p:last-of-type::after {
+        content: none !important;
+      }
+    }
+
+    & pre {
+      padding: 20px !important;
+    }
+
+    & :where(code)::before,
+    & :where(code)::after {
+      content: none !important;
+    }
+
+    & ul,
+    & ol {
+      padding-left: 0 !important;
+      list-style-position: inside !important;
+    }
+
+    & :where(p, li) {
+      line-height: inherit !important;
+    }
   }
 }

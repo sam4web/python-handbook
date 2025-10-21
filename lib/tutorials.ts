@@ -1,6 +1,8 @@
 import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
+import { NotFoundError } from "./errors";
+import { getMarkdownData } from "./markdown";
 
 const tutorialsDir = path.join(process.cwd(), "contents", "tutorials");
 let PATH_INDEX: Map<string, string>;
@@ -9,6 +11,7 @@ const MAX_ORDER_VALUE = 999999;
 export interface TutorialMetadata {
   title: string;
   description?: string;
+  [key: string]: any;
 }
 
 export interface SidebarItem {
@@ -95,5 +98,28 @@ export function getAllTutorialSlugs(): string[] {
   return Array.from(PATH_INDEX.keys());
 }
 
-// export function getTutorialContent(slug: string) {}
-// export function getTutorialMetadata(slug: string): TutorialMetadata {}
+export function getTutorialMetadata(slug: string): TutorialMetadata {
+  if (!PATH_INDEX) {
+    PATH_INDEX = buildPathIndex();
+  }
+  const filePath = PATH_INDEX.get(slug);
+  if (!filePath) {
+    throw new NotFoundError(`Tutorial not found for slug: ${slug}`);
+  }
+  const fileContents = fs.readFileSync(filePath, "utf-8");
+  const rawMetadata = matter(fileContents).data as TutorialMetadata;
+  const metadata = { ...rawMetadata, title: (rawMetadata.title ?? "") as string };
+  return metadata;
+}
+
+export async function getTutorialContent(slug: string) {
+  if (!PATH_INDEX) {
+    PATH_INDEX = buildPathIndex();
+  }
+  const filePath = PATH_INDEX.get(slug);
+  if (!filePath) {
+    throw new NotFoundError(`Tutorial not found for slug: ${slug}`);
+  }
+  const content = await getMarkdownData(filePath);
+  return content;
+}

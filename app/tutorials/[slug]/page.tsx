@@ -1,7 +1,7 @@
 // export const dynamicParams = false;
 
 import { NotFoundError } from "@/lib/errors";
-import { getAllTutorialSlugs, getTutorialMetadata } from "@/lib/tutorials";
+import { getAllTutorialSlugs, getTutorialContent, getTutorialMetadata } from "@/lib/tutorials";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
@@ -14,26 +14,23 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   try {
-    getTutorialMetadata(slug);
+    const metadata = getTutorialMetadata(slug);
+    return { ...metadata };
   } catch (error) {
     if (error instanceof NotFoundError) {
       notFound();
     }
     throw error;
   }
-  return { title: slug, description: "dummy" };
 }
 
 export default async function TutorialPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  const content = await getTutorialContent(slug);
 
   return (
     <div className="px-4 py-3">
-      <h1>{slug}</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque non odit debitis dolorem totam ducimus officiis,
-        modi dignissimos architecto illo! Omnis nesciunt ipsum corrupti magni exercitationem dolore aut eius labore.
-      </p>
+      <div className="prose prose-lg porse-force text-foreground" dangerouslySetInnerHTML={{ __html: content }} />
     </div>
   );
 }
