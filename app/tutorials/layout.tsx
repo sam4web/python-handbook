@@ -7,7 +7,7 @@ export default function TutorialsLayout({ children }: { children: React.ReactNod
   return (
     <main>
       <TutorialSidebar sidebarItems={sidebarItems} />
-      <article className="ml-10 md:ml-72">{children}</article>
+      <article className="mx-auto md:ml-64 lg:ml-80 max-w-lg md:max-w-xl lg:max-w-3xl">{children}</article>
     </main>
   );
 }

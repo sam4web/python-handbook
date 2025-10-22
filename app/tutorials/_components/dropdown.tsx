@@ -20,7 +20,7 @@ export default function Dropdown({ title, items, active: isActive, closeTutorial
   return (
     <>
       <div
-        className="flex justify-between items-center hover:bg-muted-foreground/20 py-2 px-2.5 rounded-lg"
+        className="flex justify-between items-center hover:bg-muted-foreground/20 py-2 px-1 lg:px-2.5 rounded-lg"
         onClick={() => setActive((prev) => !prev)}
       >
         <p>{title}</p>
@@ -28,7 +28,7 @@ export default function Dropdown({ title, items, active: isActive, closeTutorial
       </div>
 
       {active ? (
-        <div className="ml-6 mt-0.5 space-y-0.5">
+        <div className="ml-4 lg:ml-6 mt-0.5 space-y-0.5">
           {items.map((item, idx) => (
             <Link
               key={idx}

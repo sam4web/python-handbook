@@ -3,6 +3,7 @@
 import { NotFoundError } from "@/lib/errors";
 import { getAllTutorialSlugs, getTutorialContent, getTutorialMetadata } from "@/lib/tutorials";
 import { notFound } from "next/navigation";
+import TutorialContentRenderer from "../_components/tutorial-content-renderer";
 
 export async function generateStaticParams() {
   const slugs = getAllTutorialSlugs();
@@ -29,8 +30,8 @@ export default async function TutorialPage({ params }: { params: Promise<{ slug:
   const content = await getTutorialContent(slug);
 
   return (
-    <div className="px-4 py-3">
-      <div className="prose prose-lg porse-force text-foreground" dangerouslySetInnerHTML={{ __html: content }} />
+    <div className="px-4 py-1.5 md:py-3">
+      <TutorialContentRenderer content={content} />
     </div>
   );
 }

@@ -25,7 +25,7 @@ export default function TutorialSidebar({ sidebarItems }: { sidebarItems: Sideba
       {/* Page Overlay */}
       {showTutorialSidebar && isMobile ? (
         <div
-          className="size-full fixed top-0 left-0 bg-zin/60 z-[3] bg-background/60 dark:bg-background/85 backdrop-blur-xs"
+          className="size-full fixed top-0 left-0 bg-zin/60 z-3 bg-background/60 dark:bg-background/85 backdrop-blur-xs"
           onClick={closeTutorialSidebar}
         />
       ) : null}
@@ -36,7 +36,7 @@ export default function TutorialSidebar({ sidebarItems }: { sidebarItems: Sideba
           variant="icon"
           title="Show tutorial sidebar"
           onClick={openTutorialSidebar}
-          className="border-card! bg-border! fixed left-2"
+          className="border-card! bg-border/90! fixed left-2 top-17"
         >
           <BookOpen />
         </Button>
@@ -44,12 +44,12 @@ export default function TutorialSidebar({ sidebarItems }: { sidebarItems: Sideba
 
       <aside
         className={cx(
-          "z-[5] overflow-y-auto bg-muted w-full h-full max-w-72 fixed top-0 left-0 select-none shadow-sm shadow-muted styled-scrollbar",
+          "z-5 overflow-y-auto bg-muted w-full h-full max-w-60 lg:max-w-72 fixed top-0 left-0 select-none shadow-sm shadow-muted styled-scrollbar",
           isMobile ? "max-w-md!" : "",
           !showTutorialSidebar && isMobile ? "-translate-x-full" : ""
         )}
       >
-        <div className="mt-16 px-4 py-3">
+        <div className="mt-16 px-2.5 lg:px-4 py-3">
           <div className="mb-5 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <BookOpen className="text-accent size-5" />

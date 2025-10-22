@@ -2,7 +2,6 @@ import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
 import { NotFoundError } from "./errors";
-import { getMarkdownData } from "./markdown";
 
 const tutorialsDir = path.join(process.cwd(), "contents", "tutorials");
 let PATH_INDEX: Map<string, string>;
@@ -120,6 +119,7 @@ export async function getTutorialContent(slug: string) {
   if (!filePath) {
     throw new NotFoundError(`Tutorial not found for slug: ${slug}`);
   }
-  const content = await getMarkdownData(filePath);
+  const rawContents = fs.readFileSync(filePath, "utf8");
+  const content = matter(rawContents).content;
   return content;
 }
