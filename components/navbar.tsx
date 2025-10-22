@@ -78,9 +78,20 @@ export default function Navbar() {
           )}
         >
           <Link href={"/"}>
-            <div className="flex items-center gap-2">
-              <div className="size-10 lg:size-12 bg-foreground rounded-lg shadow-md" />
-              <p className={`leading-snug text-lg font-medium text-foreground ${firaCode.className}`}>
+            <div className="flex items-center">
+              <div
+                className={cx(
+                  "bg-foreground rounded-lg shadow-md",
+                  !isHomePage || scrollActive ? "size-10!" : "lg:size-12"
+                )}
+              />
+              <p
+                className={cx(
+                  "font-medium text-foreground",
+                  !isHomePage || scrollActive ? "text-base leading-tight ml-1" : "text-lg leading-snug ml-2",
+                  firaCode.className
+                )}
+              >
                 Python <br />
                 Handbook
               </p>

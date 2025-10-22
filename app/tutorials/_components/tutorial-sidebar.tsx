@@ -36,7 +36,7 @@ export default function TutorialSidebar({ sidebarItems }: { sidebarItems: Sideba
           variant="icon"
           title="Show tutorial sidebar"
           onClick={openTutorialSidebar}
-          className="border-card! bg-border/90! fixed left-2 top-17"
+          className="border-card! bg-border/90! fixed left-2 top-16"
         >
           <BookOpen />
         </Button>
@@ -44,13 +44,13 @@ export default function TutorialSidebar({ sidebarItems }: { sidebarItems: Sideba
 
       <aside
         className={cx(
-          "z-5 overflow-y-auto bg-muted w-full h-full max-w-60 lg:max-w-72 fixed top-0 left-0 select-none shadow-sm shadow-muted styled-scrollbar",
-          isMobile ? "max-w-md!" : "",
+          "z-5 overflow-y-auto bg-muted w-full h-dvh left-0 select-none shadow-sm shadow-muted styled-scrollbar",
+          isMobile ? "max-w-md fixed top-12" : "sticky max-w-72 top-0",
           !showTutorialSidebar && isMobile ? "-translate-x-full" : ""
         )}
       >
-        <div className="mt-16 px-2.5 lg:px-4 py-3">
-          <div className="mb-5 flex items-center justify-between">
+        <div className="mt-1 px-2.5 lg:px-4 py-3">
+          <div className="mb-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <BookOpen className="text-accent size-5" />
               <p className="text-lg">Python Lessons</p>

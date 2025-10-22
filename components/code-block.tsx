@@ -15,6 +15,19 @@ export default function CodeBlock({ language, value }: { language: string; value
     background: "transparent",
   };
 
+  const lightThemeStyle: { [key: string]: React.CSSProperties } = {
+    'code[class*="language-"]': {
+      color: "#1e293b",
+      backgroundColor: "transparent",
+    },
+    'pre[class*="language-"]': {
+      margin: 0,
+      padding: 0,
+      background: "transparent",
+      overflowX: "auto",
+    },
+  };
+
   return (
     <div className="bg-muted border-muted-foreground/30 border rounded-lg shadow-muted my-4">
       <div className="flex justify-between items-center border-muted-foreground/30 border-b px-3 py-1">
@@ -28,7 +41,7 @@ export default function CodeBlock({ language, value }: { language: string; value
       </div>
       <div className="text-sm overflow-auto font-mono px-3 py-3.5">
         <SyntaxHighlighter
-          style={theme === "dark" ? atomDark : { color: "#1e293b", background: "transparent" }}
+          style={theme === "dark" ? atomDark : lightThemeStyle}
           language={language}
           customStyle={customStyle}
           PreTag="div"
