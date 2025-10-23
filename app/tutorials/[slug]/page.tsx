@@ -1,6 +1,4 @@
-import { NotFoundError } from "@/lib/errors";
 import { getAllTutorialSlugs, getTutorialContent, getTutorialMetadata } from "@/lib/tutorials";
-import { notFound } from "next/navigation";
 import ReactMarkdown, { Components } from "react-markdown";
 import CodeBlock from "@/components/code-block";
 import Link from "next/link";
@@ -15,15 +13,8 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  try {
-    const metadata = getTutorialMetadata(slug);
-    return { ...metadata };
-  } catch (error) {
-    if (error instanceof NotFoundError) {
-      notFound();
-    }
-    throw error;
-  }
+  const metadata = getTutorialMetadata(slug);
+  return { ...metadata };
 }
 
 export default async function TutorialPage({ params }: { params: Promise<{ slug: string }> }) {

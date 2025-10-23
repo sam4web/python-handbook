@@ -16,7 +16,7 @@ const navlinks = [
   { title: "Cheetsheets", href: "/cheetsheets" },
 ];
 
-function Navlinks({ pathname }: { pathname: string }) {
+function Navlinks({ pathname, className = "" }: { pathname: string; className?: string }) {
   return (
     <>
       {navlinks.map((link, idx) => {
@@ -26,12 +26,11 @@ function Navlinks({ pathname }: { pathname: string }) {
             key={idx}
             className={cx(
               "inline-block px-1 relative after:transition-all after:ease-out after:content-[''] after:absolute after:h-0.5 after:w-0 after:bg-primary after:-translate-x-1/2 after:left-1/2 after:-bottom-0.5 after:rounded-full",
-              isActive ? "text-primary after:w-full" : "text-foreground hover:after:w-1/2"
+              isActive ? "text-primary after:w-full" : "text-foreground hover:after:w-1/2",
+              className
             )}
           >
-            <Link className="text-base" href={link.href}>
-              {link.title}
-            </Link>
+            <Link href={link.href}>{link.title}</Link>
           </li>
         );
       })}
@@ -82,7 +81,7 @@ export default function Navbar() {
               <div
                 className={cx(
                   "bg-foreground rounded-lg shadow-md",
-                  !isHomePage || scrollActive ? "size-10!" : "lg:size-12"
+                  !isHomePage || scrollActive ? "size-10" : "size-10 lg:size-12"
                 )}
               />
               <p
@@ -99,7 +98,7 @@ export default function Navbar() {
           </Link>
 
           <ul className="hidden md:flex justify-between items-center space-x-1 lg:space-x-2">
-            <Navlinks pathname={pathname} />
+            <Navlinks pathname={pathname} className={!isHomePage || scrollActive ? "text-sm" : "text-base"} />
           </ul>
 
           <div className="flex items-center gap-1 lg:gap-2">
@@ -119,7 +118,7 @@ export default function Navbar() {
 
         {showNavbar ? (
           <ul className="py-3 space-y-2 sm:space-y-2.5 px-3 sm:px-4 flex flex-col items-start">
-            <Navlinks pathname={pathname} />
+            <Navlinks pathname={pathname} className={!isHomePage || scrollActive ? "text-sm" : "text-base"} />
           </ul>
         ) : null}
       </div>

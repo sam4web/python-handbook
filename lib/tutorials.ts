@@ -1,7 +1,7 @@
 import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
-import { NotFoundError } from "./errors";
+import { notFound } from "next/navigation";
 
 const tutorialsDir = path.join(process.cwd(), "contents", "tutorials");
 let PATH_INDEX: Map<string, string>;
@@ -103,7 +103,7 @@ export function getTutorialMetadata(slug: string): TutorialMetadata {
   }
   const filePath = PATH_INDEX.get(slug);
   if (!filePath) {
-    throw new NotFoundError(`Tutorial not found for slug: ${slug}`);
+    notFound();
   }
   const fileContents = fs.readFileSync(filePath, "utf-8");
   const rawMetadata = matter(fileContents).data as TutorialMetadata;
@@ -117,7 +117,7 @@ export async function getTutorialContent(slug: string) {
   }
   const filePath = PATH_INDEX.get(slug);
   if (!filePath) {
-    throw new NotFoundError(`Tutorial not found for slug: ${slug}`);
+    notFound();
   }
   const rawContents = fs.readFileSync(filePath, "utf8");
   const content = matter(rawContents).content;

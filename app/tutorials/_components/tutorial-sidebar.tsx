@@ -44,13 +44,13 @@ export default function TutorialSidebar({ sidebarItems }: { sidebarItems: Sideba
 
       <aside
         className={cx(
-          "z-5 overflow-y-auto bg-muted w-full h-dvh left-0 select-none shadow-sm shadow-muted styled-scrollbar",
-          isMobile ? "max-w-md fixed top-12" : "sticky max-w-72 top-0",
+          "z-5 overflow-y-auto bg-muted w-full left-0 select-none shadow-sm shadow-muted styled-scrollbar",
+          isMobile ? "max-w-md fixed top-12 h-screen" : "sticky max-w-72 top-13 h-[calc(100vh-3.3rem)]",
           !showTutorialSidebar && isMobile ? "-translate-x-full" : ""
         )}
       >
-        <div className="mt-1 px-2.5 lg:px-4 py-3">
-          <div className="mb-4 flex items-center justify-between">
+        <div className="mt-1 py-3">
+          <div className="mb-4 flex items-center justify-between px-2.5 lg:px-4">
             <div className="flex items-center gap-2">
               <BookOpen className="text-accent size-5" />
               <p className="text-lg">Python Lessons</p>
@@ -69,7 +69,7 @@ export default function TutorialSidebar({ sidebarItems }: { sidebarItems: Sideba
             ) : null}
           </div>
 
-          <div className="space-y-1">
+          <div className="space-y-1 px-2 lg:px-4">
             {sidebarItems.map((item, idx) => (
               <Dropdown
                 key={idx}
