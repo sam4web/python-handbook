@@ -12,7 +12,7 @@ export default function GlobalError({ error, reset }: { error: Error & { digest?
             <div className="text-center">
               <div className="mb-3 md:mb-5 space-y-1.5">
                 <p className="text-foreground font-bold text-2xl md:text-4xl">Something went wrong!</p>
-                <p className="text-secondary-foreground max-w-xs mx-auto md:text-lg">{error.message}</p>
+                <p className="text-muted-foreground max-w-xs mx-auto md:text-lg">{error.message}</p>
               </div>
               <Button variant="primary" onClick={() => reset()}>
                 Try again

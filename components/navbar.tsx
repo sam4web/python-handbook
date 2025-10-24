@@ -26,7 +26,7 @@ function Navlinks({ pathname, className = "" }: { pathname: string; className?: 
             key={idx}
             className={cx(
               "inline-block px-1 relative after:transition-all after:ease-out after:content-[''] after:absolute after:h-0.5 after:w-0 after:bg-primary after:-translate-x-1/2 after:left-1/2 after:-bottom-0.5 after:rounded-full",
-              isActive ? "text-primary after:w-full" : "text-foreground hover:after:w-1/2",
+              isActive ? "text-primary after:w-4/5 font-medium" : "text-foreground hover:after:w-1/2",
               className
             )}
           >
@@ -117,7 +117,7 @@ export default function Navbar() {
         </div>
 
         {showNavbar ? (
-          <ul className="py-3 space-y-2 sm:space-y-2.5 px-3 sm:px-4 flex flex-col items-start">
+          <ul className="py-3 space-y-2 sm:space-y-2.5 px-3 sm:px-4 md:hidden flex flex-col items-start">
             <Navlinks pathname={pathname} className={!isHomePage || scrollActive ? "text-sm" : "text-base"} />
           </ul>
         ) : null}

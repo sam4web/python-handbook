@@ -26,13 +26,13 @@ export default async function TutorialPage({ params }: { params: Promise<{ slug:
       const match = /language-(\w+)/.exec(className || "");
       const language = match ? match[1] : "text";
       if (!match) {
-        return <code className="bg-accent/10 px-2.5 py-1 rounded-sm text-accent font-mono">{children}</code>;
+        return <code className="bg-primary/10 px-2.5 py-1 rounded-sm text-accent font-mono">{children}</code>;
       }
       const codeValue = String(children).replace(/\n$/, "");
       return <CodeBlock language={language} value={codeValue} />;
     },
     blockquote: ({ children }) => (
-      <blockquote className="border-l-4 pl-4 border-accent bg-accent/10 italic text-foreground py-1.5 *:m-0">
+      <blockquote className="border-l-4 pl-2.5 border-primary bg-primary/10 italic text-foreground py-1.5 *:m-0">
         {children}
       </blockquote>
     ),
@@ -42,7 +42,7 @@ export default async function TutorialPage({ params }: { params: Promise<{ slug:
     h4: ({ children }) => <h4 className="text-lg font-semibold my-3">{children}</h4>,
     p: ({ children }) => <p className="my-2 leading-relaxed">{children}</p>,
     a: ({ children, href }) => (
-      <Link href={href || ""} className="text-blue-500 underline hover:text-blue-700">
+      <Link href={href || ""} className="text-primary underline hover:text-accent">
         {children}
       </Link>
     ),

@@ -36,7 +36,7 @@ export default function TutorialSidebar({ sidebarItems }: { sidebarItems: Sideba
           variant="icon"
           title="Show tutorial sidebar"
           onClick={openTutorialSidebar}
-          className="border-card! bg-border/90! fixed left-2 top-16"
+          className="border-muted-foreground/40! bg-border/90! fixed left-2 top-16"
         >
           <BookOpen />
         </Button>
@@ -52,7 +52,7 @@ export default function TutorialSidebar({ sidebarItems }: { sidebarItems: Sideba
         <div className="mt-1 py-3">
           <div className="mb-4 flex items-center justify-between px-2.5 lg:px-4">
             <div className="flex items-center gap-2">
-              <BookOpen className="text-accent size-5" />
+              <BookOpen className="text-primary size-5" />
               <p className="text-lg">Python Lessons</p>
             </div>
 

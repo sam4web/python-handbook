@@ -13,7 +13,7 @@ export default function TutorialNotFoundPage() {
         </p>
         <div className="space-y-1">
           <p className="text-foreground font-medium text-2xl">Tutorial Not Found</p>
-          <p className="max-w-xs text-secondary-foreground mx-auto">
+          <p className="max-w-xs text-muted-foreground mx-auto">
             We couldn't locate the requested tutorial. Please check the URL.
           </p>
         </div>

@@ -6,17 +6,16 @@
   /* Base */
   --background: #f1f5f9;
   --foreground: #1e293b;
-  --card: #f8fafc;
-  --border: #e5e7eb;
+  --border: #f8fafc;
   --muted: #e5e7eb;
   --muted-foreground: #6b7280;
 
   /* Primary & Secondary */
-  --primary: #38bdf8;
+  --primary: #3776ab;
   --primary-foreground: #ffffff;
   --secondary: #f3f4f6;
   --secondary-foreground: #1f2937;
-  --accent: #38bdf8;
+  --accent: #0284c7;
   --accent-foreground: #ffffff;
 
   /* Status */
@@ -27,16 +26,15 @@
 .dark {
   --background: #0f172a;
   --foreground: #e2e8f0;
-  --card: #2a2a2a;
-  --border: #182130;
+  --border: #2a2a2a;
   --muted: #182130;
   --muted-foreground: #9ca3af;
 
-  --primary: #06b6d4;
+  --primary: #4584b6;
   --primary-foreground: #1e1e1e;
   --secondary: #374151;
   --secondary-foreground: #e5e7eb;
-  --accent: #06b6d4;
+  --accent: #38bdf8;
   --accent-foreground: #1e1e1e;
 
   --destructive: #dc2626;
