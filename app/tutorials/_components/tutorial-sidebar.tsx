@@ -43,12 +43,12 @@ export default function TutorialSidebar({ sidebarItems }: { sidebarItems: Sideba
       ) : null}
       <aside
         className={cx(
-          "z-5 overflow-y-auto bg-muted w-full left-0 select-none shadow-sm shadow-muted styled-scrollbar",
-          isMobile ? "max-w-md fixed top-12 h-screen" : "sticky max-w-72 top-14 h-[calc(100vh-3.6rem)]",
+          "z-5 overflow-y-auto bg-muted w-full top-12 left-0 select-none shadow-sm shadow-muted styled-scrollbar",
+          isMobile ? "max-w-md fixed h-dvh" : "sticky max-w-72 h-[calc(100dvh-54px)]",
           !showTutorialSidebar && isMobile ? "-translate-x-full" : ""
         )}
       >
-        <div className="mt-1 py-3">
+        <div className="mt-1 py-4">
           <div className="mb-4 flex items-center justify-between px-2.5 lg:px-4">
             <div className="flex items-center gap-2">
               <BookOpen className="text-primary size-5" />

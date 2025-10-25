@@ -40,12 +40,12 @@ export default function Navbar() {
   }, [pathname]);
 
   return (
-    <header className="z-10 w-full fixed top-0 left-0">
+    <header className="z-10 w-full sticky top-0 left-0">
       <div
         className={cx(
-          "backdrop-blur-xs border-b shadow-sm shadow-muted",
+          "backdrop-blur-xs shadow-sm shadow-muted",
           scrollActive ? "bg-background/50 dark:bg-background/75" : "bg-background",
-          showNavbar ? "border-b-border" : "border-transparent"
+          showNavbar ? "bg-background!" : "backdrop-blur-xs shadow-sm shadow-muted"
         )}
       >
         <div
@@ -107,8 +107,10 @@ export default function Navbar() {
             ) : null}
           </div>
         </div>
+      </div>
 
-        {showNavbar ? (
+      {showNavbar ? (
+        <div className="shadow-sm shadow-muted top-full border-b border-border left-0 absolute w-full rounded-b-lg bg-background">
           <ul className="py-3 space-y-1 px-3 sm:px-4 md:hidden flex flex-col items-start">
             {navlinks.map((link, idx) => {
               const isActive = pathname === link.href || (pathname.startsWith(link.href) && link.href !== "/");
@@ -127,8 +129,8 @@ export default function Navbar() {
               );
             })}
           </ul>
-        ) : null}
-      </div>
+        </div>
+      ) : null}
     </header>
   );
 }

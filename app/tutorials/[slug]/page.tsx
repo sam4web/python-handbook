@@ -3,6 +3,7 @@ import ReactMarkdown, { Components } from "react-markdown";
 import CodeBlock from "@/components/code-block";
 import Link from "next/link";
 import remarkGfm from "remark-gfm";
+import { Metadata } from "next";
 
 export async function generateStaticParams() {
   const slugs = getAllTutorialSlugs();
@@ -11,7 +12,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const metadata = getTutorialMetadata(slug);
   return { ...metadata };

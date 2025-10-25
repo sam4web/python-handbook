@@ -4,7 +4,7 @@ export default function PracticePage() {
   return (
     <main className="md:max-w-3xl xl:max-w-4xl mx-auto">
       <div className="px-6 py-4">
-        <div className="text-center my-6 md:my-10">
+        <div className="text-center my-6 md:my-8">
           <div className="p-2.5 md:p-3.5 dark:bg-primary/5 bg-primary/10 rounded-2xl inline-block border-primary border mb-2.5">
             <Target className="size-8 text-primary" />
           </div>
