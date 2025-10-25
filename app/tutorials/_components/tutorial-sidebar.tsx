@@ -36,16 +36,15 @@ export default function TutorialSidebar({ sidebarItems }: { sidebarItems: Sideba
           variant="icon"
           title="Show tutorial sidebar"
           onClick={openTutorialSidebar}
-          className="border-muted-foreground/40! bg-border/90! fixed left-2 top-16"
+          className="border-border! bg-muted/95! fixed left-2 top-16 p-2!"
         >
           <BookOpen />
         </Button>
       ) : null}
-
       <aside
         className={cx(
           "z-5 overflow-y-auto bg-muted w-full left-0 select-none shadow-sm shadow-muted styled-scrollbar",
-          isMobile ? "max-w-md fixed top-12 h-screen" : "sticky max-w-72 top-13 h-[calc(100vh-3.3rem)]",
+          isMobile ? "max-w-md fixed top-12 h-screen" : "sticky max-w-72 top-14 h-[calc(100vh-3.6rem)]",
           !showTutorialSidebar && isMobile ? "-translate-x-full" : ""
         )}
       >

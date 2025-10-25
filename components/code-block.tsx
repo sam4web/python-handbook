@@ -5,7 +5,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import Button from "./ui/button";
 import { Copy, CopyCheck } from "lucide-react";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { cx } from "@/lib/utils";
 
 export default function CodeBlock({ language, value }: { language: string; value: string }) {
@@ -54,7 +54,7 @@ export default function CodeBlock({ language, value }: { language: string; value
           disabled={copied}
           className={cx(
             "border-none! hover:bg-muted-foreground/10! p-2!",
-            copied ? " [&>svg]:text-emerald-500!" : " [&>svg]:text-muted-foreground!"
+            copied ? " [&>svg]:text-green-500!" : " [&>svg]:text-muted-foreground!"
           )}
         >
           {copied ? <CopyCheck className="size-4!" /> : <Copy className="size-4!" />}
