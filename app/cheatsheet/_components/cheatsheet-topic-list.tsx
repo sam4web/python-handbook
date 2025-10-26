@@ -30,7 +30,7 @@ export default function CheatSheetTopicList({ topics }: { topics: { title: strin
         {topics.map((topic, idx) => (
           <div
             key={idx}
-            className="border-muted-foreground/30 border px-2.5 py-0.5 rounded-md shadow-xs bg-muted/35 hover:bg-primary/10 hover:text-accent cursor-pointer"
+            className="border-muted-foreground/30 border px-2.5 py-0.5 rounded-md shadow-xs bg-muted/30 hover:bg-primary/10 hover:text-accent cursor-pointer"
           >
             <Link className="text-sm" href={topic.target}>
               {topic.title}

@@ -59,7 +59,7 @@ function CheatsheetItemContent({ cheatsheet }: { cheatsheet: ICheatsheetItem }) 
   };
 
   return (
-    <div className="bg-secondary/10 px-2.5 py-2 rounded-lg shadow-sm">
+    <div className="bg-secondary/20 px-2.5 py-2 rounded-lg shadow-sm">
       <div className="mb-2">
         <div className="flex items-center justify-between">
           <p className="text-sm font-medium">{cheatsheet.title}</p>
