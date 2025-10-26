@@ -4,7 +4,7 @@ import Code from "@/components/code";
 import Button from "@/components/ui/button";
 import { ICheatsheetCategory, ICheatsheetItem } from "@/lib/cheatsheets";
 import { cx } from "@/lib/utils";
-import { ChevronRight, Copy } from "lucide-react";
+import { ChevronRight, Copy, CopyCheck } from "lucide-react";
 import { useState } from "react";
 
 export default function CheatsheetItem({ item }: { item: ICheatsheetCategory }) {
@@ -15,13 +15,13 @@ export default function CheatsheetItem({ item }: { item: ICheatsheetCategory }) 
   return (
     <div className="border-muted-foreground/20 border rounded-xl shadow-sm bg-muted/30 p-3">
       <div className="flex items-center justify-between w-full" onClick={() => setActive((prev) => !prev)}>
-        <div className="flex items-center gap-2 font-medium">
-          <p className="cursor-pointer">{item.name}</p>
+        <div className="flex items-center gap-2.5 font-medium">
+          <p className={cx("cursor-pointer", active ? "text-primary" : "text-foreground")}>{item.name}</p>
           <div className="bg-muted rounded-sm px-2 py-0.5 text-center">
             <p className="text-sm">{item.cheatsheets.length}</p>
           </div>
         </div>
-        <ChevronRight className={cx("size-4.5 text-secondary-foreground", active ? "rotate-90" : "")} />
+        <ChevronRight className={cx("size-4.5", active ? "rotate-90 text-primary" : "text-secondary-foreground")} />
       </div>
 
       {active ? (
@@ -43,13 +43,35 @@ export default function CheatsheetItem({ item }: { item: ICheatsheetCategory }) 
 }
 
 function CheatsheetItemContent({ cheatsheet }: { cheatsheet: ICheatsheetItem }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyCode = () => {
+    navigator.clipboard
+      .writeText(cheatsheet.content)
+      .then(() => {
+        setCopied(true);
+        // alert here
+        setTimeout(() => setCopied(false), 2000);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <div className="bg-secondary/10 px-2.5 py-2 rounded-lg shadow-sm">
-      <div className="space-y-0.5 mb-2.5">
+      <div className="mb-2">
         <div className="flex items-center justify-between">
-          <p>{cheatsheet.title}</p>
-          <Button variant="icon" className={cx("border-none! hover:bg-muted-foreground/10! rounded-md! p-1.5!")}>
-            <Copy className="size-3.5!" />
+          <p className="text-sm font-medium">{cheatsheet.title}</p>
+          <Button
+            variant="icon"
+            onClick={handleCopyCode}
+            className={cx(
+              "border-none! hover:bg-muted-foreground/10! rounded-md! p-1.5!",
+              copied ? " [&>svg]:text-green-600!" : " [&>svg]:text-muted-foreground!"
+            )}
+          >
+            {copied ? <CopyCheck className="size-3.5!" /> : <Copy className="size-3.5!" />}
           </Button>
         </div>
         <p className="text-sm text-muted-foreground">{cheatsheet.description}</p>

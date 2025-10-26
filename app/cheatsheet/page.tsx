@@ -1,13 +1,13 @@
 import { NotebookText, Search } from "lucide-react";
-import Link from "next/link";
 import CheatsheetItem from "./_components/cheatsheet-item";
 import { mockCheatsheetData } from "@/lib/cheatsheets";
+import CheatSheetTopicList from "./_components/cheatsheet-topic-list";
 
 const cheatsheetTopics = [
-  { title: "Basics", href: "#basics" },
-  { title: "Control Flow", href: "control-flow" },
-  { title: "Functions", href: "#functions" },
-  { title: "Standard Library", href: "#standard-library" },
+  { title: "Basics", target: "#basics" },
+  { title: "Control Flow", target: "#control-flow" },
+  { title: "Functions", target: "#functions" },
+  { title: "Standard Library", target: "#standard-library" },
 ];
 
 export default function CheatsheetPage() {
@@ -36,19 +36,7 @@ export default function CheatsheetPage() {
                 />
               </label>
             </div>
-
-            <div className="flex items-center justify-center flex-wrap gap-2">
-              {cheatsheetTopics.map((topic, idx) => (
-                <div
-                  key={idx}
-                  className="border-muted-foreground/30 border px-2.5 py-0.5 rounded-md shadow-xs bg-muted/35 hover:bg-primary/10 hover:text-accent cursor-pointer"
-                >
-                  <Link className="text-sm" href={topic.href}>
-                    {topic.title}
-                  </Link>
-                </div>
-              ))}
-            </div>
+            <CheatSheetTopicList topics={cheatsheetTopics} />
           </div>
 
           <div className="space-y-2 md:space-y-4.5 max-w-lg md:max-w-full mx-auto">

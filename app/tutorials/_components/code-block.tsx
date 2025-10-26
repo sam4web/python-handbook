@@ -33,7 +33,7 @@ export default function CodeBlock({ language, value }: { language: string; value
           title="Copy code"
           className={cx(
             "border-none! hover:bg-muted-foreground/10! p-2!",
-            copied ? " [&>svg]:text-green-500!" : " [&>svg]:text-muted-foreground!"
+            copied ? " [&>svg]:text-green-600!" : " [&>svg]:text-muted-foreground!"
           )}
         >
           {copied ? <CopyCheck className="size-4!" /> : <Copy className="size-4!" />}
