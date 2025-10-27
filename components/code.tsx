@@ -8,7 +8,8 @@ export default function Code({ language, content }: { language: string; content:
   const { theme } = useTheme();
   const customStyle = {
     margin: 0,
-    padding: 0,
+    paddingLeft: 0,
+    paddingRight: 0,
     background: "transparent",
   };
 
@@ -18,6 +19,7 @@ export default function Code({ language, content }: { language: string; content:
       customStyle={customStyle}
       style={theme === "dark" ? atomOneDark : atomOneLight}
       PreTag="div"
+      className="styled-scrollbar-sm text-sm font-mono overflow-auto"
     >
       {content}
     </SyntaxHighlighter>

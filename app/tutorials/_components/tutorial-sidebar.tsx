@@ -68,7 +68,7 @@ export default function TutorialSidebar({ sidebarItems }: { sidebarItems: Sideba
             ) : null}
           </div>
 
-          <div className="space-y-1 px-2 lg:px-4">
+          <div className="space-y-1.5 px-2 lg:px-4">
             {sidebarItems.map((item, idx) => (
               <Dropdown
                 key={idx}

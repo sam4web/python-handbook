@@ -39,7 +39,7 @@ export default function CodeBlock({ language, value }: { language: string; value
           {copied ? <CopyCheck className="size-4!" /> : <Copy className="size-4!" />}
         </Button>
       </div>
-      <div className="text-sm overflow-auto font-mono px-3 py-3.5">
+      <div className="px-3 py-2">
         <Code content={value} language={language} />
       </div>
     </div>

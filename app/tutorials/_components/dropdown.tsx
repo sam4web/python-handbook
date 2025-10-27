@@ -18,27 +18,27 @@ export default function Dropdown({ title, items, active: isActive, closeTutorial
   const [active, setActive] = useState(isActive || false);
 
   return (
-    <>
+    <div>
       <div
-        className="flex justify-between items-center hover:bg-muted-foreground/20 py-2 px-2.5 rounded-lg"
+        className="flex justify-between items-center hover:bg-muted-foreground/20 py-1.5 px-2.5 rounded-lg"
         onClick={() => setActive((prev) => !prev)}
       >
-        <p>{title}</p>
+        <p className="font-medium">{title}</p>
         <ChevronRight className={cx("size-4 text-secondary-foreground", active ? "rotate-90" : "")} />
       </div>
 
       {active ? (
-        <div className="ml-4 lg:ml-6 mt-0.5 space-y-0.5">
+        <div className="ml-3 lg:ml-5 pl-1 lg:pl-2 space-y-0.5 my-0.5 border-l-2 border-muted-foreground/15">
           {items.map((item, idx) => (
             <Link
               key={idx}
               onClick={closeTutorialSidebar}
               href={`/tutorials/${item.slug}`}
               className={cx(
-                "hover:bg-muted-foreground/20 py-2 px-2.5 cursor-pointer block border-l-4 rounded-lg",
+                "hover:bg-muted-foreground/20 p-2 cursor-pointer block rounded-lg text-sm",
                 pathname.includes(item.slug)
-                  ? "text-primary border-primary rounded-l-xs dark:bg-muted-foreground/15 bg-muted-foreground/5"
-                  : "border-transparent"
+                  ? "text-primary dark:bg-muted-foreground/15 bg-muted-foreground/5 font-medium"
+                  : ""
               )}
             >
               {item.title}
@@ -46,6 +46,6 @@ export default function Dropdown({ title, items, active: isActive, closeTutorial
           ))}
         </div>
       ) : null}
-    </>
+    </div>
   );
 }

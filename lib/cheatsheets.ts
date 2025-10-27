@@ -2,6 +2,7 @@ export interface ICheatsheetItem {
   title: string;
   description: string;
   content: string;
+  type: "keyword" | "content";
 }
 
 export interface ICheatsheetCategory {
@@ -16,6 +17,7 @@ export const mockCheatsheetData: ICheatsheetCategory[] = [
     name: "Git Version Control", // <-- Usage updated here
     cheatsheets: [
       {
+        type: "content",
         title: "Commit Changes",
         description: "Records changes to the repository with a descriptive message.",
         content: `git commit -m "feat: Add new feature"
@@ -24,16 +26,19 @@ git commit -m "feat: Add new feature"
 git commit -m "feat: Add new featurexxxxxxxxxxxxxxxxxxxxxxxxxxxxx"`,
       },
       {
+        type: "content",
         title: "Force Push",
         description: "Overwrites the remote branch history with your local version (use with caution).",
         content: `git push --force origin <branch-name>`,
       },
       {
+        type: "keyword",
         title: "Undo Last Commit",
         description: "Moves HEAD pointer back one commit, keeping changes in the working directory.",
         content: `git reset HEAD~1`,
       },
       {
+        type: "keyword",
         title: "View History",
         description: "Displays a clean, graphical history of the commit tree.",
         content: `git log --oneline --graph --decorate`,
@@ -45,6 +50,7 @@ git commit -m "feat: Add new featurexxxxxxxxxxxxxxxxxxxxxxxxxxxxx"`,
     name: "CSS Layouts and Styling", // <-- Usage updated here
     cheatsheets: [
       {
+        type: "keyword",
         title: "Center Horizontally (Flexbox)",
         description: "Centers an item within a flex container along the main axis.",
         content: `.container {
@@ -53,6 +59,7 @@ git commit -m "feat: Add new featurexxxxxxxxxxxxxxxxxxxxxxxxxxxxx"`,
 }`,
       },
       {
+        type: "content",
         title: "Grid Template",
         description: "Defines a 3-column grid with equal width tracks.",
         content: `.grid-layout {
@@ -62,6 +69,7 @@ git commit -m "feat: Add new featurexxxxxxxxxxxxxxxxxxxxxxxxxxxxx"`,
 }`,
       },
       {
+        type: "content",
         title: "Visually Hide Element",
         description: "Hides an element from view but keeps it accessible to screen readers.",
         content: `.sr-only {
@@ -83,6 +91,7 @@ git commit -m "feat: Add new featurexxxxxxxxxxxxxxxxxxxxxxxxxxxxx"`,
     name: "TypeScript Basics", // <-- Usage updated here
     cheatsheets: [
       {
+        type: "content",
         title: "Interface Definition",
         description: "Defines a shape for objects to ensure type safety.",
         content: `interface User {
@@ -92,6 +101,7 @@ git commit -m "feat: Add new featurexxxxxxxxxxxxxxxxxxxxxxxxxxxxx"`,
 }`,
       },
       {
+        type: "content",
         title: "Generics Usage",
         description: "Creates reusable components that can work over several types.",
         content: `function identity<T>(arg: T): T {
@@ -101,6 +111,7 @@ git commit -m "feat: Add new featurexxxxxxxxxxxxxxxxxxxxxxxxxxxxx"`,
 const num = identity<number>(42);`,
       },
       {
+        type: "content",
         title: "Union Types",
         description: "Allows a variable to be one of several types.",
         content: `let status: "success" | "error" | number;

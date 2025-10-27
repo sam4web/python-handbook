@@ -73,15 +73,21 @@
     font-family: var(--font-inter);
   }
 
-  .styled-scrollbar::-webkit-scrollbar-track {
+  .styled-scrollbar::-webkit-scrollbar {
+    @apply size-2;
+  }
+
+  .styled-scrollbar-sm::-webkit-scrollbar {
+    @apply size-1;
+  }
+
+  .styled-scrollbar::-webkit-scrollbar-track,
+  .styled-scrollbar-sm::-webkit-scrollbar-track {
     @apply bg-muted;
   }
 
-  .styled-scrollbar::-webkit-scrollbar-thumb {
+  .styled-scrollbar::-webkit-scrollbar-thumb,
+  .styled-scrollbar-sm::-webkit-scrollbar-thumb {
     @apply rounded-xs bg-muted-foreground;
-  }
-
-  .styled-scrollbar::-webkit-scrollbar {
-    @apply w-2;
   }
 }
