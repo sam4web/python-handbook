@@ -67,6 +67,10 @@
     @apply m-0 p-0 box-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: var(--background);
     color: var(--foreground);
@@ -89,5 +93,11 @@
   .styled-scrollbar::-webkit-scrollbar-thumb,
   .styled-scrollbar-sm::-webkit-scrollbar-thumb {
     @apply rounded-xs bg-muted-foreground;
+  }
+}
+
+@layer components {
+  .page-overlay {
+    @apply size-full fixed top-0 left-0 z-3 bg-background/60 dark:bg-background/85 backdrop-blur-xs;
   }
 }

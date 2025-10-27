@@ -1,7 +1,7 @@
 import { NotebookText, Search } from "lucide-react";
-import CheatsheetItem from "./_components/cheatsheet-item";
 import { mockCheatsheetData } from "@/lib/cheatsheets";
-import CheatSheetTopicList from "./_components/cheatsheet-topic-list";
+import CheatsheetItem from "./_components/cheatsheet-item";
+import CheatsheetTopics from "./_components/cheatsheet-topics";
 
 const cheatsheetTopics = [
   { title: "Basics", target: "#basics" },
@@ -25,8 +25,8 @@ export default function CheatsheetPage() {
             </p>
           </div>
 
-          <div className="space-y-2 md:space-y-4.5">
-            <div className="max-w-md mx-auto">
+          <div className="space-y-3 md:space-y-4.5">
+            <div className="max-w-sm md:max-w-md mx-auto">
               <label className="border border-muted-foreground/40 bg-muted flex items-center py-1.5 px-2.5 rounded-md gap-1.5 outline-0 focus-within:outline-2 outline-primary">
                 <Search className="size-4.5" />
                 <input
@@ -36,10 +36,10 @@ export default function CheatsheetPage() {
                 />
               </label>
             </div>
-            <CheatSheetTopicList topics={cheatsheetTopics} />
+            <CheatsheetTopics topics={cheatsheetTopics} />
           </div>
 
-          <div className="space-y-1.5 max-w-md md:max-w-full mx-auto">
+          <div className="space-y-4 md:space-y-6 max-w-md md:max-w-full mx-auto">
             {mockCheatsheetData.map((item) => (
               <CheatsheetItem key={item.id} item={item} />
             ))}
