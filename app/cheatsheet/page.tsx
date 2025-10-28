@@ -1,7 +1,7 @@
 import { NotebookText, Search } from "lucide-react";
 import { mockCheatsheetData } from "@/lib/cheatsheets";
-import CheatsheetItem from "./_components/cheatsheet-item";
-import CheatsheetTopics from "./_components/cheatsheet-topics";
+import CheatsheetCategoryNavigation from "./_components/cheatsheet-category-navigation";
+import CheatsheetItemSection from "./_components/cheatsheet-item-section";
 
 const cheatsheetTopics = [
   { title: "Basics", target: "#basics" },
@@ -36,12 +36,12 @@ export default function CheatsheetPage() {
                 />
               </label>
             </div>
-            <CheatsheetTopics topics={cheatsheetTopics} />
+            <CheatsheetCategoryNavigation topics={cheatsheetTopics} />
           </div>
 
           <div className="space-y-4 md:space-y-6 max-w-md md:max-w-full mx-auto">
             {mockCheatsheetData.map((item) => (
-              <CheatsheetItem key={item.id} item={item} />
+              <CheatsheetItemSection key={item.id} item={item} />
             ))}
           </div>
         </div>

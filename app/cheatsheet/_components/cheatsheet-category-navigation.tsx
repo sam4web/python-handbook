@@ -6,7 +6,7 @@ import { NotebookText, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-export default function CheatsheetTopics({ topics }: { topics: { title: string; target: string }[] }) {
+export default function CheatsheetCategoryNavigation({ topics }: { topics: { title: string; target: string }[] }) {
   const elementRef = useRef<HTMLDivElement>(null);
   const [isPassed, setIsPassed] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
@@ -82,7 +82,7 @@ export default function CheatsheetTopics({ topics }: { topics: { title: string; 
             variant="icon"
             title="Close tutorial sidebar"
             onClick={closeTopicsSidebar}
-            className="[&>svg]:text-destructive! p-0.5!"
+            className="[&>svg]:text-destructive! p-0.5! rounded-sm! bg-transparent! hover:border-secondary!"
           >
             <X />
           </Button>

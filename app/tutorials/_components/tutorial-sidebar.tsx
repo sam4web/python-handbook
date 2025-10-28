@@ -56,7 +56,7 @@ export default function TutorialSidebar({ sidebarItems }: { sidebarItems: Sideba
                 variant="icon"
                 title="Close tutorial sidebar"
                 onClick={closeTutorialSidebar}
-                className="[&>svg]:text-destructive! p-0.5!"
+                className="[&>svg]:text-destructive! p-0.5! rounded-sm! bg-transparent! hover:border-secondary!"
               >
                 <X />
               </Button>

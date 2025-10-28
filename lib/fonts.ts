@@ -6,7 +6,7 @@ export const inter = Inter({
 });
 
 export const poppins = Poppins({
-  weight: ["100", "900"],
+  weight: ["100", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
 });
 
