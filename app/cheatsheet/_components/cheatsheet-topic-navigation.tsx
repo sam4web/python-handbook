@@ -5,34 +5,17 @@ import { ICheatsheetTopic } from "@/lib/cheatsheets";
 import { cx } from "@/lib/utils";
 import { NotebookText, X } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import TopicScrollTracker from "./topic-scroll-tracker";
 
 export default function CheatsheetTopicNavigation({ topics }: { topics: ICheatsheetTopic[] }) {
   const elementRef = useRef<HTMLDivElement>(null);
   const [isPassed, setIsPassed] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
+  const [activeDiv, setActiveDiv] = useState<string | null>(null);
 
-  const openTopicsSidebar = () => {
-    setShowSidebar(true);
-  };
-
-  const closeTopicsSidebar = () => {
-    setShowSidebar(false);
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowSidebar(false);
-      if (elementRef.current) {
-        const rect = elementRef.current.getBoundingClientRect();
-        setIsPassed(rect.bottom < 0);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  const openSidebar = () => setShowSidebar(true);
+  const closeSidebar = () => setShowSidebar(false);
 
   return (
     <>
@@ -51,13 +34,13 @@ export default function CheatsheetTopicNavigation({ topics }: { topics: ICheatsh
       </div>
 
       {/* Page Overlay */}
-      {isPassed && showSidebar ? <div className="page-overlay" onClick={closeTopicsSidebar} /> : null}
+      {isPassed && showSidebar ? <div className="page-overlay" onClick={closeSidebar} /> : null}
 
       {/* Open Topics Sidebar Button */}
       <Button
         variant="icon"
         title="Show topics list"
-        onClick={openTopicsSidebar}
+        onClick={openSidebar}
         className={cx(
           "border-border! bg-muted/95! fixed left-2 top-16 p-2! z-4",
           isPassed && !showSidebar ? "block" : "hidden"
@@ -66,6 +49,7 @@ export default function CheatsheetTopicNavigation({ topics }: { topics: ICheatsh
         <NotebookText />
       </Button>
 
+      {/* Topic List Sidebar */}
       <div
         className={cx(
           "bg-muted md:bg-muted/80 rounded-lg shadow-sm shadow-muted fixed top-12 w-full max-w-full md:max-w-xs z-5 h-dvh select-none mt-1 px-3 py-4",
@@ -82,25 +66,21 @@ export default function CheatsheetTopicNavigation({ topics }: { topics: ICheatsh
           <Button
             variant="icon"
             title="Close tutorial sidebar"
-            onClick={closeTopicsSidebar}
+            onClick={closeSidebar}
             className="[&>svg]:text-destructive! p-0.5! rounded-sm! bg-transparent! hover:border-secondary!"
           >
             <X />
           </Button>
         </div>
-
         <div className="pl-1 lg:pl-2 space-y-0.5 my-0.5">
           {topics.map((topic, idx) => (
             <Link
               key={idx}
               href={"#" + topic.slug}
-              //         className="flex justify-between items-center hover:bg-muted-foreground/20 py-1.5 px-2.5 rounded-lg"
-
+              onClick={closeSidebar}
               className={cx(
-                "hover:bg-muted-foreground/20 px-2.5 py-1 cursor-pointer block rounded-lg"
-                // active
-                // ? "text-primary dark:bg-muted-foreground/15 bg-muted-foreground/5 font-medium"
-                // : ""
+                "hover:bg-muted-foreground/20 px-2.5 py-1 cursor-pointer block rounded-lg",
+                topic.slug === activeDiv ? "text-primary bg-muted-foreground/15 font-medium" : ""
               )}
             >
               {topic.title}
@@ -108,6 +88,14 @@ export default function CheatsheetTopicNavigation({ topics }: { topics: ICheatsh
           ))}
         </div>
       </div>
+
+      <TopicScrollTracker
+        topics={topics}
+        setActiveDiv={setActiveDiv}
+        elementRef={elementRef}
+        setIsPassed={setIsPassed}
+        setShowSidebar={setShowSidebar}
+      />
     </>
   );
 }

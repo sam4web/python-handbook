@@ -36,9 +36,7 @@ export default function Dropdown({ title, items, active: isActive, closeTutorial
               href={`/tutorials/${item.slug}`}
               className={cx(
                 "hover:bg-muted-foreground/20 p-2 cursor-pointer block rounded-lg text-sm",
-                pathname.includes(item.slug)
-                  ? "text-primary dark:bg-muted-foreground/15 bg-muted-foreground/5 font-medium"
-                  : ""
+                pathname.includes(item.slug) ? "text-primary bg-muted-foreground/10 font-medium" : ""
               )}
             >
               {item.title}

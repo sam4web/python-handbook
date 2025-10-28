@@ -7,7 +7,7 @@ export default function CheatsheetItemSection({ topic }: { topic: ICheatsheetDat
   const secondColumn = topic.items.filter((_, index) => index % 2 === 1);
 
   return (
-    <div id={topic.slug}>
+    <div id={topic.slug} className="my-4 md:my-6">
       <div className="flex items-center justify-between w-full border-b px-0.5 py-1 md:py-2.5 border-primary">
         <div className="flex items-center gap-1.5 md:gap-2.5">
           <p className={`text-2xl md:text-3xl font-medium text-primary ${poppins.className}`}>{topic.title}</p>

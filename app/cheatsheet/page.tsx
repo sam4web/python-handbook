@@ -35,7 +35,7 @@ export default function CheatsheetPage() {
             <CheatsheetTopicNavigation topics={topics} />
           </div>
 
-          <div className="space-y-4 md:space-y-6 max-w-md md:max-w-full mx-auto">
+          <div className="max-w-md md:max-w-full mx-auto">
             {cheatsheetData.map((topic, idx) => (
               <CheatsheetItemSection key={idx} topic={topic} />
             ))}
