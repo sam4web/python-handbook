@@ -5,6 +5,7 @@ import Code from "@/components/code";
 import { Copy, CopyCheck } from "lucide-react";
 import { useState } from "react";
 import { cx } from "@/lib/utils";
+import { firaCode } from "@/lib/fonts";
 
 export default function CodeBlock({ language, value }: { language: string; value: string }) {
   const [copied, setCopied] = useState(false);
@@ -25,7 +26,7 @@ export default function CodeBlock({ language, value }: { language: string; value
   return (
     <div className="bg-muted/65 border-muted-foreground/30 border rounded-lg shadow-muted my-4">
       <div className="flex justify-between items-center border-muted-foreground/30 border-b px-3 py-1">
-        <p className="text-muted-foreground text-sm">{language}</p>
+        <p className={`text-muted-foreground text-sm ${firaCode.className}`}>{language}</p>
         <Button
           variant="icon"
           onClick={handleCopyCode}

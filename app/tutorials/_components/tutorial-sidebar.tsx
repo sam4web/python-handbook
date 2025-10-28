@@ -5,10 +5,10 @@ import { BookOpen, X } from "lucide-react";
 import { cx } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Button from "@/components/ui/button";
-import { SidebarItem } from "@/lib/tutorials";
+import { ISidebarItem } from "@/lib/tutorials";
 import { useState } from "react";
 
-export default function TutorialSidebar({ sidebarItems }: { sidebarItems: SidebarItem[] }) {
+export default function TutorialSidebar({ sidebarItems }: { sidebarItems: ISidebarItem[] }) {
   const isMobile = useIsMobile();
   const [showTutorialSidebar, setShowTutorialSidebar] = useState(false);
 

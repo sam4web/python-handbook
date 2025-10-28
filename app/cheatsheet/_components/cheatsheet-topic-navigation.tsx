@@ -1,12 +1,13 @@
 "use client";
 
 import Button from "@/components/ui/button";
+import { ICheatsheetTopic } from "@/lib/cheatsheets";
 import { cx } from "@/lib/utils";
 import { NotebookText, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-export default function CheatsheetCategoryNavigation({ topics }: { topics: { title: string; target: string }[] }) {
+export default function CheatsheetTopicNavigation({ topics }: { topics: ICheatsheetTopic[] }) {
   const elementRef = useRef<HTMLDivElement>(null);
   const [isPassed, setIsPassed] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
@@ -40,9 +41,9 @@ export default function CheatsheetCategoryNavigation({ topics }: { topics: { tit
         {topics.map((topic, idx) => (
           <div
             key={idx}
-            className="border-muted-foreground/30 border px-2.5 py-0.5 rounded-md shadow-xs bg-muted/30 hover:bg-primary/10 hover:text-accent cursor-pointer"
+            className="border-muted border px-2.5 py-0.5 text-muted-foreground rounded-md shadow-xs bg-muted/60 hover:bg-primary/10 hover:text-primary hover:border-primary cursor-pointer"
           >
-            <Link className="text-sm" href={topic.target}>
+            <Link className="text-sm" href={"#" + topic.slug}>
               {topic.title}
             </Link>
           </div>
@@ -75,7 +76,7 @@ export default function CheatsheetCategoryNavigation({ topics }: { topics: { tit
         <div className="mb-4 flex items-center justify-between px-2.5 lg:px-4">
           <div className="flex items-center gap-2">
             <NotebookText className="text-primary size-5" />
-            <p className="text-lg font-medium">Python Lessons</p>
+            <p className="text-lg font-medium">Topics</p>
           </div>
           {/* Close Topics Side bar */}
           <Button
@@ -92,7 +93,7 @@ export default function CheatsheetCategoryNavigation({ topics }: { topics: { tit
           {topics.map((topic, idx) => (
             <Link
               key={idx}
-              href={topic.target}
+              href={"#" + topic.slug}
               //         className="flex justify-between items-center hover:bg-muted-foreground/20 py-1.5 px-2.5 rounded-lg"
 
               className={cx(

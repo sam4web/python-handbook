@@ -2,18 +2,19 @@ import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
 import { notFound } from "next/navigation";
+import { MAX_ORDER_VALUE } from "./constants";
+import { splitNameAndOrder } from "./utils";
 
 const tutorialsDir = path.join(process.cwd(), "contents", "tutorials");
 let PATH_INDEX: Map<string, string>;
-const MAX_ORDER_VALUE = 999999;
 
-export interface TutorialMetadata {
+export interface ITutorialMetadata {
   title: string;
   description?: string;
   [key: string]: any;
 }
 
-export interface SidebarItem {
+export interface ISidebarItem {
   title: string;
   order: number;
   items: {
@@ -23,30 +24,14 @@ export interface SidebarItem {
   }[];
 }
 
-function toTitleCase(slug: string): string {
-  return slug
-    .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-    .join(" ");
-}
-
-function splitNameAndOrder(name: string): { order: number; title: string } {
-  const parts = name.split("-");
-  let order = Number(parts[0]);
-  let slug = parts.slice(1).join("-");
-  if (isNaN(order)) order = 0;
-  if (!slug.length) slug = name;
-  const title = toTitleCase(slug);
-  return { order, title };
-}
+const TUTORIALS_GROUPS = fs
+  .readdirSync(tutorialsDir, { withFileTypes: true })
+  .filter((dirent) => dirent.isDirectory())
+  .map((dirent) => dirent.name);
 
 function buildPathIndex(): Map<string, string> {
   const pathIndex = new Map<string, string>();
-  const tutorialGroups = fs
-    .readdirSync(tutorialsDir, { withFileTypes: true })
-    .filter((dirent) => dirent.isDirectory())
-    .map((dirent) => dirent.name);
-  for (const group of tutorialGroups) {
+  for (const group of TUTORIALS_GROUPS) {
     const groupPath = path.join(tutorialsDir, group);
     const tutorialFileNames = fs.readdirSync(groupPath);
     for (const fileName of tutorialFileNames) {
@@ -61,20 +46,16 @@ function buildPathIndex(): Map<string, string> {
   return pathIndex;
 }
 
-export function getSidebarItems(): SidebarItem[] {
-  const tutorialGroups = fs
-    .readdirSync(tutorialsDir, { withFileTypes: true })
-    .filter((dirent) => dirent.isDirectory())
-    .map((dirent) => dirent.name);
-  const allItems: SidebarItem[] = tutorialGroups.map((group) => {
+export function getSidebarItems(): ISidebarItem[] {
+  const allItems: ISidebarItem[] = TUTORIALS_GROUPS.map((group) => {
     const { title: categoryTitle, order: rawCategoryOrder } = splitNameAndOrder(group);
     const categoryOrder = rawCategoryOrder || MAX_ORDER_VALUE;
     const groupPath = path.join(tutorialsDir, group);
     const tutorialFileNames = fs.readdirSync(groupPath);
     const items = tutorialFileNames
       .filter((filename) => filename.endsWith(".md") || filename.endsWith(".mdx"))
-      .map((fileName) => {
-        const baseName = fileName.replace(/\.(md|mdx)$/, "");
+      .map((filename) => {
+        const baseName = filename.replace(/\.(md|mdx)$/, "");
         const { title: itemTitle, order: rawItemOrder } = splitNameAndOrder(baseName);
         const itemOrder = rawItemOrder || MAX_ORDER_VALUE;
         const slug = baseName.slice(baseName.search("-") + 1);
@@ -85,7 +66,7 @@ export function getSidebarItems(): SidebarItem[] {
       title: categoryTitle,
       order: categoryOrder,
       items: sortedItems,
-    } as SidebarItem;
+    } as ISidebarItem;
   });
   return allItems.sort((a, b) => a.order - b.order);
 }
@@ -97,7 +78,7 @@ export function getAllTutorialSlugs(): string[] {
   return Array.from(PATH_INDEX.keys());
 }
 
-export function getTutorialMetadata(slug: string): TutorialMetadata {
+export function getTutorialMetadata(slug: string): ITutorialMetadata {
   if (!PATH_INDEX) {
     PATH_INDEX = buildPathIndex();
   }
@@ -106,7 +87,7 @@ export function getTutorialMetadata(slug: string): TutorialMetadata {
     notFound();
   }
   const fileContents = fs.readFileSync(filePath, "utf-8");
-  const rawMetadata = matter(fileContents).data as TutorialMetadata;
+  const rawMetadata = matter(fileContents).data as ITutorialMetadata;
   const metadata = { ...rawMetadata, title: (rawMetadata.title ?? "") as string };
   return metadata;
 }

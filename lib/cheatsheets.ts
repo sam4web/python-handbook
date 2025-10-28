@@ -1,124 +1,63 @@
-export interface ICheatsheetItem {
+import path from "path";
+import fs from "fs";
+import { MAX_ORDER_VALUE } from "./constants";
+import { splitNameAndOrder } from "./utils";
+import matter from "gray-matter";
+
+const cheatsheetsDir = path.join(process.cwd(), "contents", "cheatsheets");
+
+export interface ICheatsheetMetadata {
   title: string;
   description: string;
+  kind: "concept" | "syntax" | "function";
+}
+
+export interface ICheatsheetItem extends ICheatsheetMetadata {
   content: string;
-  type: "keyword" | "content";
 }
 
-export interface ICheatsheetCategory {
-  id: number;
-  name: string;
-  cheatsheets: ICheatsheetItem[];
+export interface ICheatsheetTopic {
+  title: string;
+  order: number;
+  slug: string;
 }
 
-export const mockCheatsheetData: ICheatsheetCategory[] = [
-  {
-    id: 1,
-    name: "Git Version Control", // <-- Usage updated here
-    cheatsheets: [
-      {
-        type: "content",
-        title: "Commit Changes",
-        description: "Records changes to the repository with a descriptive message.",
-        content: `git commit -m "feat: Add new feature"
-git commit -m "feat: Add new feature"
-git commit -m "feat: Add new feature"
-git commit -m "feat: Add new featurexxxxxxxxxxxxxxxxxxxxxxxxxxxxx"`,
-      },
-      {
-        type: "content",
-        title: "Force Push",
-        description: "Overwrites the remote branch history with your local version (use with caution).",
-        content: `git push --force origin <branch-name>`,
-      },
-      {
-        type: "keyword",
-        title: "Undo Last Commit",
-        description: "Moves HEAD pointer back one commit, keeping changes in the working directory.",
-        content: `git reset HEAD~1`,
-      },
-      {
-        type: "keyword",
-        title: "View History",
-        description: "Displays a clean, graphical history of the commit tree.",
-        content: `git log --oneline --graph --decorate`,
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "CSS Layouts and Styling", // <-- Usage updated here
-    cheatsheets: [
-      {
-        type: "keyword",
-        title: "Center Horizontally (Flexbox)",
-        description: "Centers an item within a flex container along the main axis.",
-        content: `.container {
-  display: flex;
-  justify-content: center;
-}`,
-      },
-      {
-        type: "content",
-        title: "Grid Template",
-        description: "Defines a 3-column grid with equal width tracks.",
-        content: `.grid-layout {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-}`,
-      },
-      {
-        type: "content",
-        title: "Visually Hide Element",
-        description: "Hides an element from view but keeps it accessible to screen readers.",
-        content: `.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}`,
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: "TypeScript Basics", // <-- Usage updated here
-    cheatsheets: [
-      {
-        type: "content",
-        title: "Interface Definition",
-        description: "Defines a shape for objects to ensure type safety.",
-        content: `interface User {
-  id: number;
-  name: string;
-  email?: string; // optional property
-}`,
-      },
-      {
-        type: "content",
-        title: "Generics Usage",
-        description: "Creates reusable components that can work over several types.",
-        content: `function identity<T>(arg: T): T {
-  return arg;
+export interface ICheatsheetData extends ICheatsheetTopic {
+  items: ICheatsheetItem[];
 }
 
-const num = identity<number>(42);`,
-      },
-      {
-        type: "content",
-        title: "Union Types",
-        description: "Allows a variable to be one of several types.",
-        content: `let status: "success" | "error" | number;
+const ALL_CHEATSHEET_TOPICS = fs
+  .readdirSync(cheatsheetsDir, { withFileTypes: true })
+  .filter((dirent) => dirent.isDirectory())
+  .map((dirent) => dirent.name);
 
-status = "success";
-status = 404;`,
-      },
-    ],
-  },
-];
+export function getCheatsheetTopics(): ICheatsheetTopic[] {
+  const allTopics: ICheatsheetTopic[] = ALL_CHEATSHEET_TOPICS.map((topic) => {
+    const { title: topicTitle, order: rawTopicOrder } = splitNameAndOrder(topic);
+    const topicOrder = rawTopicOrder || MAX_ORDER_VALUE;
+    const topicSlug = topicTitle.toLowerCase().replaceAll(" ", "-");
+    return { title: topicTitle, slug: topicSlug, order: topicOrder };
+  });
+  return allTopics.sort((a, b) => a.order - b.order);
+}
+
+export function getCheatsheetData(): ICheatsheetData[] {
+  const allItems = ALL_CHEATSHEET_TOPICS.map((topic) => {
+    const { title: topicTitle, order: rawTopicOrder } = splitNameAndOrder(topic);
+    const topicOrder = rawTopicOrder || MAX_ORDER_VALUE;
+    const topicSlug = topicTitle.toLowerCase().replaceAll(" ", "-");
+    const topicPath = path.join(cheatsheetsDir, topic);
+    const cheatsheetFileNames = fs.readdirSync(topicPath);
+    const items: ICheatsheetItem[] = cheatsheetFileNames
+      .filter((filename) => filename.endsWith(".md") || filename.endsWith(".mdx"))
+      .map((filename) => {
+        const filepath = path.join(topicPath, filename);
+        const rawContents = fs.readFileSync(filepath, "utf-8");
+        const metadata = matter(rawContents).data as ICheatsheetMetadata;
+        const content = matter(rawContents).content;
+        return { ...metadata, content };
+      });
+    return { title: topicTitle, slug: topicSlug, order: topicOrder, items };
+  });
+  return allItems.sort((a, b) => a.order - b.order);
+}

@@ -1,5 +1,6 @@
 "use client";
 
+import { firaCode } from "@/lib/fonts";
 import { useTheme } from "next-themes";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneDark, atomOneLight } from "react-syntax-highlighter/dist/esm/styles/hljs";
@@ -19,7 +20,7 @@ export default function Code({ language, content }: { language: string; content:
       customStyle={customStyle}
       style={theme === "dark" ? atomOneDark : atomOneLight}
       PreTag="div"
-      className="styled-scrollbar-sm text-sm font-mono overflow-auto"
+      className={`styled-scrollbar-sm text-sm overflow-auto ${firaCode.className}`}
     >
       {content}
     </SyntaxHighlighter>

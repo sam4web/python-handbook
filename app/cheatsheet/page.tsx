@@ -1,16 +1,12 @@
 import { NotebookText, Search } from "lucide-react";
-import { mockCheatsheetData } from "@/lib/cheatsheets";
-import CheatsheetCategoryNavigation from "./_components/cheatsheet-category-navigation";
 import CheatsheetItemSection from "./_components/cheatsheet-item-section";
-
-const cheatsheetTopics = [
-  { title: "Basics", target: "#basics" },
-  { title: "Control Flow", target: "#control-flow" },
-  { title: "Functions", target: "#functions" },
-  { title: "Standard Library", target: "#standard-library" },
-];
+import CheatsheetTopicNavigation from "./_components/cheatsheet-topic-navigation";
+import { getCheatsheetData, getCheatsheetTopics } from "@/lib/cheatsheets";
 
 export default function CheatsheetPage() {
+  const cheatsheetData = getCheatsheetData();
+  const topics = getCheatsheetTopics();
+
   return (
     <main className="md:max-w-4xl xl:max-w-6xl mx-auto">
       <div className="px-3 md:px-6 py-3">
@@ -27,7 +23,7 @@ export default function CheatsheetPage() {
 
           <div className="space-y-3 md:space-y-4.5">
             <div className="max-w-sm md:max-w-md mx-auto">
-              <label className="border border-muted-foreground/40 bg-muted flex items-center py-1.5 px-2.5 rounded-md gap-1.5 outline-0 focus-within:outline-2 outline-primary">
+              <label className="border border-secondary-foreground bg-background flex items-center py-1.5 px-2.5 rounded-md gap-1.5 outline-0 focus-within:outline-2 focus-within:border-muted  outline-primary">
                 <Search className="size-4.5" />
                 <input
                   type="text"
@@ -36,12 +32,12 @@ export default function CheatsheetPage() {
                 />
               </label>
             </div>
-            <CheatsheetCategoryNavigation topics={cheatsheetTopics} />
+            <CheatsheetTopicNavigation topics={topics} />
           </div>
 
           <div className="space-y-4 md:space-y-6 max-w-md md:max-w-full mx-auto">
-            {mockCheatsheetData.map((item) => (
-              <CheatsheetItemSection key={item.id} item={item} />
+            {cheatsheetData.map((topic, idx) => (
+              <CheatsheetItemSection key={idx} topic={topic} />
             ))}
           </div>
         </div>
