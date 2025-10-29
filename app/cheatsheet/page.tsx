@@ -1,4 +1,4 @@
-import { NotebookText, Search } from "lucide-react";
+import { NotebookText } from "lucide-react";
 import { getCheatsheetData, getCheatsheetTopics } from "@/lib/cheatsheets";
 import CheatsheetIndex from "./_components/cheatsheet-index";
 
