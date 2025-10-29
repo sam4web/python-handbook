@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 import { poppins } from "@/lib/fonts";
-import useCheatsheetSearch from "../_hooks/use-cheatsheet-search";
-import { ICheatsheetData, ICheatsheetTopic } from "@/lib/cheatsheets";
+import { ICheatsheetData, ICheatsheetItem, ICheatsheetTopic } from "@/lib/cheatsheets";
 import CheatsheetSidebar from "./cheatsheet-sidebar";
 import CheatsheetItemsGrid from "./cheatsheet-item-grid";
 import SearchInput from "@/components/search-input";
+import useSearchFilter from "@/hooks/use-search-filter";
 
 interface Props {
   cheatsheetData: ICheatsheetData[];
@@ -16,7 +16,25 @@ interface Props {
 
 export default function CheatsheetIndex({ cheatsheetData, topics }: Props) {
   const topicsElementRef = useRef<HTMLDivElement>(null);
-  const { search, setSearch, filteredData } = useCheatsheetSearch(cheatsheetData);
+
+  const filterCheatsheetItems = useCallback((search: string, cheatsheets: ICheatsheetData[]) => {
+    const sanitizedSearch = search.trim().toLowerCase();
+    if (!sanitizedSearch) {
+      return null;
+    }
+    const result = cheatsheets.flatMap((cheatsheet) => {
+      return cheatsheet.items.filter((item) => {
+        const text = `${item.title} ${item.kind}`.toLowerCase();
+        return text.includes(sanitizedSearch);
+      });
+    });
+    return result;
+  }, []);
+
+  const { search, setSearch, filteredData } = useSearchFilter<ICheatsheetData, ICheatsheetItem>(
+    cheatsheetData,
+    filterCheatsheetItems
+  );
 
   return (
     <>
