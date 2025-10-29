@@ -1,14 +1,13 @@
 "use client";
 
-import { ICheatsheetData, ICheatsheetTopic } from "@/lib/cheatsheets";
-import CheatsheetSidebar from "./cheatsheet-sidebar";
 import Link from "next/link";
 import { useRef } from "react";
-import useCheatsheetSearch from "../hooks/useCheatsheetSearch";
-import CheatsheetSearch from "./cheatsheet-search";
-import CheatsheetItemsGrid from "./cheatsheet-item-grid";
 import { poppins } from "@/lib/fonts";
-import Button from "@/components/ui/button";
+import useCheatsheetSearch from "../_hooks/use-cheatsheet-search";
+import { ICheatsheetData, ICheatsheetTopic } from "@/lib/cheatsheets";
+import CheatsheetSidebar from "./cheatsheet-sidebar";
+import CheatsheetItemsGrid from "./cheatsheet-item-grid";
+import SearchInput from "@/components/search-input";
 
 interface Props {
   cheatsheetData: ICheatsheetData[];
@@ -18,12 +17,11 @@ interface Props {
 export default function CheatsheetIndex({ cheatsheetData, topics }: Props) {
   const topicsElementRef = useRef<HTMLDivElement>(null);
   const { search, setSearch, filteredData } = useCheatsheetSearch(cheatsheetData);
-  console.log(filteredData);
 
   return (
     <>
       <div className="space-y-3 md:space-y-4.5">
-        <CheatsheetSearch search={search} onSearchChange={setSearch} />
+        <SearchInput search={search} onSearchChange={setSearch} placeholder="Search by keywords or concepts..." />
         <div className="flex items-center justify-center flex-wrap gap-1.5 md:gap-2 w-full" ref={topicsElementRef}>
           {topics.map((topic, idx) => (
             <div

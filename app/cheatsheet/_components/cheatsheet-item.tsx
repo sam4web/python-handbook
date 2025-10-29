@@ -46,6 +46,8 @@ export default function CheatsheetItem({ item }: { item: ICheatsheetItem }) {
           <Button
             variant="icon"
             onClick={handleCopyCode}
+            disabled={copied}
+            title="Copy code"
             className={cx(
               "border-none! hover:bg-muted-foreground/10! rounded-md! p-1.5! hidden group-hover:block",
               copied ? " [&>svg]:text-green-600!" : " [&>svg]:text-foreground!"

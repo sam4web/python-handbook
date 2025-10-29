@@ -26,7 +26,7 @@ export default function useCheatsheetSearch(initialData: ICheatsheetData[]) {
       setFilteredData(results);
     },
     [search, initialData, filterCheatsheetItems],
-    350
+    400
   );
 
   return {
