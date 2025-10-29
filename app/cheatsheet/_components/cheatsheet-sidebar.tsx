@@ -5,11 +5,16 @@ import { ICheatsheetTopic } from "@/lib/cheatsheets";
 import { cx } from "@/lib/utils";
 import { NotebookText, X } from "lucide-react";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { Dispatch, RefObject, SetStateAction, useState } from "react";
 import TopicScrollTracker from "./topic-scroll-tracker";
 
-export default function CheatsheetTopicNavigation({ topics }: { topics: ICheatsheetTopic[] }) {
-  const elementRef = useRef<HTMLDivElement>(null);
+interface Props {
+  topics: ICheatsheetTopic[];
+  elementRef: RefObject<HTMLElement | null>;
+  setSearch: Dispatch<SetStateAction<string>>;
+}
+
+export default function CheatsheetSidebar({ topics, elementRef, setSearch }: Props) {
   const [isPassed, setIsPassed] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
   const [activeDiv, setActiveDiv] = useState<string | null>(null);
@@ -19,20 +24,6 @@ export default function CheatsheetTopicNavigation({ topics }: { topics: ICheatsh
 
   return (
     <>
-      {/* Topics list */}
-      <div className="flex items-center justify-center flex-wrap gap-1 md:gap-2 w-full" ref={elementRef}>
-        {topics.map((topic, idx) => (
-          <div
-            key={idx}
-            className="border-muted border px-2.5 py-0.5 text-muted-foreground rounded-md shadow-xs bg-muted/60 hover:bg-primary/10 hover:text-primary hover:border-primary cursor-pointer"
-          >
-            <Link className="text-sm" href={"#" + topic.slug}>
-              {topic.title}
-            </Link>
-          </div>
-        ))}
-      </div>
-
       {/* Page Overlay */}
       {isPassed && showSidebar ? <div className="page-overlay" onClick={closeSidebar} /> : null}
 
@@ -77,7 +68,10 @@ export default function CheatsheetTopicNavigation({ topics }: { topics: ICheatsh
             <Link
               key={idx}
               href={"#" + topic.slug}
-              onClick={closeSidebar}
+              onClick={() => {
+                closeSidebar();
+                setSearch("");
+              }}
               className={cx(
                 "hover:bg-muted-foreground/20 px-2.5 py-1 cursor-pointer block rounded-lg",
                 topic.slug === activeDiv ? "text-primary bg-muted-foreground/15 font-medium" : ""

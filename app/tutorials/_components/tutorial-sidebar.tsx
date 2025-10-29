@@ -12,13 +12,8 @@ export default function TutorialSidebar({ sidebarItems }: { sidebarItems: ISideb
   const isMobile = useIsMobile();
   const [showTutorialSidebar, setShowTutorialSidebar] = useState(false);
 
-  const openTutorialSidebar = () => {
-    setShowTutorialSidebar(true);
-  };
-
-  const closeTutorialSidebar = () => {
-    setShowTutorialSidebar(false);
-  };
+  const openTutorialSidebar = () => setShowTutorialSidebar(true);
+  const closeTutorialSidebar = () => setShowTutorialSidebar(false);
 
   return (
     <>
