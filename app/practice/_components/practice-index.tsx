@@ -5,9 +5,9 @@ import SearchInput from "@/components/search-input";
 import { DIFFICULTY_MAP, IChallenge, DifficultyKey } from "@/lib/practice";
 import { cx } from "@/lib/utils";
 import useSearchFilter from "@/hooks/use-search-filter";
-import PracticeItemGrid from "./practice-item-grid";
 import { poppins } from "@/lib/fonts";
 import { X } from "lucide-react";
+import ChallengeColumnGrid from "./challenge-column-grid";
 
 export default function PracticeIndex({ challenges }: { challenges: IChallenge[] }) {
   const [difficulty, setDifficulty] = useState<DifficultyKey | null>(null);
@@ -59,6 +59,7 @@ export default function PracticeIndex({ challenges }: { challenges: IChallenge[]
               </button>
             ))}
           </div>
+          {/* Clear Difficulty Filter Button */}
           {difficulty ? (
             <button
               title="Clear difficulty filter"
@@ -74,7 +75,7 @@ export default function PracticeIndex({ challenges }: { challenges: IChallenge[]
       </div>
 
       {dataToRender.length > 0 ? (
-        <PracticeItemGrid challenges={dataToRender} />
+        <ChallengeColumnGrid challenges={dataToRender} />
       ) : (
         <div className={`text-center my-4 md:my-6 ${poppins.className}`}>
           <p className="text-xl md:text-2xl text-destructive font-normal md:mb-2">No results found</p>

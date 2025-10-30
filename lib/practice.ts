@@ -23,6 +23,7 @@ export interface IFormat {
 export interface IChallenge {
   id: number;
   title: string;
+  slug: string;
   difficulty: DifficultyKey;
   category: string[];
   description: string;
@@ -34,6 +35,7 @@ export const mockPracticeChallenges: IChallenge[] = [
   {
     id: 1,
     title: "Sum of Two Integers",
+    slug: "sum-of-two-integers",
     difficulty: "easy",
     category: ["basics", "math"],
     description: "Write a function that takes two integer inputs, `a` and `b`, and returns their sum.",
@@ -43,6 +45,7 @@ export const mockPracticeChallenges: IChallenge[] = [
   {
     id: 2,
     title: "Area of a Circle",
+    slug: "area-of-a-circle",
     difficulty: "easy",
     category: ["basics", "math"],
     description:
@@ -53,6 +56,7 @@ export const mockPracticeChallenges: IChallenge[] = [
   {
     id: 3,
     title: "Celsius to Fahrenheit",
+    slug: "celsius-to-fahrenheit",
     difficulty: "easy",
     category: ["basics", "math"],
     description: "Convert a temperature from Celsius to Fahrenheit. Formula: F = C * 9/5 + 32.",
@@ -62,6 +66,7 @@ export const mockPracticeChallenges: IChallenge[] = [
   {
     id: 4,
     title: "Simple Calculator",
+    slug: "simple-calculator",
     difficulty: "medium",
     category: ["basics", "functions"],
     description:
@@ -74,6 +79,7 @@ export const mockPracticeChallenges: IChallenge[] = [
   {
     id: 5,
     title: "Reverse a String",
+    slug: "reverse-a-string",
     difficulty: "medium",
     category: ["strings"],
     description: "Given an input string, return the string with its characters in reverse order.",
@@ -83,6 +89,7 @@ export const mockPracticeChallenges: IChallenge[] = [
   {
     id: 6,
     title: "Count Vowels",
+    slug: "count-vowels",
     difficulty: "easy",
     category: ["strings"],
     description:
@@ -93,6 +100,7 @@ export const mockPracticeChallenges: IChallenge[] = [
   {
     id: 7,
     title: "Check Palindrome",
+    slug: "check-palindrome",
     difficulty: "medium",
     category: ["strings"],
     description:
@@ -103,6 +111,7 @@ export const mockPracticeChallenges: IChallenge[] = [
   {
     id: 8,
     title: "Title Case a Sentence",
+    slug: "title-case-a-sentence",
     difficulty: "medium",
     category: ["strings"],
     description: "Convert a sentence to title case, where the first letter of every word is capitalized.",
@@ -112,6 +121,7 @@ export const mockPracticeChallenges: IChallenge[] = [
   {
     id: 9,
     title: "Longest Word in Sentence",
+    slug: "longest-word-in-sentence",
     difficulty: "hard",
     category: ["strings", "arrays"],
     description:
@@ -120,9 +130,11 @@ export const mockPracticeChallenges: IChallenge[] = [
     output_format: { type: "string", example: "'longest'" },
   },
 
+  // --- ARRAYS & LISTS (5 Items) ---
   {
     id: 10,
     title: "Array Sum and Average",
+    slug: "array-sum-and-average",
     difficulty: "easy",
     category: ["arrays", "math"],
     description: "Calculate the sum and average of all numbers in a given list of integers.",
@@ -132,6 +144,7 @@ export const mockPracticeChallenges: IChallenge[] = [
   {
     id: 11,
     title: "Remove Duplicates",
+    slug: "remove-duplicates",
     difficulty: "medium",
     category: ["arrays"],
     description:
@@ -142,6 +155,7 @@ export const mockPracticeChallenges: IChallenge[] = [
   {
     id: 12,
     title: "Rotate Array Left",
+    slug: "rotate-array-left",
     difficulty: "hard",
     category: ["arrays", "algorithms"],
     description: "Rotate the elements of an array to the left by `k` steps.",
@@ -151,6 +165,7 @@ export const mockPracticeChallenges: IChallenge[] = [
   {
     id: 13,
     title: "Binary Search",
+    slug: "binary-search",
     difficulty: "medium",
     category: ["arrays", "algorithms"],
     description: "Implement the binary search algorithm to efficiently find a target value in a sorted array.",
@@ -160,6 +175,7 @@ export const mockPracticeChallenges: IChallenge[] = [
   {
     id: 14,
     title: "Two Sum",
+    slug: "two-sum",
     difficulty: "hard",
     category: ["arrays", "objects_maps", "algorithms"],
     description:
@@ -172,6 +188,7 @@ export const mockPracticeChallenges: IChallenge[] = [
   {
     id: 15,
     title: "Factorial (Recursive)",
+    slug: "factorial-recursive",
     difficulty: "medium",
     category: ["recursion", "math"],
     description: "Calculate the factorial of a non-negative integer `n` using recursion.",
@@ -181,6 +198,7 @@ export const mockPracticeChallenges: IChallenge[] = [
   {
     id: 16,
     title: "Fibonacci Sequence (Nth Term)",
+    slug: "fibonacci-sequence-nth-term",
     difficulty: "hard",
     category: ["recursion", "algorithms"],
     description:
@@ -191,6 +209,7 @@ export const mockPracticeChallenges: IChallenge[] = [
   {
     id: 17,
     title: "Valid Parentheses",
+    slug: "valid-parentheses",
     difficulty: "hard",
     category: ["data_structures", "algorithms", "strings"],
     description:
@@ -201,6 +220,7 @@ export const mockPracticeChallenges: IChallenge[] = [
   {
     id: 18,
     title: "Depth First Search (DFS)",
+    slug: "depth-first-search-dfs",
     difficulty: "expert",
     category: ["data_structures", "algorithms", "graphs"],
     description: "Implement Depth First Search on a simple tree or graph structure to find a specific node.",
@@ -210,6 +230,7 @@ export const mockPracticeChallenges: IChallenge[] = [
   {
     id: 19,
     title: "Count Word Frequency",
+    slug: "count-word-frequency",
     difficulty: "medium",
     category: ["objects_maps", "strings"],
     description:
@@ -220,6 +241,7 @@ export const mockPracticeChallenges: IChallenge[] = [
   {
     id: 20,
     title: "Linked List Reversal",
+    slug: "linked-list-reversal",
     difficulty: "expert",
     category: ["data_structures"],
     description: "Reverse a singly linked list in place and return the new head of the list.",
