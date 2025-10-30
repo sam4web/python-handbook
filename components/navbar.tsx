@@ -70,7 +70,7 @@ export default function Navbar() {
             </div>
           </Link>
 
-          <ul className="hidden md:flex flex-between space-x-1 lg:space-x-2">
+          <ul className="hidden md:flex justify-between items-center space-x-1 lg:space-x-2">
             {navlinks.map((link, idx) => {
               const isActive = pathname === link.href || (pathname.startsWith(link.href) && link.href !== "/");
               return (
