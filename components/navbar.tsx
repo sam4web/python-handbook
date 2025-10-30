@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import Button from "./ui/button";
 import ThemeToggleBtn from "./theme-toggle-btn";
 import { Menu } from "lucide-react";
-import { firaCode } from "@/lib/fonts";
+import { firacode } from "@/lib/fonts";
 import { cx } from "@/lib/utils";
 
 const navlinks = [
@@ -48,12 +48,7 @@ export default function Navbar() {
           showNavbar ? "bg-background!" : "backdrop-blur-xs shadow-sm shadow-muted"
         )}
       >
-        <div
-          className={cx(
-            "flex justify-between items-center px-2.5 max-w-6xl mx-auto",
-            !isHomePage || scrollActive ? "py-1.5" : "py-2.5"
-          )}
-        >
+        <div className={cx("flex-between px-2.5 max-w-6xl mx-auto", !isHomePage || scrollActive ? "py-1.5" : "py-2.5")}>
           <Link href={"/"}>
             <div className="flex items-center">
               <div
@@ -66,7 +61,7 @@ export default function Navbar() {
                 className={cx(
                   "font-medium text-foreground",
                   !isHomePage || scrollActive ? "text-base leading-tight ml-1" : "text-lg leading-snug ml-2",
-                  firaCode.className
+                  firacode.className
                 )}
               >
                 Python <br />
@@ -75,7 +70,7 @@ export default function Navbar() {
             </div>
           </Link>
 
-          <ul className="hidden md:flex justify-between items-center space-x-1 lg:space-x-2">
+          <ul className="hidden md:flex flex-between space-x-1 lg:space-x-2">
             {navlinks.map((link, idx) => {
               const isActive = pathname === link.href || (pathname.startsWith(link.href) && link.href !== "/");
               return (

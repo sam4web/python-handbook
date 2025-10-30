@@ -10,6 +10,6 @@ export const poppins = Poppins({
   subsets: ["latin"],
 });
 
-export const firaCode = Fira_Code({
+export const firacode = Fira_Code({
   weight: "variable",
 });

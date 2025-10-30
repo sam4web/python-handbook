@@ -96,8 +96,34 @@
   }
 }
 
+@layer utility {
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .flex-between {
+    @apply flex items-center justify-between;
+  }
+}
+
 @layer components {
   .page-overlay {
     @apply size-full fixed top-0 left-0 z-3 bg-background/60 dark:bg-background/85 backdrop-blur-xs;
+  }
+
+  .card {
+    @apply bg-muted/60 px-2 md:px-3.5 pt-1.5 pb-2 md:pb-3.5 rounded-xl shadow-sm relative border-2 border-transparent hover:border-primary hover:-translate-y-1;
+  }
+
+  .tag-container {
+    @apply flex items-center justify-center flex-wrap gap-1.5;
+  }
+
+  .tag {
+    @apply border-muted border px-2.5 py-0.5 text-muted-foreground rounded-md shadow-xs bg-muted/60 hover:bg-primary/10 hover:text-primary hover:border-primary text-sm;
+  }
+
+  .tag-active {
+    @apply text-accent bg-primary/10 border-primary;
   }
 }

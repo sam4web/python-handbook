@@ -40,16 +40,11 @@ export default function CheatsheetIndex({ cheatsheetData, topics }: Props) {
     <>
       <div className="space-y-3 md:space-y-4.5">
         <SearchInput search={search} onSearchChange={setSearch} placeholder="Search by keywords or concepts..." />
-        <div className="flex items-center justify-center flex-wrap gap-1.5 md:gap-2 w-full" ref={topicsElementRef}>
+        <div className="tag-container" ref={topicsElementRef}>
           {topics.map((topic, idx) => (
-            <div
-              key={idx}
-              className="border-muted border px-2.5 py-0.5 text-muted-foreground rounded-md shadow-xs bg-muted/60 hover:bg-primary/10 hover:text-primary hover:border-primary cursor-pointer"
-            >
-              <Link className="text-sm" href={"#" + topic.slug} onClick={() => setSearch("")}>
-                {topic.title}
-              </Link>
-            </div>
+            <Link className="tag" href={"#" + topic.slug} onClick={() => setSearch("")}>
+              {topic.title}
+            </Link>
           ))}
         </div>
         <CheatsheetSidebar topics={topics} elementRef={topicsElementRef} setSearch={setSearch} />
@@ -59,7 +54,7 @@ export default function CheatsheetIndex({ cheatsheetData, topics }: Props) {
         {!search.trim().length || !filteredData ? (
           cheatsheetData.map((cheatsheet) => (
             <div id={cheatsheet.slug} className="my-4 md:my-6" key={`${cheatsheet.order} ${cheatsheet.slug}`}>
-              <div className="flex items-center justify-between w-full border-b px-0.5 py-1 md:py-2.5 border-primary">
+              <div className="flex-between w-full border-b px-0.5 py-1 md:py-2.5 border-primary">
                 <div className="flex items-center gap-2 md:gap-3">
                   <p className={`text-2xl md:text-3xl font-medium text-primary ${poppins.className}`}>
                     {cheatsheet.title}
@@ -74,7 +69,7 @@ export default function CheatsheetIndex({ cheatsheetData, topics }: Props) {
           ))
         ) : filteredData.length ? (
           <div className="my-4 md:my-6">
-            <div className="flex items-center justify-between w-full border-dashed border-b px-0.5 py-1 md:py-2.5 border-primary">
+            <div className="flex-between w-full border-dashed border-b px-0.5 py-1 md:py-2.5 border-primary">
               <p className={`text-xl md:text-2xl font-medium text-primary ${poppins.className}`}>
                 <span className="font-semibold">{filteredData.length}</span> Search Results Found
               </p>

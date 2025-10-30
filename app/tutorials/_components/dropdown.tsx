@@ -20,7 +20,7 @@ export default function Dropdown({ title, items, active: isActive, closeTutorial
   return (
     <div>
       <div
-        className="flex justify-between items-center hover:bg-muted-foreground/20 py-1.5 px-2.5 rounded-lg"
+        className="flex-between hover:bg-muted-foreground/20 py-1.5 px-2.5 rounded-lg"
         onClick={() => setActive((prev) => !prev)}
       >
         <p className="font-medium">{title}</p>

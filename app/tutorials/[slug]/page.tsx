@@ -4,7 +4,7 @@ import Link from "next/link";
 import remarkGfm from "remark-gfm";
 import { Metadata } from "next";
 import CodeBlock from "../_components/code-block";
-import { firaCode } from "@/lib/fonts";
+import { firacode } from "@/lib/fonts";
 
 export async function generateStaticParams() {
   const slugs = getAllTutorialSlugs();
@@ -29,7 +29,7 @@ export default async function TutorialPage({ params }: { params: Promise<{ slug:
       const language = match ? match[1] : "text";
       if (!match) {
         return (
-          <code className={`bg-primary/10 px-2.5 py-1 rounded-sm text-accent ${firaCode.className}`}>{children}</code>
+          <code className={`bg-primary/10 px-2.5 py-1 rounded-sm text-accent ${firacode.className}`}>{children}</code>
         );
       }
       const codeValue = String(children).replace(/\n$/, "");

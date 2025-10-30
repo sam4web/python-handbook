@@ -48,7 +48,7 @@ export default function CheatsheetSidebar({ topics, elementRef, setSearch }: Pro
           isPassed ? "block" : "hidden"
         )}
       >
-        <div className="mb-4 flex items-center justify-between px-2.5 lg:px-4">
+        <div className="mb-4 flex-between px-2.5 lg:px-4">
           <div className="flex items-center gap-2">
             <NotebookText className="text-primary size-5" />
             <p className="text-lg font-medium">Topics</p>
