@@ -3,24 +3,19 @@
 import { IChallenge } from "@/lib/practice";
 import PracticeItem from "./practice-item";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useMemo } from "react";
 
 export default function PracticeItemGrid({ challenges }: { challenges: IChallenge[] }) {
-  const columns: IChallenge[][] = [];
   const isMobile = useIsMobile();
-  if (isMobile) {
-    columns.push(
-      challenges.filter((_, index) => index % 2 === 0),
-      challenges.filter((_, index) => index % 2 === 1)
-    );
-  } else {
-    columns.push(
-      challenges.filter((_, index) => index % 3 === 0),
-      challenges.filter((_, index) => index % 3 === 1),
-      challenges.filter((_, index) => index % 3 === 2)
-    );
-  }
-
-  console.log(isMobile);
+  const columns = useMemo(() => {
+    const numColumns = isMobile ? 2 : 3;
+    const columns: IChallenge[][] = Array.from({ length: numColumns }, () => []);
+    challenges.forEach((item, index) => {
+      const columnIndex = index % numColumns;
+      columns[columnIndex].push(item);
+    });
+    return columns;
+  }, [isMobile]);
 
   return (
     <div className="max-w-sm xs:max-w-xl md:max-w-full mx-auto">
@@ -32,22 +27,6 @@ export default function PracticeItemGrid({ challenges }: { challenges: IChalleng
             ))}
           </div>
         ))}
-
-        {/*<div className="grid gap-y-3">
-          {firstColumn.map((item) => (
-            <PracticeItem challenge={item} key={item.id} />
-          ))}
-        </div>
-        <div className="grid gap-y-3">
-          {secondColumn.map((item) => (
-            <PracticeItem challenge={item} key={item.id} />
-          ))}
-        </div>*/}
-        {/*<div className="grid col-span-2 lg:col-span-1 grid-cols-2 lg:grid-cols-1 gap-x-3 gap-y-3 items-start">
-          {thirdColumn.map((item) => (
-            <PracticeItem challenge={item} key={item.id} />
-          ))}
-        </div>*/}
       </div>
     </div>
   );
