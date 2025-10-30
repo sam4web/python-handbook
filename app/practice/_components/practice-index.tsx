@@ -5,27 +5,37 @@ import SearchInput from "@/components/search-input";
 import { DIFFICULTY_MAP, IChallenge, DifficultyKey } from "@/lib/practice";
 import { cx } from "@/lib/utils";
 import useSearchFilter from "@/hooks/use-search-filter";
-import { useIsMobile } from "@/hooks/use-mobile";
-import PracticeItem from "./practice-item";
+import PracticeItemGrid from "./practice-item-grid";
+import { poppins } from "@/lib/fonts";
+import { X } from "lucide-react";
 
 export default function PracticeIndex({ challenges }: { challenges: IChallenge[] }) {
   const [difficulty, setDifficulty] = useState<DifficultyKey | null>(null);
-  const isMobile = useIsMobile();
-  const columns = useMemo(() => {
-    const numColumns = isMobile ? 2 : 3;
-    const columns: IChallenge[][] = Array.from({ length: numColumns }, () => []);
-    challenges.forEach((item, index) => {
-      const columnIndex = index % numColumns;
-      columns[columnIndex].push(item);
-    });
-    return columns;
-  }, [isMobile]);
 
   const filterChallenges = useCallback((search: string, challenges: IChallenge[]) => {
-    return null;
+    const sanitizedSearch = search.trim().toLowerCase();
+    if (!sanitizedSearch) {
+      return null;
+    }
+    return challenges.filter((item) => {
+      const text = `${item.title} ${item.category.join(" ")}`.toLowerCase();
+      return text.includes(sanitizedSearch);
+    });
   }, []);
 
   const { search, setSearch, filteredData } = useSearchFilter<IChallenge>(challenges, filterChallenges);
+
+  const dataToRender = useMemo(() => {
+    let result = challenges;
+    const sanitizedSearch = search.trim().toLowerCase();
+    if (sanitizedSearch) {
+      result = filteredData || [];
+    }
+    if (difficulty) {
+      result = result.filter((challenge) => challenge.difficulty === difficulty);
+    }
+    return result;
+  }, [difficulty, filteredData]);
 
   return (
     <>
@@ -36,7 +46,7 @@ export default function PracticeIndex({ challenges }: { challenges: IChallenge[]
           placeholder="Search challenges..."
         />
         {/* Difficulty Options List */}
-        <div className="max-w-sm md:max-w-md mx-auto flex gap-2">
+        <div className="max-w-sm md:max-w-lg mx-auto flex items-start justify-center gap-2">
           <p className="font-medium text-sm text-muted-foreground">Difficulty:</p>
           <div className="tag-container">
             {DIFFICULTY_MAP.map((item) => (
@@ -49,21 +59,28 @@ export default function PracticeIndex({ challenges }: { challenges: IChallenge[]
               </button>
             ))}
           </div>
+          {difficulty ? (
+            <button
+              title="Clear difficulty filter"
+              onClick={() => setDifficulty(null)}
+              className="flex items-center gap-1 cursor-pointer bg-destructive rounded-full p-1"
+            >
+              <X className="size-4 text-foreground" />
+            </button>
+          ) : (
+            ""
+          )}
         </div>
       </div>
 
-      {/* Items Grid */}
-      <div className="max-w-sm xs:max-w-xl md:max-w-full mx-auto">
-        <div className="grid xs:grid-cols-2 md:grid-cols-3 gap-3 items-start">
-          {columns.map((col, idx) => (
-            <div key={idx} className="grid gap-y-3">
-              {col.map((item) => (
-                <PracticeItem challenge={item} key={item.id} />
-              ))}
-            </div>
-          ))}
+      {dataToRender.length > 0 ? (
+        <PracticeItemGrid challenges={dataToRender} />
+      ) : (
+        <div className={`text-center my-4 md:my-6 ${poppins.className}`}>
+          <p className="text-xl md:text-2xl text-destructive font-normal md:mb-2">No results found</p>
+          <p className="text-sm text-muted-foreground">Try adjusting your search term.</p>
         </div>
-      </div>
+      )}
     </>
   );
 }

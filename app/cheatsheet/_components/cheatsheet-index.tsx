@@ -78,11 +78,8 @@ export default function CheatsheetIndex({ cheatsheetData, topics }: Props) {
           </div>
         ) : (
           <div className={`text-center my-4 md:my-6 ${poppins.className}`}>
-            <p className="text-xl md:text-2xl text-destructive font-medium md:mb-2">No results found</p>
-            <p className="text-base md:text-lg text-muted-foreground">
-              for "<span className="font-semibold text-destructive">{search}</span>".
-            </p>
-            <p className="text-sm mt-3 md:mt-4 text-muted-foreground/50">Try adjusting your search term.</p>
+            <p className="text-xl md:text-2xl text-destructive font-normal md:mb-2">No results found</p>
+            <p className="text-sm text-muted-foreground">Try adjusting your search term.</p>
           </div>
         )}
       </div>
