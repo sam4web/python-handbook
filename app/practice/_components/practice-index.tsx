@@ -1,29 +1,18 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import SearchInput from "@/components/search-input";
 import { DIFFICULTY_MAP, IChallenge, DifficultyKey } from "@/lib/practice";
 import { cx } from "@/lib/utils";
-import useSearchFilter from "@/hooks/use-search-filter";
 import { poppins } from "@/lib/fonts";
 import { X } from "lucide-react";
 import ChallengeColumnGrid from "./challenge-column-grid";
+import useFilterChallenges from "../_hooks/use-filter-challenges";
 
 export default function PracticeIndex({ challenges }: { challenges: IChallenge[] }) {
   const [difficulty, setDifficulty] = useState<DifficultyKey | null>(null);
 
-  const filterChallenges = useCallback((search: string, challenges: IChallenge[]) => {
-    const sanitizedSearch = search.trim().toLowerCase();
-    if (!sanitizedSearch) {
-      return null;
-    }
-    return challenges.filter((item) => {
-      const text = `${item.title} ${item.category.join(" ")}`.toLowerCase();
-      return text.includes(sanitizedSearch);
-    });
-  }, []);
-
-  const { search, setSearch, filteredData } = useSearchFilter<IChallenge>(challenges, filterChallenges);
+  const { search, setSearch, filteredData } = useFilterChallenges(challenges);
 
   const dataToRender = useMemo(() => {
     let result = challenges;

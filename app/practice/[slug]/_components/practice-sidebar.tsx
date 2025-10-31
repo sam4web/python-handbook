@@ -2,10 +2,13 @@
 
 import SearchInput from "@/components/search-input";
 import Button from "@/components/ui/button";
-import { IChallenge } from "@/lib/practice";
+import { firacode } from "@/lib/fonts";
+import { DIFFICULTY_FILTERS, IChallenge } from "@/lib/practice";
 import { cx } from "@/lib/utils";
 import { Target, X } from "lucide-react";
-import { useState } from "react";
+import Link from "next/link";
+import { useMemo, useState } from "react";
+import useFilterChallenges from "../../_hooks/use-filter-challenges";
 
 export default function PracticeSidebar({
   challenges,
@@ -15,9 +18,21 @@ export default function PracticeSidebar({
   activeChallengeSlug: string;
 }) {
   const [showSidebar, setShowSidebar] = useState(false);
-
   const openSidebar = () => setShowSidebar(true);
   const closeSidebar = () => setShowSidebar(false);
+  const { search, setSearch, filteredData } = useFilterChallenges(challenges);
+  const dataToRender = useMemo(() => {
+    const activeItem = challenges.find((item) => item.slug === activeChallengeSlug) || null;
+    const sanitizedSearch = search.trim().toLowerCase();
+    if (sanitizedSearch) {
+      return filteredData || [];
+    }
+    let result = [...challenges].splice(0, 6).filter((item) => item.slug !== activeChallengeSlug);
+    if (activeItem) {
+      result = [activeItem, ...result];
+    }
+    return result;
+  }, [filteredData]);
 
   return (
     <>
@@ -35,13 +50,7 @@ export default function PracticeSidebar({
       </Button>
 
       {/* Challenges List Sidebar */}
-      <div
-        className={cx(
-          "sidebar",
-          showSidebar ? "left-0" : "-left-full"
-          // isPassed ? "block" : "hidden"
-        )}
-      >
+      <div className={cx("sidebar overflow-y-auto styled-scrollbar-sm", showSidebar ? "left-0" : "-left-full")}>
         <div className="mb-4 px-2.5">
           <div className="flex-between mb-3">
             <div className="flex items-center gap-2">
@@ -60,19 +69,37 @@ export default function PracticeSidebar({
             </Button>
           </div>
 
-          <div>
-            <SearchInput
-              search={""}
-              onSearchChange={(search) => console.log(search)}
-              placeholder="Search challenges..."
-            />
-          </div>
+          <SearchInput
+            search={search}
+            onSearchChange={(search) => setSearch(search)}
+            placeholder="Search challenges..."
+          />
         </div>
 
-        <div className="pl-1 lg:pl-2 space-y-0.5 my-0.5">
-          {challenges.map((challenge) => (
-            <div>{JSON.stringify(challenge)}</div>
-          ))}
+        <div className="px-1 space-y-2.5 my-5">
+          {dataToRender.map((challenge) => {
+            const difficulty = DIFFICULTY_FILTERS[challenge.difficulty];
+            return (
+              <Link
+                href={`/practice/${challenge.slug}`}
+                key={challenge.id}
+                className={cx(
+                  "card cursor-pointer bg-background block translate-y-0! outline max-w-72",
+                  activeChallengeSlug === challenge.slug
+                    ? "border-primary! outline-transparent"
+                    : "border-transparent! hover:bg-accent-foreground/10! outline-secondary-foreground/10"
+                )}
+              >
+                <div className="flex justify-between items-start py-0.5">
+                  <p className={`text-wrap font-medium ${firacode.className}`}>{challenge.title}</p>
+                  <p className={`px-1 py-px rounded-xs text-xs shadow-xs font-medium  ${difficulty?.colorClass}`}>
+                    {difficulty?.label}
+                  </p>
+                </div>
+                <p className="text-sm text-muted-foreground">{challenge.description}</p>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </>
