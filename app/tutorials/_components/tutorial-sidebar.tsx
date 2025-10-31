@@ -34,7 +34,7 @@ export default function TutorialSidebar({ sidebarItems }: { sidebarItems: ISideb
       <aside
         className={cx(
           "z-5 overflow-y-auto w-full top-12 left-0 select-none shadow-sm shadow-muted styled-scrollbar",
-          isMobile ? "max-w-md fixed h-dvh bg-muted/80" : "sticky max-w-72 h-[calc(100dvh-54px)] bg-secondary/10",
+          isMobile ? "max-w-sm fixed h-dvh bg-muted" : "sticky max-w-76 h-[calc(100dvh-54px)]",
           !showTutorialSidebar && isMobile ? "-translate-x-full" : ""
         )}
       >

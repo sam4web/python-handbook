@@ -56,7 +56,7 @@ export default function CheatsheetItem({ item }: { item: ICheatsheetItem }) {
         </div>
         <p className="text-sm text-muted-foreground">{item.description}</p>
       </div>
-      <div className="px-2 py-0 bg-secondary dark:bg-muted border-muted-foreground/25 border rounded-lg inline-grid w-full">
+      <div className="px-2 py-0 bg-secondary dark:bg-muted border-secondary-foreground/20 border rounded-lg inline-grid w-full">
         <Code content={item.content} language={"python"} />
       </div>
     </div>
