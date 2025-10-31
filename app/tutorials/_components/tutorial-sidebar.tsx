@@ -26,7 +26,7 @@ export default function TutorialSidebar({ sidebarItems }: { sidebarItems: ISideb
           variant="icon"
           title="Show tutorial sidebar"
           onClick={openTutorialSidebar}
-          className="border-border! bg-muted/95! fixed left-2 top-16 p-2!"
+          className="open-sidebar-button"
         >
           <BookOpen />
         </Button>
@@ -51,7 +51,7 @@ export default function TutorialSidebar({ sidebarItems }: { sidebarItems: ISideb
                 variant="icon"
                 title="Close tutorial sidebar"
                 onClick={closeTutorialSidebar}
-                className="[&>svg]:text-destructive! p-0.5! rounded-sm! bg-transparent! hover:border-secondary!"
+                className="close-sidebar-button"
               >
                 <X />
               </Button>

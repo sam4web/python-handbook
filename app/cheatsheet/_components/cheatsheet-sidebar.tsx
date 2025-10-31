@@ -32,34 +32,21 @@ export default function CheatsheetSidebar({ topics, elementRef, setSearch }: Pro
         variant="icon"
         title="Show topics list"
         onClick={openSidebar}
-        className={cx(
-          "border-border! bg-muted/95! fixed left-2 top-16 p-2! z-4",
-          isPassed && !showSidebar ? "block" : "hidden"
-        )}
+        className={cx("open-sidebar-button", isPassed && !showSidebar ? "block" : "hidden")}
       >
         <NotebookText />
       </Button>
 
       {/* Topic List Sidebar */}
-      <div
-        className={cx(
-          "bg-muted md:bg-muted/80 rounded-lg shadow-sm shadow-muted fixed top-12 w-full max-w-full md:max-w-xs z-5 h-dvh select-none mt-1 px-3 py-4",
-          showSidebar ? "left-0" : "-left-full",
-          isPassed ? "block" : "hidden"
-        )}
-      >
+      <div className={cx("sidebar", showSidebar ? "left-0" : "-left-full", isPassed ? "block" : "hidden")}>
         <div className="mb-4 flex-between px-2.5 lg:px-4">
           <div className="flex items-center gap-2">
             <NotebookText className="text-primary size-5" />
             <p className="text-lg font-medium">Topics</p>
           </div>
+
           {/* Close Topics Side bar */}
-          <Button
-            variant="icon"
-            title="Close tutorial sidebar"
-            onClick={closeSidebar}
-            className="[&>svg]:text-destructive! p-0.5! rounded-sm! bg-transparent! hover:border-secondary!"
-          >
+          <Button variant="icon" title="Close tutorial sidebar" onClick={closeSidebar} className="close-sidebar-button">
             <X />
           </Button>
         </div>

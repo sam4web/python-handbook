@@ -127,4 +127,16 @@
   .tag-active {
     @apply text-accent bg-primary/10 border-primary;
   }
+
+  .open-sidebar-button {
+    @apply border-border! bg-muted/95! fixed left-2 top-16 p-2! z-4;
+  }
+
+  .close-sidebar-button {
+    @apply [&>svg]:text-destructive! p-0.5! rounded-md! bg-transparent! hover:bg-destructive! hover:[&>svg]:text-foreground!;
+  }
+
+  .sidebar {
+    @apply bg-muted md:bg-muted/80 rounded-lg shadow-sm shadow-muted fixed top-12 w-full max-w-full md:max-w-xs z-5 h-dvh select-none mt-1 px-3 py-4;
+  }
 }

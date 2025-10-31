@@ -3,7 +3,7 @@ import { Target } from "lucide-react";
 import PracticeIndex from "./_components/practice-index";
 
 export default function PracticePage() {
-  const practiceChallenges = mockPracticeChallenges;
+  const challenges = mockPracticeChallenges;
 
   return (
     <main className="md:max-w-4xl xl:max-w-6xl mx-auto">
@@ -20,7 +20,7 @@ export default function PracticePage() {
               Solve Python programming challenges. Test your understanding and improve your coding skills.
             </p>
           </div>
-          <PracticeIndex challenges={practiceChallenges} />
+          <PracticeIndex challenges={challenges} />
         </div>
       </div>
     </main>
