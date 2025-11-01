@@ -8,6 +8,8 @@ import ThemeToggleBtn from "./theme-toggle-btn";
 import { Menu } from "lucide-react";
 import { firacode } from "@/lib/fonts";
 import { cx } from "@/lib/utils";
+import Image from "next/image";
+import { useTheme } from "next-themes";
 
 const navlinks = [
   { title: "Tutorials", href: "/tutorials" },
@@ -53,14 +55,16 @@ export default function Navbar() {
             <div className="flex items-center">
               <div
                 className={cx(
-                  "bg-foreground rounded-lg shadow-md",
+                  "bg-foreground dark:bg-muted rounded-lg shadow-md overflow-hidden",
                   !isHomePage || scrollActive ? "size-10" : "size-10 lg:size-12"
                 )}
-              />
+              >
+                <Image src={"/logo.png"} width={680} height={680} alt="Python Handbook Logo" />
+              </div>
               <p
                 className={cx(
                   "font-medium text-foreground",
-                  !isHomePage || scrollActive ? "text-base leading-tight ml-1" : "text-lg leading-snug ml-2",
+                  !isHomePage || scrollActive ? "text-base leading-tight ml-1.5" : "text-lg leading-snug ml-2",
                   firacode.className
                 )}
               >
