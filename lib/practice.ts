@@ -31,6 +31,51 @@ export interface IChallenge {
   output_format: IFormat;
 }
 
+export const mockSingleChallengeData = {
+  id: 1,
+  title: "Sum of Two Integers (Bitwise)",
+  slug: "sum-of-two-integers",
+  difficulty: "easy",
+  description:
+    "Write a function that takes two integer inputs, `a` and `b`, and returns their sum without using the standard '+' or '-' operators. The solution must use bitwise operations.",
+  constraints: ["-1000 <= a, b <= 1000", "No use of '+' or '-' operators.", "Solve using bitwise operations."],
+  category: ["basics", "math"],
+  explanation:
+    "### Algorithm Overview (Bitwise Addition)\n\nTo add two numbers without using the standard '+' operator, we rely on bitwise operations: XOR and AND. \n\n1. **XOR (`^`)** handles the sum without considering the carry (e.g., 1+1=0, 1+0=1).\n2. **AND (`&`)** finds the carry (a carry only occurs when both bits are 1).\n3. The carry is then shifted left by one position (`<< 1`) to be added in the next iteration.\n\nThis process continues recursively or iteratively until there are no more carry bits left (i.e., `carry` is 0).",
+  examples: [
+    {
+      input_value: "a = 5, b = 3",
+      output_value: "8",
+    },
+    {
+      input_value: "a = -10, b = 5",
+      output_value: "-5",
+    },
+    {
+      input_value: "a = 7, b = 0",
+      output_value: "7",
+    },
+  ],
+  startercode: "function getSum(a, b) {\n  // Implement bitwise addition here\n  return 0; \n}",
+  testcases: [
+    {
+      input: [5, 3],
+      expected_output: 8,
+      description: "Simple positive integers.",
+    },
+    {
+      input: [2, 12],
+      expected_output: 14,
+      description: "Standard addition of two positive numbers.",
+    },
+    {
+      input: [-10, 5],
+      expected_output: -5,
+      description: "Handling negative numbers.",
+    },
+  ],
+};
+
 export const mockPracticeChallenges: IChallenge[] = [
   {
     id: 1,

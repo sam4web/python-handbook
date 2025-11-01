@@ -12,9 +12,9 @@ export default async function SinglePracticeLayout({
   const challenges = mockPracticeChallenges;
 
   return (
-    <main>
+    <main className="md:max-w-4xl xl:max-w-7xl mx-auto">
       <PracticeSidebar activeChallengeSlug={slug} challenges={challenges} />
-      <div>{children}</div>
+      <div className="px-2 py-3.5">{children}</div>
     </main>
   );
 }

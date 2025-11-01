@@ -8,7 +8,7 @@ export default function TutorialsLayout({ children }: { children: React.ReactNod
     <main className="flex">
       <TutorialSidebar sidebarItems={sidebarItems} />
       <div className="flex-1 overflow-y-auto">
-        <article className="md:max-w-3xl xl:max-w-4xl mx-auto px-6 py-2">{children}</article>
+        <article className="md:max-w-3xl xl:max-w-4xl mx-auto px-6 py-1.5">{children}</article>
       </div>
     </main>
   );
