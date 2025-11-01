@@ -55,11 +55,11 @@ export default function Navbar() {
             <div className="flex items-center">
               <div
                 className={cx(
-                  "bg-foreground dark:bg-muted rounded-lg shadow-md overflow-hidden",
+                  "bg-[#131d34] rounded-lg shadow-sm overflow-hidden",
                   !isHomePage || scrollActive ? "size-10" : "size-10 lg:size-12"
                 )}
               >
-                <Image src={"/logo.png"} width={680} height={680} alt="Python Handbook Logo" />
+                <Image src={"/logo.png"} width={780} height={780} alt="Python Handbook Logo" />
               </div>
               <p
                 className={cx(
@@ -82,7 +82,9 @@ export default function Navbar() {
                   key={idx}
                   className={cx(
                     "inline-block px-1 relative after:transition-all after:ease-out after:content-[''] after:absolute after:h-0.5 after:w-0 after:bg-primary after:-translate-x-1/2 after:left-1/2 after:-bottom-0.5 after:rounded-full",
-                    isActive ? "text-primary after:w-4/5 font-medium" : "text-foreground hover:after:w-1/2",
+                    isActive
+                      ? "text-primary after:w-4/5 font-semibold"
+                      : "text-foreground font-medium hover:after:w-1/2",
                     !isHomePage || scrollActive ? "text-sm" : "text-base"
                   )}
                 >
