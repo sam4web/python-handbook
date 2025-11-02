@@ -4,16 +4,16 @@ import Button from "@/components/ui/button";
 import { firacode } from "@/lib/fonts";
 import { Lightbulb, LightbulbOff, Play, RotateCcw } from "lucide-react";
 import { useState } from "react";
-import ThemeDropdown from "./theme-dropdown";
+import EditorThemeDropdown from "./editor-theme-dropdown";
 
-export default function ChallengeCodeEditory({ challenge }) {
+export default function ChallengeCodeEditor({ challenge }) {
   const [showHint, setShowHint] = useState(false);
 
   return (
     <div className="px-3 py-2 space-y-3">
       <div className="flex-between">
         <div className="flex-center gap-2">
-          <ThemeDropdown />
+          <EditorThemeDropdown />
           <Button
             variant="outline"
             className="code-editor-button"
@@ -45,7 +45,6 @@ export default function ChallengeCodeEditory({ challenge }) {
           </Button>
         </div>
       </div>
-
       {showHint ? (
         <div
           className={`rounded-md shadow-xs px-2 md:px-3 py-1 md:py-2 bg-primary/15 border border-primary ${firacode.className}`}

@@ -2,7 +2,7 @@ import { firacode } from "@/lib/fonts";
 import { DIFFICULTY_FILTERS, DifficultyKey, mockSingleChallengeData } from "@/lib/practice";
 import { Dot } from "lucide-react";
 import { notFound } from "next/navigation";
-import ChallengeCodeEditory from "./_components/challenge-code-editor";
+import ChallengeCodeEditor from "./_components/challenge-code-editor";
 
 // generateStaticParams
 // generateMetadata
@@ -16,7 +16,7 @@ export default async function SinglePracticePage({ params }: { params: Promise<{
   }
 
   return (
-    <div className="grid md:grid-cols-5 min-h-[calc(100dvh-5.8rem)] h-full">
+    <div className="grid md:grid-cols-5 h-full">
       <div className="px-3 col-span-2">
         <div className="flex items-start justify-between mb-0.5 pb-1">
           <p className={`text-lg md:text-xl text-wrap font-medium ${firacode.className}`}>{challenge.title}</p>
@@ -82,7 +82,7 @@ export default async function SinglePracticePage({ params }: { params: Promise<{
       </div>
 
       <div className="bg-muted shadow-sm rounded-lg col-span-3">
-        <ChallengeCodeEditory challenge={challenge} />
+        <ChallengeCodeEditor challenge={challenge} />
       </div>
     </div>
   );
