@@ -13,7 +13,7 @@ interface Props {
   closeTutorialSidebar: () => void;
 }
 
-export default function Dropdown({ title, items, active: isActive, closeTutorialSidebar }: Props) {
+export default function SidebarItem({ title, items, active: isActive, closeTutorialSidebar }: Props) {
   const pathname = usePathname();
   const [active, setActive] = useState(isActive || false);
 
@@ -28,7 +28,7 @@ export default function Dropdown({ title, items, active: isActive, closeTutorial
       </div>
 
       {active ? (
-        <div className="ml-5 pl-2 space-y-0.5 my-0.5 border-l-2 border-muted-foreground/15">
+        <div className="ml-5 pl-2 space-y-0.5 my-0.5 border-l-2 border-muted-foreground/20">
           {items.map((item, idx) => (
             <Link
               key={idx}

@@ -1,12 +1,12 @@
 "use client";
 
-import Dropdown from "./dropdown";
 import { BookOpen, X } from "lucide-react";
 import { cx } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Button from "@/components/ui/button";
 import { ISidebarItem } from "@/lib/tutorials";
 import { useState } from "react";
+import SidebarItem from "./sidebar-item";
 
 export default function TutorialSidebar({ sidebarItems }: { sidebarItems: ISidebarItem[] }) {
   const isMobile = useIsMobile();
@@ -60,7 +60,7 @@ export default function TutorialSidebar({ sidebarItems }: { sidebarItems: ISideb
 
           <div className="space-y-1.5 px-2 lg:px-4">
             {sidebarItems.map((item, idx) => (
-              <Dropdown
+              <SidebarItem
                 key={idx}
                 title={item.title}
                 items={item.items}

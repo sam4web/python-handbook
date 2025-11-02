@@ -56,6 +56,11 @@ export const mockSingleChallengeData = {
       output_value: "7",
     },
   ],
+  hints: [
+    "Use XOR (^) for the sum without carry.",
+    "Use AND (&) and left shift (<< 1) for the carry.",
+    "Loop until the carry is zero.",
+  ],
   startercode: "function getSum(a, b) {\n  // Implement bitwise addition here\n  return 0; \n}",
   testcases: [
     {

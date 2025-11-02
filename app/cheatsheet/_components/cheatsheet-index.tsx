@@ -42,7 +42,7 @@ export default function CheatsheetIndex({ cheatsheetData, topics }: Props) {
         <SearchInput search={search} onSearchChange={setSearch} placeholder="Search by keywords or concepts..." />
         <div className="tag-container" ref={topicsElementRef}>
           {topics.map((topic, idx) => (
-            <Link className="tag" href={"#" + topic.slug} onClick={() => setSearch("")}>
+            <Link className="tag" href={"#" + topic.slug} onClick={() => setSearch("")} key={idx}>
               {topic.title}
             </Link>
           ))}
