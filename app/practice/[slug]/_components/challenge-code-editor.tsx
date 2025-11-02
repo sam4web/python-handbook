@@ -4,6 +4,7 @@ import Button from "@/components/ui/button";
 import { firacode } from "@/lib/fonts";
 import { Lightbulb, LightbulbOff, Play, RotateCcw } from "lucide-react";
 import { useState } from "react";
+import ThemeDropdown from "./theme-dropdown";
 
 export default function ChallengeCodeEditory({ challenge }) {
   const [showHint, setShowHint] = useState(false);
@@ -12,7 +13,7 @@ export default function ChallengeCodeEditory({ challenge }) {
     <div className="px-3 py-2 space-y-3">
       <div className="flex-between">
         <div className="flex-center gap-2">
-          {/* DROPDOWN HERE */}
+          <ThemeDropdown />
           <Button
             variant="outline"
             className="code-editor-button"

@@ -20,7 +20,7 @@ export default function Button({ children, variant, className, title, ...props }
     <button
       title={title ? title : children?.toString()}
       className={cx(
-        "transition-all text-center cursor-pointer rounded-sm font-foreground font-medium disabled:opacity-75 disabled:translate-y-0!",
+        "transition-all text-center cursor-pointer rounded-sm text-foreground font-medium disabled:opacity-75 disabled:translate-y-0!",
         variantStyles[variant],
         className ? className : ""
       )}
