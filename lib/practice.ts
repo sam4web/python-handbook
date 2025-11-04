@@ -61,7 +61,7 @@ export const mockSingleChallengeData = {
     "Use AND (&) and left shift (<< 1) for the carry.",
     "Loop until the carry is zero.",
   ],
-  startercode: "function getSum(a, b) {\n  // Implement bitwise addition here\n  return 0; \n}",
+  startercode: "def getSum(a, b):\n  return a + b \n",
   testcases: [
     {
       input: [5, 3],

@@ -3,12 +3,14 @@ import { DIFFICULTY_FILTERS, DifficultyKey, mockSingleChallengeData } from "@/li
 import { Dot } from "lucide-react";
 import { notFound } from "next/navigation";
 import ChallengeCodeEditor from "./_components/challenge-code-editor";
+import { getAllThemesData } from "./_lib/editor-themes";
 
 // generateStaticParams
 // generateMetadata
 
 export default async function SinglePracticePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  const themes = await getAllThemesData();
   const challenge = mockSingleChallengeData;
   const difficulty = DIFFICULTY_FILTERS[challenge.difficulty as DifficultyKey];
   if (!challenge) {
@@ -82,7 +84,7 @@ export default async function SinglePracticePage({ params }: { params: Promise<{
       </div>
 
       <div className="bg-muted shadow-sm rounded-lg col-span-3">
-        <ChallengeCodeEditor challenge={challenge} />
+        <ChallengeCodeEditor challenge={challenge} themes={themes} />
       </div>
     </div>
   );

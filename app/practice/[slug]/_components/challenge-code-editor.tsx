@@ -3,17 +3,53 @@
 import Button from "@/components/ui/button";
 import { firacode } from "@/lib/fonts";
 import { Lightbulb, LightbulbOff, Play, RotateCcw } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import EditorThemeDropdown from "./editor-theme-dropdown";
+import { Editor, OnMount } from "@monaco-editor/react";
+import Spinner from "@/components/spinner";
+import { IEditorTheme } from "../_lib/editor-themes";
+import { editor } from "monaco-editor";
 
-export default function ChallengeCodeEditor({ challenge }) {
+export default function ChallengeCodeEditor({ challenge, themes }: { challenge: any; themes: IEditorTheme[] }) {
   const [showHint, setShowHint] = useState(false);
+  const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
+  const [theme, setTheme] = useState<string | null>(null);
+
+  const themeList = themes.map((theme) => {
+    const { name, label } = theme;
+    return { name, label };
+  });
+
+  const activeTheme = (function () {
+    let theme = localStorage.getItem("editor-theme");
+    if (!theme) {
+      theme = "night-owl";
+    }
+    let result = themeList.find((item) => item.name === theme);
+    if (!result) {
+      return { name: "night-owl", label: "Night Owl" };
+    }
+    return result;
+  })();
+
+  const handleEditorDidMount: OnMount = (editor, monaco) => {
+    editorRef.current = editor;
+    themes.map((theme) => {
+      monaco.editor.defineTheme(theme.name, theme.data);
+    });
+    setTheme(activeTheme.name);
+  };
+
+  const handleThemeChange = (theme: string) => {
+    setTheme(theme);
+    localStorage.setItem("editor-theme", theme);
+  };
 
   return (
     <div className="px-3 py-2 space-y-3">
       <div className="flex-between">
         <div className="flex-center gap-2">
-          <EditorThemeDropdown />
+          <EditorThemeDropdown themes={themeList} activeTheme={activeTheme} handleThemeChange={handleThemeChange} />
           <Button
             variant="outline"
             className="code-editor-button"
@@ -59,6 +95,16 @@ export default function ChallengeCodeEditor({ challenge }) {
           </ol>
         </div>
       ) : null}
+
+      <div className="h-[50dvh] overflow-hidden shadow-xs rounded-md">
+        <Editor
+          defaultLanguage="python"
+          defaultValue={challenge.startercode}
+          onMount={handleEditorDidMount}
+          theme={theme || "vs-dark"}
+          loading={<Spinner />}
+        />
+      </div>
     </div>
   );
 }
