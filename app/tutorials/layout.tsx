@@ -1,5 +1,5 @@
-import { getSidebarItems } from "@/lib/tutorials";
 import TutorialSidebar from "./_components/tutorial-sidebar";
+import { getSidebarItems } from "./utils/server";
 
 export default function TutorialsLayout({ children }: { children: React.ReactNode }) {
   const sidebarItems = getSidebarItems();

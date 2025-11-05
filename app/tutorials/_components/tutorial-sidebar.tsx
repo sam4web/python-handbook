@@ -4,9 +4,9 @@ import { BookOpen, X } from "lucide-react";
 import { cx } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Button from "@/components/ui/button";
-import { ISidebarItem } from "@/lib/tutorials";
 import { useState } from "react";
 import SidebarItem from "./sidebar-item";
+import { ISidebarItem } from "../utils/shared";
 
 export default function TutorialSidebar({ sidebarItems }: { sidebarItems: ISidebarItem[] }) {
   const isMobile = useIsMobile();
@@ -33,8 +33,10 @@ export default function TutorialSidebar({ sidebarItems }: { sidebarItems: ISideb
       ) : null}
       <aside
         className={cx(
-          "z-5 overflow-y-auto w-full top-12 left-0 select-none shadow-sm shadow-muted styled-scrollbar",
-          isMobile ? "max-w-sm fixed h-dvh bg-muted" : "sticky max-w-76 h-[calc(100dvh-54px)]",
+          "z-5 overflow-y-auto w-full top-13 left-0 select-none shadow-sm shadow-muted styled-scrollbar",
+          isMobile
+            ? "max-w-sm fixed h-dvh bg-muted"
+            : "sticky max-w-76 h-[calc(100dvh-53px)] border-r border-muted-foreground/25",
           !showTutorialSidebar && isMobile ? "-translate-x-full" : ""
         )}
       >

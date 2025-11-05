@@ -109,7 +109,7 @@
 
 @layer components {
   .page-overlay {
-    @apply size-full fixed top-0 left-0 z-10 bg-background/40 dark:bg-background/20 backdrop-blur-xs;
+    @apply size-full fixed top-0 left-0 z-10 bg-background/40 backdrop-blur-xs;
   }
 
   .card {

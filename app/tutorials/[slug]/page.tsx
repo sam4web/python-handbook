@@ -1,10 +1,10 @@
-import { getAllTutorialSlugs, getTutorialContent, getTutorialMetadata } from "@/lib/tutorials";
 import ReactMarkdown, { Components } from "react-markdown";
 import Link from "next/link";
 import remarkGfm from "remark-gfm";
 import { Metadata } from "next";
 import CodeBlock from "../_components/code-block";
 import { firacode } from "@/lib/fonts";
+import { getAllTutorialSlugs, getTutorialContent, getTutorialMetadata } from "../utils/server";
 
 export async function generateStaticParams() {
   const slugs = getAllTutorialSlugs();

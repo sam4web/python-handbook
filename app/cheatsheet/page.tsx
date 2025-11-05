@@ -1,6 +1,6 @@
 import { NotebookText } from "lucide-react";
-import { getCheatsheetData, getCheatsheetTopics } from "@/lib/cheatsheets";
 import CheatsheetIndex from "./_components/cheatsheet-index";
+import { getCheatsheetData, getCheatsheetTopics } from "./utils/server";
 
 export default function CheatsheetPage() {
   const cheatsheetData = getCheatsheetData();

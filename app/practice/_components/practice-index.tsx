@@ -2,12 +2,12 @@
 
 import { useMemo, useState } from "react";
 import SearchInput from "@/components/search-input";
-import { DIFFICULTY_MAP, IChallenge, DifficultyKey } from "@/lib/practice";
 import { cx } from "@/lib/utils";
 import { poppins } from "@/lib/fonts";
 import { X } from "lucide-react";
 import ChallengeColumnGrid from "./challenge-column-grid";
 import useFilterChallenges from "../_hooks/use-filter-challenges";
+import { DIFFICULTY_MAP, DifficultyKey, IChallenge } from "../utils/shared";
 
 export default function PracticeIndex({ challenges }: { challenges: IChallenge[] }) {
   const [difficulty, setDifficulty] = useState<DifficultyKey | null>(null);

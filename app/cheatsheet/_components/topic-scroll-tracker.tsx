@@ -1,5 +1,5 @@
-import { ICheatsheetTopic } from "@/lib/cheatsheets";
 import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
+import { ICheatsheetTopic } from "../utils/shared";
 
 interface Props {
   topics: ICheatsheetTopic[];

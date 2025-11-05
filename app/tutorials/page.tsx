@@ -1,5 +1,5 @@
-import { getAllTutorialSlugs, getSidebarItems } from "@/lib/tutorials";
 import { redirect } from "next/navigation";
+import { getAllTutorialSlugs, getSidebarItems } from "./utils/server";
 
 export default function TutorialBaseRedirectPage() {
   let firstTutorialSlug;

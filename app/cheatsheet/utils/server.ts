@@ -1,30 +1,11 @@
-import path from "path";
+import { MAX_ORDER_VALUE } from "@/lib/constants";
+import { splitNameAndOrder } from "@/lib/utils";
 import fs from "fs";
-import { MAX_ORDER_VALUE } from "./constants";
-import { splitNameAndOrder } from "./utils";
 import matter from "gray-matter";
+import path from "path";
+import { ICheatsheetData, ICheatsheetItem, ICheatsheetMetadata, ICheatsheetTopic } from "./shared";
 
 const cheatsheetsDir = path.join(process.cwd(), "contents", "cheatsheets");
-
-export interface ICheatsheetMetadata {
-  title: string;
-  description: string;
-  kind: "concept" | "syntax" | "function";
-}
-
-export interface ICheatsheetItem extends ICheatsheetMetadata {
-  content: string;
-}
-
-export interface ICheatsheetTopic {
-  title: string;
-  order: number;
-  slug: string;
-}
-
-export interface ICheatsheetData extends ICheatsheetTopic {
-  items: ICheatsheetItem[];
-}
 
 const ALL_CHEATSHEET_TOPICS = fs
   .readdirSync(cheatsheetsDir, { withFileTypes: true })

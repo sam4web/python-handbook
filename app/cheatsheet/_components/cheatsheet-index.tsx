@@ -1,13 +1,13 @@
 "use client";
 
-import Link from "next/link";
-import { useCallback, useRef } from "react";
-import { poppins } from "@/lib/fonts";
-import { ICheatsheetData, ICheatsheetItem, ICheatsheetTopic } from "@/lib/cheatsheets";
-import CheatsheetSidebar from "./cheatsheet-sidebar";
-import CheatsheetItemsGrid from "./cheatsheet-item-grid";
 import SearchInput from "@/components/search-input";
 import useSearchFilter from "@/hooks/use-search-filter";
+import { poppins } from "@/lib/fonts";
+import Link from "next/link";
+import { useCallback, useRef } from "react";
+import { ICheatsheetData, ICheatsheetItem, ICheatsheetTopic } from "../utils/shared";
+import CheatsheetItemsGrid from "./cheatsheet-item-grid";
+import CheatsheetSidebar from "./cheatsheet-sidebar";
 
 interface Props {
   cheatsheetData: ICheatsheetData[];

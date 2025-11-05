@@ -1,9 +1,9 @@
 import { firacode } from "@/lib/fonts";
-import { DIFFICULTY_FILTERS, DifficultyKey, mockSingleChallengeData } from "@/lib/practice";
+import { DIFFICULTY_FILTERS, DifficultyKey } from "../utils/shared";
 import { Dot } from "lucide-react";
 import { notFound } from "next/navigation";
 import ChallengeCodeEditor from "./_components/challenge-code-editor";
-import { getAllThemesData } from "./_lib/editor-themes";
+import { getAllThemesData } from "../utils/editor-themes";
 
 // generateStaticParams
 // generateMetadata
@@ -11,11 +11,11 @@ import { getAllThemesData } from "./_lib/editor-themes";
 export default async function SinglePracticePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const themes = await getAllThemesData();
-  const challenge = mockSingleChallengeData;
-  const difficulty = DIFFICULTY_FILTERS[challenge.difficulty as DifficultyKey];
+  const challenge = null;
   if (!challenge) {
     notFound();
   }
+  const difficulty = DIFFICULTY_FILTERS[challenge.difficulty as DifficultyKey];
 
   return (
     <div className="grid md:grid-cols-5 h-full">

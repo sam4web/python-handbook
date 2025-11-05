@@ -1,5 +1,5 @@
 import { useIsMobile } from "@/hooks/use-mobile";
-import { DIFFICULTY_FILTERS, IChallenge } from "@/lib/practice";
+import { DIFFICULTY_FILTERS, IChallenge } from "../utils/shared";
 import { useMemo } from "react";
 import { firacode } from "@/lib/fonts";
 import Link from "next/link";

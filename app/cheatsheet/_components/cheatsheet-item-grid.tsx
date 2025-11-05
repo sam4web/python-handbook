@@ -1,4 +1,4 @@
-import { ICheatsheetItem } from "@/lib/cheatsheets";
+import { ICheatsheetItem } from "../utils/shared";
 import CheatsheetItem from "./cheatsheet-item";
 
 export default function CheatsheetItemsGrid({ items }: { items: ICheatsheetItem[] }) {

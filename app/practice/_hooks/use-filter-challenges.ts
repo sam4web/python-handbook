@@ -1,6 +1,6 @@
 import useSearchFilter from "@/hooks/use-search-filter";
-import { IChallenge } from "@/lib/practice";
 import { useCallback } from "react";
+import { IChallenge } from "../utils/shared";
 
 export default function useFilterChallenges(challenges: IChallenge[]) {
   const filterChallenges = useCallback((search: string, challenges: IChallenge[]) => {

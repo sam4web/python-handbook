@@ -3,7 +3,7 @@
 import SearchInput from "@/components/search-input";
 import Button from "@/components/ui/button";
 import { firacode } from "@/lib/fonts";
-import { DIFFICULTY_FILTERS, IChallenge } from "@/lib/practice";
+import { DIFFICULTY_FILTERS, IChallenge } from "../../utils/shared";
 import { cx } from "@/lib/utils";
 import { Target, X } from "lucide-react";
 import Link from "next/link";

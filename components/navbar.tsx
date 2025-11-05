@@ -9,7 +9,6 @@ import { Menu } from "lucide-react";
 import { firacode } from "@/lib/fonts";
 import { cx } from "@/lib/utils";
 import Image from "next/image";
-import { useTheme } from "next-themes";
 
 const navlinks = [
   { title: "Tutorials", href: "/tutorials" },

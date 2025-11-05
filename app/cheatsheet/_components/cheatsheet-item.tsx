@@ -2,11 +2,11 @@
 
 import Code from "@/components/code";
 import Button from "@/components/ui/button";
-import { ICheatsheetItem } from "@/lib/cheatsheets";
-import { firacode, poppins } from "@/lib/fonts";
+import { firacode } from "@/lib/fonts";
 import { cx } from "@/lib/utils";
 import { Copy, CopyCheck } from "lucide-react";
 import { useState } from "react";
+import { ICheatsheetItem } from "../utils/shared";
 
 export default function CheatsheetItem({ item }: { item: ICheatsheetItem }) {
   const [copied, setCopied] = useState(false);

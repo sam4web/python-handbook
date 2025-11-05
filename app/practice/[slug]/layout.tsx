@@ -1,4 +1,4 @@
-import { mockPracticeChallenges } from "@/lib/practice";
+import { getAllChallengeListItems } from "../utils/server";
 import PracticeSidebar from "./_components/practice-sidebar";
 
 export default async function SinglePracticeLayout({
@@ -9,7 +9,7 @@ export default async function SinglePracticeLayout({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const challenges = mockPracticeChallenges;
+  const challenges = getAllChallengeListItems();
 
   return (
     <main className="max-w-lg md:max-w-7xl mx-auto">

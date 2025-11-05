@@ -3,31 +3,39 @@
 import Button from "@/components/ui/button";
 import { firacode } from "@/lib/fonts";
 import { Lightbulb, LightbulbOff, Play, RotateCcw } from "lucide-react";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import EditorThemeDropdown from "./editor-theme-dropdown";
-import { Editor, OnMount, useMonaco } from "@monaco-editor/react";
+import { Editor, OnMount } from "@monaco-editor/react";
 import Spinner from "@/components/spinner";
-import { IEditorTheme } from "../_lib/editor-themes";
 import { editor } from "monaco-editor";
+import { IEditorTheme } from "../../utils/editor-themes";
 
 export default function ChallengeCodeEditor({ challenge, themes }: { challenge: any; themes: IEditorTheme[] }) {
   const [showHint, setShowHint] = useState(false);
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const [theme, setTheme] = useState<string | null>(null);
 
-  const themeList = themes.map((theme) => {
-    const { name, label } = theme;
-    return { name, label };
-  });
+  const themeList = useMemo(
+    () =>
+      themes.map((theme) => {
+        const { name, label } = theme;
+        return { name, label };
+      }),
+    [themes]
+  );
 
-  const activeTheme = (function () {
-    let theme = localStorage.getItem("editor-theme");
-    if (!theme) {
-      theme = "night-owl";
+  const activeTheme = (() => {
+    const DEFAULT_THEME = { name: "night-owl", label: "Night Owl" };
+    if (typeof window === "undefined") {
+      return DEFAULT_THEME;
     }
-    let result = themeList.find((item) => item.name === theme);
+    let themeName = localStorage.getItem("editor-theme");
+    if (!themeName) {
+      themeName = DEFAULT_THEME.name;
+    }
+    let result = themeList.find((item) => item.name === themeName);
     if (!result) {
-      return { name: "night-owl", label: "Night Owl" };
+      return DEFAULT_THEME;
     }
     return result;
   })();
@@ -64,7 +72,9 @@ export default function ChallengeCodeEditor({ challenge, themes }: { challenge: 
 
   const handleThemeChange = (theme: string) => {
     setTheme(theme);
-    localStorage.setItem("editor-theme", theme);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("editor-theme", theme);
+    }
   };
 
   return (

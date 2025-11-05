@@ -1,11 +1,11 @@
 "use client";
 
 import Button from "@/components/ui/button";
-import { ICheatsheetTopic } from "@/lib/cheatsheets";
 import { cx } from "@/lib/utils";
 import { NotebookText, X } from "lucide-react";
 import Link from "next/link";
 import { Dispatch, RefObject, SetStateAction, useState } from "react";
+import { ICheatsheetTopic } from "../utils/shared";
 import TopicScrollTracker from "./topic-scroll-tracker";
 
 interface Props {

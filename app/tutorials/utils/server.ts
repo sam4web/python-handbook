@@ -1,28 +1,13 @@
+import { MAX_ORDER_VALUE } from "@/lib/constants";
+import { splitNameAndOrder } from "@/lib/utils";
 import fs from "fs";
 import matter from "gray-matter";
-import path from "path";
 import { notFound } from "next/navigation";
-import { MAX_ORDER_VALUE } from "./constants";
-import { splitNameAndOrder } from "./utils";
+import path from "path";
+import { ISidebarItem, ITutorialMetadata } from ".";
 
 const tutorialsDir = path.join(process.cwd(), "contents", "tutorials");
 let PATH_INDEX: Map<string, string>;
-
-export interface ITutorialMetadata {
-  title: string;
-  description?: string;
-  [key: string]: any;
-}
-
-export interface ISidebarItem {
-  title: string;
-  order: number;
-  items: {
-    title: string;
-    order: number;
-    slug: string;
-  }[];
-}
 
 const TUTORIALS_GROUPS = fs
   .readdirSync(tutorialsDir, { withFileTypes: true })

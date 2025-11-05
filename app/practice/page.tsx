@@ -1,9 +1,9 @@
-import { mockPracticeChallenges } from "@/lib/practice";
 import { Target } from "lucide-react";
 import PracticeIndex from "./_components/practice-index";
+import { getAllChallengeListItems } from "./utils/server";
 
 export default function PracticePage() {
-  const challenges = mockPracticeChallenges;
+  const challenges = getAllChallengeListItems();
 
   return (
     <main className="md:max-w-4xl xl:max-w-6xl mx-auto">
