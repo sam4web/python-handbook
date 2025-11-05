@@ -1,14 +1,14 @@
 import { useIsMobile } from "@/hooks/use-mobile";
-import { DIFFICULTY_FILTERS, IChallenge } from "../utils/shared";
+import { DIFFICULTY_FILTERS, IChallengeListItem } from "../utils/shared";
 import { useMemo } from "react";
 import { firacode } from "@/lib/fonts";
 import Link from "next/link";
 
-export default function ChallengeColumnGrid({ challenges }: { challenges: IChallenge[] }) {
+export default function ChallengeColumnGrid({ challenges }: { challenges: IChallengeListItem[] }) {
   const isMobile = useIsMobile();
   const columns = useMemo(() => {
     const numColumns = isMobile ? 2 : 3;
-    const columns: IChallenge[][] = Array.from({ length: numColumns }, () => []);
+    const columns: IChallengeListItem[][] = Array.from({ length: numColumns }, () => []);
     challenges.forEach((item, index) => {
       const columnIndex = index % numColumns;
       columns[columnIndex].push(item);

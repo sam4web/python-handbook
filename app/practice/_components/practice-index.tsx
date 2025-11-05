@@ -7,9 +7,9 @@ import { poppins } from "@/lib/fonts";
 import { X } from "lucide-react";
 import ChallengeColumnGrid from "./challenge-column-grid";
 import useFilterChallenges from "../_hooks/use-filter-challenges";
-import { DIFFICULTY_MAP, DifficultyKey, IChallenge } from "../utils/shared";
+import { DIFFICULTY_MAP, DifficultyKey, IChallengeListItem } from "../utils/shared";
 
-export default function PracticeIndex({ challenges }: { challenges: IChallenge[] }) {
+export default function PracticeIndex({ challenges }: { challenges: IChallengeListItem[] }) {
   const [difficulty, setDifficulty] = useState<DifficultyKey | null>(null);
 
   const { search, setSearch, filteredData } = useFilterChallenges(challenges);

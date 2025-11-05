@@ -1,9 +1,9 @@
 import useSearchFilter from "@/hooks/use-search-filter";
 import { useCallback } from "react";
-import { IChallenge } from "../utils/shared";
+import { IChallengeListItem } from "../utils/shared";
 
-export default function useFilterChallenges(challenges: IChallenge[]) {
-  const filterChallenges = useCallback((search: string, challenges: IChallenge[]) => {
+export default function useFilterChallenges(challenges: IChallengeListItem[]) {
+  const filterChallenges = useCallback((search: string, challenges: IChallengeListItem[]) => {
     const sanitizedSearch = search.trim().toLowerCase();
     if (!sanitizedSearch) {
       return null;
@@ -13,6 +13,6 @@ export default function useFilterChallenges(challenges: IChallenge[]) {
       return text.includes(sanitizedSearch);
     });
   }, []);
-  const data = useSearchFilter<IChallenge>(challenges, filterChallenges);
+  const data = useSearchFilter<IChallengeListItem>(challenges, filterChallenges);
   return { ...data };
 }

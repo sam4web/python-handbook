@@ -4,7 +4,7 @@ import fs from "fs";
 import matter from "gray-matter";
 import { notFound } from "next/navigation";
 import path from "path";
-import { ISidebarItem, ITutorialMetadata } from ".";
+import { ISidebarItem, ITutorialMetadata } from "./shared";
 
 const tutorialsDir = path.join(process.cwd(), "contents", "tutorials");
 let PATH_INDEX: Map<string, string>;
