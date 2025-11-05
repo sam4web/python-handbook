@@ -109,7 +109,7 @@
 
 @layer components {
   .page-overlay {
-    @apply size-full fixed top-0 left-0 z-3 bg-background/30 dark:bg-background/70 backdrop-blur-xs;
+    @apply size-full fixed top-0 left-0 z-10 bg-background/40 dark:bg-background/20 backdrop-blur-xs;
   }
 
   .card {
@@ -137,7 +137,7 @@
   }
 
   .sidebar {
-    @apply bg-muted md:bg-muted/80 rounded-lg shadow-sm shadow-muted fixed top-12 w-full xs:max-w-80 md:max-w-xs z-5 h-dvh select-none mt-1 px-3 py-4;
+    @apply bg-muted rounded-lg shadow-sm shadow-muted fixed top-12 w-full xs:max-w-80 md:max-w-xs z-15 h-dvh select-none mt-1 px-3 py-4;
   }
 
   .code-editor-button {

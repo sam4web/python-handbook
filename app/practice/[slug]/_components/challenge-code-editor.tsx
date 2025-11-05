@@ -114,7 +114,7 @@ export default function ChallengeCodeEditor({ challenge, themes }: { challenge: 
         >
           <p className="font-semibold text-sm text-foreground mb-1">Hints:</p>
           <ol>
-            {challenge.hints.map((hint, idx) => (
+            {challenge.hints.map((hint: string, idx: number) => (
               <li className="text-xs list-decimal ml-6 text-secondary-foreground" key={idx}>
                 {hint}
               </li>

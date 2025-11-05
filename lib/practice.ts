@@ -1,3 +1,7 @@
+import path from "path";
+
+const challengesDir = path.join(process.cwd(), "contents", "challenges");
+
 export type DifficultyKey = "easy" | "medium" | "hard" | "expert";
 
 export interface IDifficulty {
@@ -15,20 +19,32 @@ export const DIFFICULTY_FILTERS: Record<DifficultyKey, IDifficulty> = {
 
 export const DIFFICULTY_MAP = Object.values(DIFFICULTY_FILTERS);
 
-export interface IFormat {
-  type: string;
-  example: string;
-}
-
-export interface IChallenge {
-  id: number;
+export interface IChallengeMetadata {
+  id: number | string;
   title: string;
   slug: string;
+}
+
+export interface IChallengeListItem extends IChallengeMetadata {
   difficulty: DifficultyKey;
-  category: string[];
   description: string;
-  input_format: IFormat;
-  output_format: IFormat;
+  category: string[];
+}
+
+export interface IChallenge extends IChallengeMetadata {
+  constraints: string[];
+  startercode: string;
+  solution_code: string;
+  hints: string[];
+  examples: {
+    input_value: string;
+    output_value: string;
+    explanation?: string;
+  }[];
+  testcases: {
+    input: (number | string | number[] | string[] | Record<string, any>)[];
+    expected_output: number | string | boolean | number[] | string[] | Record<string, any>;
+  }[];
 }
 
 export const mockSingleChallengeData = {
@@ -298,3 +314,13 @@ export const mockPracticeChallenges: IChallenge[] = [
     output_format: { type: "array", example: "[4, 3, 2, 1]" },
   },
 ];
+
+// export function getChallengeSlugsAndTitles(): IChallengeMetadata[] {}
+
+// export function getChallengeMetadataBySlug(): IChallengeMetadata {}
+
+// export function getChallengeBySlug(slug: string): IChallenge {}
+
+export function getAllChallengeListItems(): IChallengeListItem[] {
+  // const allItems =
+}
