@@ -62,6 +62,8 @@ export const mockSingleChallengeData = {
     "Loop until the carry is zero.",
   ],
   startercode: "def getSum(a, b):\n  return a + b \n",
+  solutioncode:
+    "def getSum(a, b):\n    while b != 0:\n        carry = (a & b) << 1\n        a = a ^ b\n        b = carry\n    return a\n",
   testcases: [
     {
       input: [5, 3],

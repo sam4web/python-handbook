@@ -5,7 +5,7 @@ import { firacode } from "@/lib/fonts";
 import { Lightbulb, LightbulbOff, Play, RotateCcw } from "lucide-react";
 import { useRef, useState } from "react";
 import EditorThemeDropdown from "./editor-theme-dropdown";
-import { Editor, OnMount } from "@monaco-editor/react";
+import { Editor, OnMount, useMonaco } from "@monaco-editor/react";
 import Spinner from "@/components/spinner";
 import { IEditorTheme } from "../_lib/editor-themes";
 import { editor } from "monaco-editor";
@@ -31,6 +31,28 @@ export default function ChallengeCodeEditor({ challenge, themes }: { challenge: 
     }
     return result;
   })();
+
+  const handleRunTests = () => {
+    if (!editorRef.current) {
+      return;
+    }
+    const code = editorRef.current.getValue();
+    console.log(code);
+  };
+
+  const handleResetEditor = () => {
+    if (!editorRef.current) {
+      return;
+    }
+    editorRef.current.setValue(challenge.startercode);
+  };
+
+  const handleViewSolution = () => {
+    if (!editorRef.current) {
+      return;
+    }
+    editorRef.current.setValue(challenge.solutioncode);
+  };
 
   const handleEditorDidMount: OnMount = (editor, monaco) => {
     editorRef.current = editor;
@@ -68,14 +90,19 @@ export default function ChallengeCodeEditor({ challenge, themes }: { challenge: 
           </Button>
         </div>
         <div className="flex-center gap-2">
-          <Button variant="outline" className="code-editor-button" title="Reset editor">
+          <Button variant="outline" className="code-editor-button" title="Reset editor" onClick={handleResetEditor}>
             <RotateCcw />
             Reset
           </Button>
-          <Button variant="outline" className="code-editor-button" title="View solution">
+          <Button variant="outline" className="code-editor-button" title="View solution" onClick={handleViewSolution}>
             Solution
           </Button>
-          <Button variant="primary" className="code-editor-button outline outline-primary" title="Run tests">
+          <Button
+            variant="primary"
+            className="code-editor-button outline outline-primary"
+            title="Run tests"
+            onClick={handleRunTests}
+          >
             <Play />
             Run Tests
           </Button>
