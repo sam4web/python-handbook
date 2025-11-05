@@ -3,18 +3,35 @@ import { DIFFICULTY_FILTERS, DifficultyKey } from "../utils/shared";
 import { Dot } from "lucide-react";
 import { notFound } from "next/navigation";
 import ChallengeCodeEditor from "./_components/challenge-code-editor";
-import { getAllThemesData } from "../utils/editor-themes";
+import {
+  getAllChallengeMetadata,
+  getAllThemesData,
+  getChallengeBySlug,
+  getChallengeMetadataBySlug,
+} from "../utils/server";
+import { Metadata } from "next";
 
-// generateStaticParams
-// generateMetadata
+export async function generateStaticParams() {
+  const data = getAllChallengeMetadata();
+  return data.map((item) => ({
+    slug: item.slug,
+  }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const { title, description } = getChallengeMetadataBySlug(slug);
+  return { title, description };
+}
 
 export default async function SinglePracticePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const themes = await getAllThemesData();
-  const challenge = null;
+  const challenge = getChallengeBySlug(slug);
   if (!challenge) {
     notFound();
   }
+
+  const themes = getAllThemesData();
   const difficulty = DIFFICULTY_FILTERS[challenge.difficulty as DifficultyKey];
 
   return (

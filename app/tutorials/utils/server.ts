@@ -77,7 +77,7 @@ export function getTutorialMetadata(slug: string): ITutorialMetadata {
   return metadata;
 }
 
-export async function getTutorialContent(slug: string) {
+export function getTutorialContent(slug: string) {
   if (!PATH_INDEX) {
     PATH_INDEX = buildPathIndex();
   }

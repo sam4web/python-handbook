@@ -8,7 +8,7 @@ import EditorThemeDropdown from "./editor-theme-dropdown";
 import { Editor, OnMount } from "@monaco-editor/react";
 import Spinner from "@/components/spinner";
 import { editor } from "monaco-editor";
-import { IEditorTheme } from "../../utils/editor-themes";
+import { IEditorTheme } from "../../utils/shared";
 
 export default function ChallengeCodeEditor({ challenge, themes }: { challenge: any; themes: IEditorTheme[] }) {
   const [showHint, setShowHint] = useState(false);

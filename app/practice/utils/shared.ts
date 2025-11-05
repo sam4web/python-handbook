@@ -1,3 +1,5 @@
+import { editor } from "monaco-editor";
+
 export type DifficultyKey = "easy" | "medium" | "hard" | "expert";
 
 export interface IDifficulty {
@@ -16,14 +18,14 @@ export const DIFFICULTY_FILTERS: Record<DifficultyKey, IDifficulty> = {
 export const DIFFICULTY_MAP = Object.values(DIFFICULTY_FILTERS);
 
 export interface IChallengeMetadata {
-  id: number | string;
+  id: string;
   title: string;
   slug: string;
+  description: string;
 }
 
 export interface IChallengeListItem extends IChallengeMetadata {
   difficulty: DifficultyKey;
-  description: string;
   category: string[];
 }
 
@@ -41,4 +43,10 @@ export interface IChallenge extends IChallengeListItem {
     input: (number | string | number[] | string[] | Record<string, any>)[];
     expected_output: number | string | boolean | number[] | string[] | Record<string, any>;
   }[];
+}
+
+export interface IEditorTheme {
+  label: string;
+  name: string;
+  data: editor.IStandaloneThemeData;
 }

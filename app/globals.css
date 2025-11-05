@@ -121,7 +121,7 @@
   }
 
   .tag {
-    @apply border-muted border px-2.5 py-0.5 text-muted-foreground rounded-md shadow-xs bg-muted/60 hover:bg-primary/10 hover:text-primary hover:border-primary text-sm;
+    @apply border-muted border px-2.5 py-0.5 text-muted-foreground rounded-md shadow-xs bg-muted hover:bg-primary/10 hover:text-primary hover:border-primary text-sm;
   }
 
   .tag-active {

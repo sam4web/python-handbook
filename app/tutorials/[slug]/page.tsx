@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function TutorialPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const content = await getTutorialContent(slug);
+  const content = getTutorialContent(slug);
 
   const components: Components = {
     code: ({ className, children }) => {
