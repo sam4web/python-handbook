@@ -100,7 +100,7 @@ export default async function SinglePracticePage({ params }: { params: Promise<{
         </div>
       </div>
 
-      <div className="bg-muted shadow-sm rounded-lg col-span-3">
+      <div className="bg-muted min-h-[90dvh] h-full shadow-sm rounded-lg col-span-3">
         <ChallengeCodeEditor challenge={challenge} themes={themes} />
       </div>
     </div>
