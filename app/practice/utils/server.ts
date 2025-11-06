@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { IChallenge, IChallengeListItem, IChallengeMetadata, IEditorTheme } from "./shared";
+import { IChallenge, IChallengeListItem, IChallengeMetadata } from "./shared";
 import { notFound } from "next/navigation";
 
 const challengesDir = path.join(process.cwd(), "contents", "challenges");
@@ -8,20 +8,6 @@ let savedListItems: IChallengeListItem[] | null = null;
 let savedMetadataItems: IChallengeMetadata[] | null = null;
 
 const CHALLENGE_FILES = fs.readdirSync(challengesDir).filter((item) => item.endsWith(".json"));
-
-export function getAllThemesData(): IEditorTheme[] {
-  const themesDirPath = path.join(process.cwd(), "lib", "themes");
-  const fileNames = fs.readdirSync(themesDirPath).filter((name) => name.endsWith(".json"));
-  const themes = fileNames.map((fileName) => {
-    const filePath = path.join(themesDirPath, fileName);
-    const fileContent = fs.readFileSync(filePath, "utf-8");
-    const label = path.parse(fileName).name.replaceAll("-", " ");
-    const name = label.replaceAll(" ", "-").toLowerCase();
-    const data = JSON.parse(fileContent);
-    return { label, name, data } as IEditorTheme;
-  });
-  return themes;
-}
 
 export function getAllChallengeMetadata(): IChallengeMetadata[] {
   if (savedMetadataItems) {

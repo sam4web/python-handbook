@@ -1,5 +1,3 @@
-"use client";
-
 import { firacode } from "@/lib/fonts";
 import { useTheme } from "next-themes";
 import SyntaxHighlighter from "react-syntax-highlighter";

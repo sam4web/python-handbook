@@ -1,54 +1,38 @@
 "use client";
 
+import CodeEditor from "@/components/code-editor";
+import EditorThemeDropdown from "@/components/editor-theme-dropdown";
 import Button from "@/components/ui/button";
+import useEditorTheme from "@/lib/editor/hooks/use-editor-theme";
+import { IEditorTheme } from "@/lib/editor/shared";
 import { firacode } from "@/lib/fonts";
-import { Check, Lightbulb, LightbulbOff, Play, RotateCcw, X } from "lucide-react";
-import { useMemo, useRef, useState } from "react";
-import EditorThemeDropdown from "./editor-theme-dropdown";
-import { Editor, OnMount } from "@monaco-editor/react";
-import Spinner from "@/components/spinner";
-import { editor } from "monaco-editor";
-import { IChallenge, IEditorTheme } from "../../utils/shared";
 import { cx } from "@/lib/utils";
+import { OnMount } from "@monaco-editor/react";
+import { Check, Lightbulb, LightbulbOff, Play, RotateCcw, X } from "lucide-react";
+import { editor } from "monaco-editor";
+import { useRef, useState } from "react";
+import { IChallenge } from "../../utils/shared";
 
 type TabsOptions = "output" | "test-cases";
 
-export default function ChallengeCodeEditor({ challenge, themes }: { challenge: IChallenge; themes: IEditorTheme[] }) {
+export default function ChallengeExecutionPanel({
+  challenge,
+  themes,
+}: {
+  challenge: IChallenge;
+  themes: IEditorTheme[];
+}) {
   const [showHint, setShowHint] = useState(false);
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const [theme, setTheme] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<TabsOptions>("test-cases");
   const [hasTestsRun, setHasTestsRun] = useState(false);
+  const { themeList, activeTheme } = useEditorTheme(themes);
 
   const tabsOptions: { label: string; type: TabsOptions }[] = [
     { label: "Output", type: "output" },
     { label: "Test Cases", type: "test-cases" },
   ];
-
-  const themeList = useMemo(
-    () =>
-      themes.map((theme) => {
-        const { name, label } = theme;
-        return { name, label };
-      }),
-    [themes]
-  );
-
-  const activeTheme = (() => {
-    const DEFAULT_THEME = { name: "night-owl", label: "Night Owl" };
-    if (typeof window === "undefined") {
-      return DEFAULT_THEME;
-    }
-    let themeName = localStorage.getItem("editor-theme");
-    if (!themeName) {
-      themeName = DEFAULT_THEME.name;
-    }
-    let result = themeList.find((item) => item.name === themeName);
-    if (!result) {
-      return DEFAULT_THEME;
-    }
-    return result;
-  })();
 
   const handleRunTests = () => {
     if (!editorRef.current) {
@@ -56,6 +40,8 @@ export default function ChallengeCodeEditor({ challenge, themes }: { challenge: 
     }
     const code = editorRef.current.getValue();
     setHasTestsRun(true);
+    setActiveTab("output");
+    setShowHint(false);
     console.log(code);
   };
 
@@ -64,6 +50,7 @@ export default function ChallengeCodeEditor({ challenge, themes }: { challenge: 
       return;
     }
     setHasTestsRun(false);
+    setShowHint(false);
     editorRef.current.setValue(challenge.startercode);
   };
 
@@ -76,7 +63,7 @@ export default function ChallengeCodeEditor({ challenge, themes }: { challenge: 
 
   const handleEditorDidMount: OnMount = (editor, monaco) => {
     editorRef.current = editor;
-    themes.map((theme) => {
+    themes.forEach((theme) => {
       monaco.editor.defineTheme(theme.name, theme.data);
     });
     setTheme(activeTheme.name);
@@ -146,13 +133,7 @@ export default function ChallengeCodeEditor({ challenge, themes }: { challenge: 
       ) : null}
 
       <div className="h-[56dvh] overflow-hidden rounded-lg">
-        <Editor
-          defaultLanguage="python"
-          defaultValue={challenge.startercode}
-          onMount={handleEditorDidMount}
-          theme={theme || "vs-dark"}
-          loading={<Spinner />}
-        />
+        <CodeEditor startercode={challenge.startercode} theme={theme} handleEditorDidMount={handleEditorDidMount} />
       </div>
 
       <div className="flex w-full mt-4 py-0.5 relative border-b-2 border-primary">

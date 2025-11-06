@@ -2,14 +2,10 @@ import { firacode } from "@/lib/fonts";
 import { DIFFICULTY_FILTERS, DifficultyKey } from "../utils/shared";
 import { Dot } from "lucide-react";
 import { notFound } from "next/navigation";
-import ChallengeCodeEditor from "./_components/challenge-code-editor";
-import {
-  getAllChallengeMetadata,
-  getAllThemesData,
-  getChallengeBySlug,
-  getChallengeMetadataBySlug,
-} from "../utils/server";
+import { getAllChallengeMetadata, getChallengeBySlug, getChallengeMetadataBySlug } from "../utils/server";
 import { Metadata } from "next";
+import ChallengeExecutionPanel from "./_components/challenge-execution-panel";
+import { getAllThemesData } from "@/lib/editor/server";
 
 export async function generateStaticParams() {
   const data = getAllChallengeMetadata();
@@ -67,7 +63,7 @@ export default async function SinglePracticePage({ params }: { params: Promise<{
                   key={idx}
                 >
                   <p className="font-semibold text-secondary-foreground">Example {idx + 1}:</p>
-                  <div className={`text-sm text-muted-foreground space-y-0.5`}>
+                  <div className="text-sm text-muted-foreground space-y-1">
                     <p>
                       <span>Input:</span>
                       <span className="text-foreground"> {example.input_value}</span>
@@ -101,7 +97,7 @@ export default async function SinglePracticePage({ params }: { params: Promise<{
       </div>
 
       <div className="bg-muted min-h-[90dvh] h-full shadow-sm rounded-lg col-span-3">
-        <ChallengeCodeEditor challenge={challenge} themes={themes} />
+        <ChallengeExecutionPanel challenge={challenge} themes={themes} />
       </div>
     </div>
   );

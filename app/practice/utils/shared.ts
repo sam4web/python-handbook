@@ -1,5 +1,3 @@
-import { editor } from "monaco-editor";
-
 export type DifficultyKey = "easy" | "medium" | "hard" | "expert";
 
 export interface IDifficulty {
@@ -43,10 +41,4 @@ export interface IChallenge extends IChallengeListItem {
     input: (number | string | number[] | string[] | Record<string, any>)[];
     expected_output: number | string | boolean | number[] | string[] | Record<string, any>;
   }[];
-}
-
-export interface IEditorTheme {
-  label: string;
-  name: string;
-  data: editor.IStandaloneThemeData;
 }
