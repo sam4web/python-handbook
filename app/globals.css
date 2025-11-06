@@ -141,6 +141,21 @@
   }
 
   .code-editor-button {
-    @apply flex! [&>svg]:size-4.5 items-center gap-2 border! text-sm;
+    @apply flex! [&>svg]:size-4.5 items-center gap-2 border! text-sm lg:[&>span]:block [&>span]:hidden;
+  }
+
+  .dropdown-button {
+    @apply flex! [&>svg]:size-4.5 items-center gap-2 border! text-sm bg-transparent border-secondary-foreground/65 text-secondary-foreground hover:bg-muted-foreground/15 hover:opacity-85 shadow-xs py-1 px-2 appearance-none rounded-sm cursor-pointer;
+  }
+
+  .dropdown-list {
+    @apply flex flex-col items-start absolute top-[135%] bg-muted/85 backdrop-blur-xs outline outline-muted-foreground/25 w-44 shadow-xs rounded-md p-1.5 space-y-1 z-3 max-h-60 overflow-y-scroll;
+  }
+
+  .dropdown-list-item {
+    @apply text-sm py-1 px-2 cursor-pointer rounded-sm w-full flex justify-between items-center hover:bg-secondary dark:hover:bg-secondary/45 hover:opacity-85;
+  }
+  .dropdown-list-item.active {
+    @apply bg-accent-foreground/60! dark:bg-secondary/80! opacity-100! font-medium text-secondary-foreground;
   }
 }

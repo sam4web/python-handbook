@@ -8,7 +8,7 @@ import { IEditorTheme } from "@/lib/editor/shared";
 import { firacode } from "@/lib/fonts";
 import { cx } from "@/lib/utils";
 import { OnMount } from "@monaco-editor/react";
-import { Check, Lightbulb, LightbulbOff, Play, RotateCcw, X } from "lucide-react";
+import { Check, Lightbulb, Play, RotateCcw, WandSparkles, X } from "lucide-react";
 import { editor } from "monaco-editor";
 import { useRef, useState } from "react";
 import { IChallenge } from "../../utils/shared";
@@ -78,7 +78,7 @@ export default function ChallengeExecutionPanel({
 
   return (
     <div className="px-3 py-3.5 space-y-3 h-full">
-      <div className="flex-between">
+      <div className="flex-between gap-2">
         <div className="flex-center gap-2">
           <EditorThemeDropdown themes={themeList} activeTheme={activeTheme} handleThemeChange={handleThemeChange} />
           <Button
@@ -87,24 +87,18 @@ export default function ChallengeExecutionPanel({
             onClick={() => setShowHint((prev) => !prev)}
             title={`${showHint ? "Hide" : "Show"} Hints`}
           >
-            {showHint ? (
-              <>
-                <LightbulbOff /> Hide Hints
-              </>
-            ) : (
-              <>
-                <Lightbulb /> Show Hints
-              </>
-            )}
+            <WandSparkles />
+            <span>{showHint ? "Hide" : "Show"} Hints</span>
           </Button>
         </div>
         <div className="flex-center gap-2">
           <Button variant="outline" className="code-editor-button" title="Reset editor" onClick={handleResetEditor}>
             <RotateCcw />
-            Reset
+            <span>Reset</span>
           </Button>
           <Button variant="outline" className="code-editor-button" title="View solution" onClick={handleViewSolution}>
-            Solution
+            <Lightbulb />
+            <span>Solution</span>
           </Button>
           <Button
             variant="primary"
@@ -113,7 +107,7 @@ export default function ChallengeExecutionPanel({
             onClick={handleRunTests}
           >
             <Play />
-            Run Tests
+            <span>Run Tests</span>
           </Button>
         </div>
       </div>
@@ -132,7 +126,7 @@ export default function ChallengeExecutionPanel({
         </div>
       ) : null}
 
-      <div className="h-[56dvh] overflow-hidden rounded-lg">
+      <div className="h-[56dvh] w-full overflow-hidden rounded-lg">
         <CodeEditor startercode={challenge.startercode} theme={theme} handleEditorDidMount={handleEditorDidMount} />
       </div>
 

@@ -3,12 +3,12 @@
 import SearchInput from "@/components/search-input";
 import Button from "@/components/ui/button";
 import { firacode } from "@/lib/fonts";
-import { DIFFICULTY_FILTERS, IChallengeListItem } from "../../utils/shared";
 import { cx } from "@/lib/utils";
 import { Target, X } from "lucide-react";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import useFilterChallenges from "../../_hooks/use-filter-challenges";
+import { DIFFICULTY_FILTERS, IChallengeListItem } from "../../utils/shared";
 
 export default function PracticeSidebar({
   challenges,
@@ -21,6 +21,17 @@ export default function PracticeSidebar({
   const openSidebar = () => setShowSidebar(true);
   const closeSidebar = () => setShowSidebar(false);
   const { search, setSearch, filteredData } = useFilterChallenges(challenges);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      closeSidebar();
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const dataToRender = useMemo(() => {
     const activeItem = challenges.find((item) => item.slug === activeChallengeSlug) || null;
     const sanitizedSearch = search.trim().toLowerCase();

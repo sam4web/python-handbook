@@ -1,11 +1,11 @@
+import { getAllThemesData } from "@/lib/editor/server";
 import { firacode } from "@/lib/fonts";
-import { DIFFICULTY_FILTERS, DifficultyKey } from "../utils/shared";
 import { Dot } from "lucide-react";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getAllChallengeMetadata, getChallengeBySlug, getChallengeMetadataBySlug } from "../utils/server";
-import { Metadata } from "next";
+import { DIFFICULTY_FILTERS, DifficultyKey } from "../utils/shared";
 import ChallengeExecutionPanel from "./_components/challenge-execution-panel";
-import { getAllThemesData } from "@/lib/editor/server";
 
 export async function generateStaticParams() {
   const data = getAllChallengeMetadata();
@@ -32,7 +32,7 @@ export default async function SinglePracticePage({ params }: { params: Promise<{
 
   return (
     <div className="grid md:grid-cols-5 h-full">
-      <div className="px-3 col-span-2">
+      <div className="px-3 md:col-span-2 w-full">
         <div className="flex items-start justify-between mb-0.5 pb-1">
           <p className={`text-lg md:text-xl text-wrap font-medium ${firacode.className}`}>{challenge.title}</p>
           <p className={`px-1.5 py-px rounded-xs text-[13px] shadow-xs font-medium  ${difficulty?.colorClass}`}>
@@ -96,7 +96,7 @@ export default async function SinglePracticePage({ params }: { params: Promise<{
         </div>
       </div>
 
-      <div className="bg-muted min-h-[90dvh] h-full shadow-sm rounded-lg col-span-3">
+      <div className="bg-muted min-h-[90dvh] h-full shadow-sm rounded-lg md:col-span-3 w-full">
         <ChallengeExecutionPanel challenge={challenge} themes={themes} />
       </div>
     </div>
