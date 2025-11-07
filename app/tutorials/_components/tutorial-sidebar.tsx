@@ -33,7 +33,7 @@ export default function TutorialSidebar({ sidebarItems }: { sidebarItems: ISideb
       ) : null}
       <aside
         className={cx(
-          "z-5 overflow-y-auto w-full top-13 left-0 select-none shadow-sm shadow-muted styled-scrollbar",
+          "z-20 overflow-y-auto w-full top-13 left-0 select-none shadow-sm shadow-muted styled-scrollbar",
           isMobile
             ? "max-w-sm fixed h-dvh bg-muted"
             : "sticky max-w-76 h-[calc(100dvh-53px)] border-r border-muted-foreground/25",
@@ -67,7 +67,6 @@ export default function TutorialSidebar({ sidebarItems }: { sidebarItems: ISideb
                 title={item.title}
                 items={item.items}
                 closeTutorialSidebar={closeTutorialSidebar}
-                active={idx === 0}
               />
             ))}
           </div>

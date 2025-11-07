@@ -13,9 +13,9 @@ interface Props {
   closeTutorialSidebar: () => void;
 }
 
-export default function SidebarItem({ title, items, active: isActive, closeTutorialSidebar }: Props) {
+export default function SidebarItem({ title, items, closeTutorialSidebar }: Props) {
   const pathname = usePathname();
-  const [active, setActive] = useState(isActive || false);
+  const [active, setActive] = useState(true);
 
   return (
     <div>
@@ -28,15 +28,17 @@ export default function SidebarItem({ title, items, active: isActive, closeTutor
       </div>
 
       {active ? (
-        <div className="ml-5 pl-2 space-y-0.5 my-0.5 border-l-2 border-muted-foreground/20">
+        <div className="ml-5 ">
           {items.map((item, idx) => (
             <Link
               key={idx}
               onClick={closeTutorialSidebar}
               href={`/tutorials/${item.slug}`}
               className={cx(
-                "hover:bg-muted-foreground/20 p-2 cursor-pointer block rounded-lg text-sm",
-                pathname.includes(item.slug) ? "text-primary bg-muted-foreground/10 font-medium" : ""
+                "pl-3 py-1.5 cursor-pointer block text-sm border-l-2",
+                pathname.includes(item.slug)
+                  ? "text-primary font-medium border-muted-foreground"
+                  : "border-muted-foreground/20 hover:border-muted-foreground"
               )}
             >
               {item.title}
