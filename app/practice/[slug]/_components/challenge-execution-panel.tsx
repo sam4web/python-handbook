@@ -156,13 +156,13 @@ export default function ChallengeExecutionPanel({
 
       {activeTab === "output" ? (
         !hasTestsRun ? (
-          <div className="px-3 py-2.5 h-36 bg-background/80 border border-muted-foreground/30 dark:border-secondary/50 rounded-md shadow-xs">
+          <div className="px-3 py-2.5 h-36 bg-background/80 border border-muted-foreground/30 dark:border-secondary/50 rounded-md shadow-xs transition-none">
             <p className={`font-medium text-sm text-accent ${firacode.className}`}>
               &gt; Click "Run Tests" to see output...
             </p>
           </div>
         ) : (
-          <div className={firacode.className}>
+          <div className={`transition-none ${firacode.className}`}>
             <p className="font-medium text-right text-sm text-muted-foreground mb-2">Passed: 2/3</p>
             <div className="space-y-3 items-start">
               {challenge.testcases.map((item, idx) => (
@@ -217,7 +217,7 @@ export default function ChallengeExecutionPanel({
           </div>
         )
       ) : (
-        <div className="space-y-2 items-start">
+        <div className="space-y-2 items-start transition-none">
           {challenge.testcases.map((item, idx) => (
             <div
               className={`px-3 py-2.5 bg-background/80 border border-muted-foreground/30 dark:border-secondary/50 rounded-md shadow-xs space-y-1 ${firacode.className}`}

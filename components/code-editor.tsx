@@ -12,6 +12,7 @@ export default function CodeEditor({
 }) {
   return (
     <Editor
+      options={{ multiCursorLimit: 1, cursorSmoothCaretAnimation: "off" }}
       defaultLanguage="python"
       defaultValue={startercode}
       onMount={handleEditorDidMount}

@@ -62,7 +62,10 @@ export default async function SinglePracticePage({ params }: { params: Promise<{
                   className={`rounded-md shadow-xs px-2 md:px-3 py-1 md:py-2 bg-muted space-y-1 md:space-y-2 ${firacode.className}`}
                   key={idx}
                 >
-                  <p className="font-semibold text-secondary-foreground">Example {idx + 1}:</p>
+                  <p className="font-semibold text-secondary-foreground">
+                    Example
+                    {challenge.examples.length > 1 ? idx + 1 : ""}:
+                  </p>
                   <div className="text-sm text-muted-foreground space-y-1">
                     <p>
                       <span>Input:</span>
