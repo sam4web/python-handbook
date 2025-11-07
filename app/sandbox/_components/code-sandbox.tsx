@@ -11,17 +11,27 @@ import { OnMount } from "@monaco-editor/react";
 import { Copy, CopyCheck, Play, Save, Trash } from "lucide-react";
 import { editor } from "monaco-editor";
 import { useRef, useState } from "react";
+import usePanelResizer from "../_hooks/use-panel-resizer";
 import TemplatesDropdown from "./templates-dropdown";
 
 export default function CodeSandbox({ themes }: { themes: IEditorTheme[] }) {
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const [theme, setTheme] = useState<string | null>(null);
-  const { activeTheme, themeList } = useEditorTheme(themes);
   const [copied, setCopied] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [output, setOutput] = useState<string | null>(null);
+  const { activeTheme, themeList } = useEditorTheme(themes);
+
+  const topPanelRef = useRef<HTMLDivElement | null>(null);
+  const bottomPanelRef = useRef<HTMLDivElement | null>(null);
+  const { handleDragStart } = usePanelResizer(topPanelRef, bottomPanelRef);
 
   const handleCopyCode = () => {
+    if (!output) {
+      return;
+    }
     navigator.clipboard
-      .writeText("df")
+      .writeText(output)
       .then(() => {
         setCopied(true);
         // alert here
@@ -61,11 +71,42 @@ export default function CodeSandbox({ themes }: { themes: IEditorTheme[] }) {
     editorRef.current.setValue("");
   };
 
+  const handleRunCode = () => {
+    if (!editorRef.current) {
+      return;
+    }
+    console.log(editorRef.current.getValue());
+  };
+
+  const handleSaveCode = () => {
+    if (!editorRef.current) {
+      return;
+    }
+    setSaved(true);
+    const codeToSave = editorRef.current.getValue();
+    const filename = "main.py";
+    const blob = new Blob([codeToSave], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const aTag = document.createElement("a");
+    aTag.href = url;
+    aTag.download = filename;
+    document.body.appendChild(aTag);
+    aTag.click();
+    document.body.removeChild(aTag);
+    URL.revokeObjectURL(url);
+    setTimeout(() => setSaved(false), 2000);
+  };
+
   return (
-    <div className="py-1 md:py-2 space-y-1 md:space-y-2.5">
+    <div className="py-1 md:py-2 space-y-2.5">
       <div className="flex justify-between gap-2.5 items-start xs:items-center flex-col-reverse xs:flex-row">
         <div className="flex-between gap-2.5">
-          <Button variant="primary" className="code-editor-button outline outline-primary" title="Run tests">
+          <Button
+            variant="primary"
+            className="code-editor-button outline outline-primary"
+            title="Run code"
+            onClick={handleRunCode}
+          >
             <Play />
             <span>Run Code</span>
           </Button>
@@ -73,9 +114,15 @@ export default function CodeSandbox({ themes }: { themes: IEditorTheme[] }) {
             <Trash />
             <span>Clear</span>
           </Button>
-          <Button variant="outline" className="code-editor-button" title="">
-            <Save />
-            <span>Save</span>
+          <Button
+            variant="outline"
+            className="code-editor-button"
+            title="Save code"
+            onClick={handleSaveCode}
+            disabled={saved}
+          >
+            <Save className={saved ? "text-green-600" : ""} />
+            <span className={saved ? "text-green-600" : ""}>{saved ? "Saved" : "Save"}</span>
           </Button>
         </div>
 
@@ -90,7 +137,7 @@ export default function CodeSandbox({ themes }: { themes: IEditorTheme[] }) {
         </div>
       </div>
 
-      <div className="h-[58dvh] w-full overflow-hidden rounded-md">
+      <div className="h-[56dvh] w-full overflow-hidden rounded-md" ref={topPanelRef}>
         <CodeEditor
           theme={theme}
           startercode={'def main():\n\tprint("Hello, World!")\n\nif __name__ == "__main__":\n\tmain()'}
@@ -98,9 +145,12 @@ export default function CodeSandbox({ themes }: { themes: IEditorTheme[] }) {
         />
       </div>
 
-      <div className="bg-muted/65 border-muted-foreground/30 border rounded-md shadow-muted">
-        <div className="flex-between border-muted-foreground/30 border-b px-3 py-1">
-          <p className={`text-muted-foreground text-sm select-none ${firacode.className}`}>Output</p>
+      <div className={`bg-muted/65 border-muted-foreground/30 border rounded-md shadow-muted ${firacode.className}`}>
+        <div
+          className="flex-between border-muted-foreground/30 border-b px-3 py-1 cursor-row-resize"
+          onMouseDown={handleDragStart}
+        >
+          <p className="text-muted-foreground text-sm select-none">Output</p>
           <Button
             variant="icon"
             onClick={handleCopyCode}
@@ -114,9 +164,12 @@ export default function CodeSandbox({ themes }: { themes: IEditorTheme[] }) {
             {copied ? <CopyCheck className="size-4!" /> : <Copy className="size-4!" />}
           </Button>
         </div>
-        <div className="w-full px-3 py-2 h-40 bg-background/80 border border-muted-foreground/30 dark:border-secondary/50 rounded-md shadow-xs">
-          <p className={`font-medium text-sm text-accent ${firacode.className}`}>
-            &gt; Click "Run Code" to see output...
+        <div
+          className="w-full px-3 py-2 h-48 bg-background/80  overflow-y-scroll styled-scrollbar-sm"
+          ref={bottomPanelRef}
+        >
+          <p className="font-medium text-sm text-accent">
+            {output ? output : <>&gt; Click "Run Code" to see output...</>}
           </p>
         </div>
       </div>

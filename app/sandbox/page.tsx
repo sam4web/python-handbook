@@ -6,7 +6,7 @@ export default function SandboxPage() {
 
   return (
     <main className="md:max-w-4xl lg:max-w-7xl mx-auto">
-      <div className="px-2 py-3.5">
+      <div className="px-2 pt-3.5">
         <CodeSandbox themes={themes} />
       </div>
     </main>
