@@ -109,7 +109,7 @@
 
 @layer components {
   .page-overlay {
-    @apply size-full fixed top-0 left-0 z-10 bg-background/40 backdrop-blur-xs;
+    @apply size-full fixed top-0 left-0 z-15 bg-background/40 backdrop-blur-xs;
   }
 
   .card {
@@ -137,7 +137,7 @@
   }
 
   .sidebar {
-    @apply bg-muted rounded-lg shadow-sm shadow-muted fixed top-12 w-full xs:max-w-80 md:max-w-xs z-15 h-dvh select-none mt-1 px-3 py-4;
+    @apply bg-muted rounded-lg shadow-sm shadow-muted fixed top-12 w-full xs:max-w-80 md:max-w-xs z-20 h-dvh select-none mt-1 px-3 py-4;
   }
 
   .code-editor-button {
@@ -149,12 +149,13 @@
   }
 
   .dropdown-list {
-    @apply flex flex-col items-start absolute top-[135%] bg-muted/85 backdrop-blur-xs outline outline-muted-foreground/25 w-44 shadow-xs rounded-md p-1.5 space-y-1 z-3 max-h-60 overflow-y-scroll;
+    @apply flex flex-col items-start absolute top-[135%] bg-muted/85 backdrop-blur-xs outline outline-muted-foreground/25 w-44 shadow-xs rounded-md p-1.5 space-y-1 z-10 max-h-60 overflow-y-scroll;
   }
 
   .dropdown-list-item {
     @apply text-sm py-1 px-2 cursor-pointer rounded-sm w-full flex justify-between items-center hover:bg-secondary dark:hover:bg-secondary/45 hover:opacity-85;
   }
+
   .dropdown-list-item.active {
     @apply bg-accent-foreground/60! dark:bg-secondary/80! opacity-100! font-medium text-secondary-foreground;
   }

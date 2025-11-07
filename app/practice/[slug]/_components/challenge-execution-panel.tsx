@@ -156,9 +156,9 @@ export default function ChallengeExecutionPanel({
 
       {activeTab === "output" ? (
         !hasTestsRun ? (
-          <div className="px-3 py-2.5 h-36 bg-background/80 rounded-md shadow-xs">
+          <div className="px-3 py-2.5 h-36 bg-background/80 border border-muted-foreground/30 dark:border-secondary/50 rounded-md shadow-xs">
             <p className={`font-medium text-sm text-accent ${firacode.className}`}>
-              Click "Run Tests" to see output...
+              &gt; Click "Run Tests" to see output...
             </p>
           </div>
         ) : (
@@ -220,7 +220,7 @@ export default function ChallengeExecutionPanel({
         <div className="space-y-2 items-start">
           {challenge.testcases.map((item, idx) => (
             <div
-              className={`px-3 py-2.5 bg-background/80 border border-secondary/40 rounded-md shadow-xs space-y-1 ${firacode.className}`}
+              className={`px-3 py-2.5 bg-background/80 border border-muted-foreground/30 dark:border-secondary/50 rounded-md shadow-xs space-y-1 ${firacode.className}`}
               key={idx}
             >
               <p className="font-semibold text-sm text-secondary-foreground">Test Case {idx + 1}</p>

@@ -41,7 +41,7 @@ export default function Navbar() {
   }, [pathname]);
 
   return (
-    <header className="z-15 w-full sticky top-0 left-0">
+    <header className="z-20 w-full sticky top-0 left-0">
       <div
         className={cx(
           "backdrop-blur-xs shadow-sm shadow-muted",

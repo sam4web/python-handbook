@@ -15,12 +15,12 @@ export default function TemplatesDropdown({
   return (
     <div className="relative">
       <button className="dropdown-button" onClick={() => setActive((prev) => !prev)}>
-        <p className="capitalize">Templates</p>
+        <p className="capitalize">Starter Code</p>
         {active ? <ChevronUp /> : <ChevronDown />}
       </button>
 
       {active ? (
-        <ul className={cx("dropdown-list styled-scrollbar-sm", dropSide === "right" ? "right-0" : "left-0 ")}>
+        <ul className={cx("dropdown-list styled-scrollbar-sm w-48", dropSide === "right" ? "right-0" : "left-0 ")}>
           {templates.map((item) => {
             return (
               <li
