@@ -3,12 +3,13 @@
 import CodeEditor from "@/components/code-editor";
 import EditorThemeDropdown from "@/components/editor-theme-dropdown";
 import Button from "@/components/ui/button";
+import usePyodideRunner from "@/hooks/use-pyodide-runner";
 import useEditorTheme from "@/lib/editor/hooks/use-editor-theme";
 import { IEditorTheme } from "@/lib/editor/shared";
 import { firacode } from "@/lib/fonts";
 import { cx } from "@/lib/utils";
 import { OnMount } from "@monaco-editor/react";
-import { Copy, CopyCheck, Play, Save, Trash } from "lucide-react";
+import { Copy, CopyCheck, OctagonX, Play, Save, Trash } from "lucide-react";
 import { editor } from "monaco-editor";
 import { useRef, useState } from "react";
 import usePanelResizer from "../_hooks/use-panel-resizer";
@@ -19,12 +20,11 @@ export default function CodeSandbox({ themes }: { themes: IEditorTheme[] }) {
   const [theme, setTheme] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [saved, setSaved] = useState(false);
-  const [output, setOutput] = useState<string | null>(null);
-  const { activeTheme, themeList } = useEditorTheme(themes);
-
   const topPanelRef = useRef<HTMLDivElement | null>(null);
   const bottomPanelRef = useRef<HTMLDivElement | null>(null);
+  const { activeTheme, themeList } = useEditorTheme(themes);
   const { handleDragStart } = usePanelResizer(topPanelRef, bottomPanelRef);
+  const { output, pyodideReady, runPythonCode, running, interruptExecution, setOutput } = usePyodideRunner();
 
   const handleCopyCode = () => {
     if (!output) {
@@ -69,13 +69,14 @@ export default function CodeSandbox({ themes }: { themes: IEditorTheme[] }) {
       return;
     }
     editorRef.current.setValue("");
+    setOutput("");
   };
 
   const handleRunCode = () => {
     if (!editorRef.current) {
       return;
     }
-    console.log(editorRef.current.getValue());
+    runPythonCode(editorRef.current.getValue());
   };
 
   const handleSaveCode = () => {
@@ -101,19 +102,41 @@ export default function CodeSandbox({ themes }: { themes: IEditorTheme[] }) {
     <div className="py-1 md:py-2 space-y-2.5">
       <div className="flex justify-between gap-2.5 items-start xs:items-center flex-col-reverse xs:flex-row">
         <div className="flex-between gap-2.5">
+          {running ? (
+            <Button
+              disabled={!pyodideReady || !running}
+              variant="primary"
+              className="code-editor-button outline outline-primary"
+              title="Stop Execution"
+              onClick={interruptExecution}
+            >
+              <OctagonX />
+              <span>Stop Execution</span>
+            </Button>
+          ) : (
+            <Button
+              disabled={!pyodideReady || running}
+              variant="primary"
+              className="code-editor-button outline outline-primary"
+              title="Run code"
+              onClick={handleRunCode}
+            >
+              <Play />
+              <span>Run Code</span>
+            </Button>
+          )}
+
           <Button
-            variant="primary"
-            className="code-editor-button outline outline-primary"
-            title="Run code"
-            onClick={handleRunCode}
+            variant="outline"
+            className="code-editor-button"
+            title="Reset editor"
+            onClick={handleResetEditor}
+            disabled={!pyodideReady || running}
           >
-            <Play />
-            <span>Run Code</span>
-          </Button>
-          <Button variant="outline" className="code-editor-button" title="Reset editor" onClick={handleResetEditor}>
             <Trash />
             <span>Clear</span>
           </Button>
+
           <Button
             variant="outline"
             className="code-editor-button"
@@ -168,9 +191,9 @@ export default function CodeSandbox({ themes }: { themes: IEditorTheme[] }) {
           className="w-full px-3 py-2 h-48 bg-background/80  overflow-y-scroll styled-scrollbar-sm"
           ref={bottomPanelRef}
         >
-          <p className="font-medium text-sm text-accent">
-            {output ? output : <>&gt; Click "Run Code" to see output...</>}
-          </p>
+          <pre className="font-medium text-sm text-accent">
+            {!pyodideReady ? <>&gt; Loading please wait...</> : output}
+          </pre>
         </div>
       </div>
     </div>
