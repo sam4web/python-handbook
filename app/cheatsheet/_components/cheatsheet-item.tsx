@@ -1,9 +1,6 @@
-"use client";
-
 import Code from "@/components/code";
 import Button from "@/components/ui/button";
 import { firacode } from "@/lib/fonts";
-import { cx } from "@/lib/utils";
 import { Copy, CopyCheck } from "lucide-react";
 import { useState } from "react";
 import { ICheatsheetItem } from "../utils/shared";
@@ -46,12 +43,9 @@ export default function CheatsheetItem({ item }: { item: ICheatsheetItem }) {
             onClick={handleCopyCode}
             disabled={copied}
             title="Copy code"
-            className={cx(
-              "border-none! hover:bg-muted-foreground/10! rounded-md! p-1.5! hidden group-hover:block",
-              copied ? " [&>svg]:text-green-600!" : " [&>svg]:text-foreground!"
-            )}
+            className="border-none! hover:bg-muted-foreground/10! rounded-md! p-1.5! hidden group-hover:block [&>svg]:size-3.5!"
           >
-            {copied ? <CopyCheck className="size-3.5!" /> : <Copy className="size-3.5!" />}
+            {copied ? <CopyCheck className="text-green-600!" /> : <Copy className="text-foreground!" />}
           </Button>
         </div>
         <p className="text-sm text-muted-foreground">{item.description}</p>

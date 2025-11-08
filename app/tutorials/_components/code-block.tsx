@@ -1,11 +1,10 @@
 "use client";
 
-import Button from "@/components/ui/button";
 import Code from "@/components/code";
+import Button from "@/components/ui/button";
+import { firacode } from "@/lib/fonts";
 import { Copy, CopyCheck } from "lucide-react";
 import { useState } from "react";
-import { cx } from "@/lib/utils";
-import { firacode } from "@/lib/fonts";
 
 export default function CodeBlock({ language, value }: { language: string; value: string }) {
   const [copied, setCopied] = useState(false);
@@ -32,12 +31,9 @@ export default function CodeBlock({ language, value }: { language: string; value
           onClick={handleCopyCode}
           disabled={copied}
           title="Copy code"
-          className={cx(
-            "border-none! hover:bg-muted-foreground/10! p-2!",
-            copied ? " [&>svg]:text-green-600!" : "[&>svg]:text-muted-foreground!"
-          )}
+          className="border-none! hover:bg-muted-foreground/10! p-1.5! [&>svg]:size-3.5!"
         >
-          {copied ? <CopyCheck className="size-4!" /> : <Copy className="size-4!" />}
+          {copied ? <CopyCheck className="text-green-600!" /> : <Copy className="text-muted-foreground!" />}
         </Button>
       </div>
       <div className="px-3 py-2">
