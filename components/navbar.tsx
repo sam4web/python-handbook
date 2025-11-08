@@ -1,14 +1,14 @@
 "use client";
 
+import { firacode } from "@/lib/fonts";
+import { cx } from "@/lib/utils";
+import { Menu } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
-import Button from "./ui/button";
 import ThemeToggleBtn from "./theme-toggle-btn";
-import { Menu } from "lucide-react";
-import { firacode } from "@/lib/fonts";
-import { cx } from "@/lib/utils";
-import Image from "next/image";
+import Button from "./ui/button";
 
 const navlinks = [
   { title: "Tutorials", href: "/tutorials" },
