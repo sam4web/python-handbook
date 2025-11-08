@@ -29,8 +29,9 @@ export default function CodeSandbox({ themes }: { themes: IEditorTheme[] }) {
     if (!output) {
       return;
     }
+    const textToCopy = output.replace("...Running Code...\n", "").replaceAll("> ", "");
     navigator.clipboard
-      .writeText(output)
+      .writeText(textToCopy)
       .then(() => {
         setCopied(true);
         // alert here

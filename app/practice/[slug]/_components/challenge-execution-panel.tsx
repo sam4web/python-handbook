@@ -81,6 +81,8 @@ export default function ChallengeExecutionPanel({
       <div className="flex-between gap-2">
         <div className="flex-center gap-2">
           <EditorThemeDropdown themes={themeList} activeTheme={activeTheme} handleThemeChange={handleThemeChange} />
+
+          {/* Show Hint Button */}
           <Button
             variant="outline"
             className="code-editor-button"
@@ -92,14 +94,17 @@ export default function ChallengeExecutionPanel({
           </Button>
         </div>
         <div className="flex-center gap-2">
+          {/* Reset Editor Button */}
           <Button variant="outline" className="code-editor-button" title="Reset editor" onClick={handleResetEditor}>
             <RotateCcw />
             <span>Reset</span>
           </Button>
+          {/* View Solution Button */}
           <Button variant="outline" className="code-editor-button" title="View solution" onClick={handleViewSolution}>
             <Lightbulb />
             <span>Solution</span>
           </Button>
+          {/* Run Tests Button */}
           <Button
             variant="primary"
             className="code-editor-button outline outline-primary"
@@ -111,6 +116,7 @@ export default function ChallengeExecutionPanel({
           </Button>
         </div>
       </div>
+      {/* Hints List */}
       {showHint ? (
         <div
           className={`rounded-md shadow-xs px-2 md:px-3 py-1 md:py-2 bg-primary/15 border border-primary ${firacode.className}`}
@@ -126,10 +132,12 @@ export default function ChallengeExecutionPanel({
         </div>
       ) : null}
 
+      {/* Code Editor */}
       <div className="h-[56dvh] w-full overflow-hidden rounded-lg">
         <CodeEditor startercode={challenge.startercode} theme={theme} handleEditorDidMount={handleEditorDidMount} />
       </div>
 
+      {/* Tabs Options (Output & Test Cases) */}
       <div className="flex w-full mt-4 py-0.5 relative border-b-2 border-primary">
         <div
           className={cx(
@@ -156,12 +164,14 @@ export default function ChallengeExecutionPanel({
 
       {activeTab === "output" ? (
         !hasTestsRun ? (
+          // Output Panel
           <div className="px-3 py-2.5 h-36 bg-background/80 border border-muted-foreground/30 dark:border-secondary/50 rounded-md shadow-xs transition-none">
             <p className={`font-medium text-sm text-accent ${firacode.className}`}>
               &gt; Click "Run Tests" to see output...
             </p>
           </div>
         ) : (
+          // Tests Result Output Panel
           <div className={`transition-none ${firacode.className}`}>
             <p className="font-medium text-right text-sm text-muted-foreground mb-2">Passed: 2/3</p>
             <div className="space-y-3 items-start">
@@ -176,7 +186,7 @@ export default function ChallengeExecutionPanel({
                   <div className="flex items-center gap-1.5 mb-2.5">
                     <span
                       className={cx(
-                        "[&>svg]:size-4 [&>svg]:text-white rounded-full p-px",
+                        "[&>svg]:size-3.5 [&>svg]:text-white rounded-full p-px",
                         idx % 2 === 0 ? " bg-green-600" : "bg-destructive"
                       )}
                     >
@@ -184,7 +194,6 @@ export default function ChallengeExecutionPanel({
                     </span>
                     <p className="font-semibold text-sm text-secondary-foreground">Test Case {idx + 1}</p>
                   </div>
-
                   <div className="text-sm space-y-1 text-secondary-foreground px-1 rounded-sm">
                     <p>
                       <span>Input: </span>
@@ -205,7 +214,6 @@ export default function ChallengeExecutionPanel({
                       </span>
                     </p>
                   </div>
-
                   {idx % 2 !== 0 ? (
                     <p className="text-sm space-y-1 text-destructive bg-destructive/10 py-1 px-2 rounded-sm">
                       Expected: [0,1], Got: [0,1]
@@ -217,6 +225,7 @@ export default function ChallengeExecutionPanel({
           </div>
         )
       ) : (
+        // Test Cases Panel
         <div className="space-y-2 items-start transition-none">
           {challenge.testcases.map((item, idx) => (
             <div
