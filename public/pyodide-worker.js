@@ -10,8 +10,16 @@ self.onmessage = async (event) => {
     pyodide = await loadPyodide({
       indexURL: "https://cdn.jsdelivr.net/pyodide/v0.29.0/full/",
     });
-    pyodide.setStdout({ batched: (msg) => self.postMessage({ cmd: "output", msg }) });
-    pyodide.setStderr({ batched: (msg) => self.postMessage({ cmd: "output", msg: `[ERROR]: ${msg}` }) });
+    pyodide.setStdout({
+      batched: (msg) => {
+        self.postMessage({ cmd: "output", msg });
+      },
+    });
+    pyodide.setStderr({
+      batched: (msg) => {
+        self.postMessage({ cmd: "output", msg: `[ERROR]: ${msg}` });
+      },
+    });
     self.postMessage({ cmd: "ready" });
   } else if (cmd === "setInterruptBuffer") {
     interruptBuffer = interrupt;

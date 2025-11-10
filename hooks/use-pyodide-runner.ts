@@ -1,3 +1,4 @@
+import { ITestCase } from "@/app/practice/utils/shared";
 import { extractPyodideErrorMessage } from "@/lib/utils";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -29,7 +30,7 @@ export default function usePyodideRunner() {
           interrupt: interruptBufferRef.current,
         });
         setPyodideReady(true);
-        setOutput('>  Click "Run Code" to see output...');
+        setOutput(`> Click "Run Code" to see output...`);
       } else if (cmd === "done") {
         setRunning(false);
         if (!event.data.success && error) {
@@ -49,9 +50,18 @@ export default function usePyodideRunner() {
         return;
       }
       setRunning(true);
-      outputBufferRef.current = "...Running Code...\n";
+      outputBufferRef.current = "";
       setOutput(outputBufferRef.current);
       pyodideWorkerRef.current?.postMessage({ cmd: "run", code });
+    },
+    [pyodideReady, running]
+  );
+
+  const runAllTests = useCallback(
+    async (userCode: string, testCases: ITestCase[]) => {
+      console.log(testCases);
+      console.log(output);
+      await runPythonCode(userCode);
     },
     [pyodideReady, running]
   );
@@ -64,5 +74,13 @@ export default function usePyodideRunner() {
     }
   }, [running, appendOutput]);
 
-  return { output, runPythonCode, pyodideReady, running, interruptExecution, setOutput };
+  return {
+    output,
+    runPythonCode,
+    runAllTests,
+    pyodideReady,
+    running,
+    interruptExecution,
+    setOutput,
+  };
 }

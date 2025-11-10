@@ -76,6 +76,11 @@ export default function CodeSandbox({ themes }: { themes: IEditorTheme[] }) {
     if (!editorRef.current) {
       return;
     }
+    if (!editorRef.current.getValue().trim()) {
+      // toast here
+      console.log("The editor is empty.");
+      return;
+    }
     runPythonCode(editorRef.current.getValue());
   };
 
@@ -169,6 +174,7 @@ export default function CodeSandbox({ themes }: { themes: IEditorTheme[] }) {
         />
       </div>
 
+      {/* Output Header */}
       <div className={`bg-muted/65 border-muted-foreground/30 border rounded-md shadow-muted ${firacode.className}`}>
         <div
           className="flex-between border-muted-foreground/30 border-b px-3 py-1 cursor-row-resize"
@@ -198,7 +204,7 @@ export default function CodeSandbox({ themes }: { themes: IEditorTheme[] }) {
           )}
         </div>
 
-        {/* Output */}
+        {/* Output Content */}
         <div
           className="w-full px-3 py-2 h-48 bg-background/80  overflow-y-scroll styled-scrollbar-sm"
           ref={bottomPanelRef}

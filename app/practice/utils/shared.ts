@@ -27,6 +27,11 @@ export interface IChallengeListItem extends IChallengeMetadata {
   category: string[];
 }
 
+export interface ITestCase {
+  input: (number | string | boolean | number[] | string[] | Record<string, any>)[];
+  expected_output: number | string | boolean | number[] | string[] | Record<string, any>;
+}
+
 export interface IChallenge extends IChallengeListItem {
   constraints: string[];
   startercode: string;
@@ -37,8 +42,5 @@ export interface IChallenge extends IChallengeListItem {
     output_value: string;
     explanation?: string;
   }[];
-  testcases: {
-    input: (number | string | number[] | string[] | Record<string, any>)[];
-    expected_output: number | string | boolean | number[] | string[] | Record<string, any>;
-  }[];
+  testcases: ITestCase[];
 }
