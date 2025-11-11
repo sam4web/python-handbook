@@ -45,7 +45,7 @@ export default function Navbar() {
       <div
         className={cx(
           "backdrop-blur-xs shadow-sm shadow-muted",
-          scrollActive ? "bg-background/50 dark:bg-background/75" : "bg-background",
+          scrollActive ? "bg-background/30 dark:bg-background/70" : "bg-background",
           showNavbar ? "bg-background!" : "backdrop-blur-xs shadow-sm shadow-muted"
         )}
       >

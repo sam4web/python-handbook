@@ -38,7 +38,7 @@ export default function PracticeSidebar({
     if (sanitizedSearch) {
       return filteredData || [];
     }
-    let result = [...challenges].splice(0, 6).filter((item) => item.slug !== activeChallengeSlug);
+    let result = [...challenges].splice(0, 8).filter((item) => item.slug !== activeChallengeSlug);
     if (activeItem) {
       result = [activeItem, ...result];
     }
@@ -95,7 +95,7 @@ export default function PracticeSidebar({
                 href={`/practice/${challenge.slug}`}
                 key={challenge.id}
                 className={cx(
-                  "card cursor-pointer bg-background block translate-y-0! outline max-w-72",
+                  "card px-2 py-1 cursor-pointer bg-background block translate-y-0! outline max-w-72",
                   activeChallengeSlug === challenge.slug
                     ? "border-primary! outline-transparent"
                     : "border-transparent! hover:bg-accent-foreground/10! outline-secondary-foreground/10"

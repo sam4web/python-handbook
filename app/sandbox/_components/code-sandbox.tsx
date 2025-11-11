@@ -206,7 +206,7 @@ export default function CodeSandbox({ themes }: { themes: IEditorTheme[] }) {
 
         {/* Output Content */}
         <div
-          className="w-full px-3 py-2 h-48 bg-background/80  overflow-y-scroll styled-scrollbar-sm"
+          className="w-full px-3 py-2 h-48 bg-background/80 overflow-y-scroll styled-scrollbar-sm"
           ref={bottomPanelRef}
         >
           <pre className="font-medium text-sm text-accent">

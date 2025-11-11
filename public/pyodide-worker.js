@@ -79,7 +79,7 @@ self.onmessage = async (event) => {
       try {
         const pythonFunction = pyodide.globals.get(functionName);
         if (!pythonFunction) {
-          throw new Error(`NameError: Function '${functionName}' not found in user code.`);
+          throw new Error(`Use the required function name: '${functionName}'.`);
         }
 
         const pythonArgs = pyodide.toPy(input);

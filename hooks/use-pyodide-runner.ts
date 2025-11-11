@@ -40,6 +40,7 @@ export default function usePyodideRunner() {
   const [pyodideReady, setPyodideReady] = useState(false);
   const [running, setRunning] = useState(false);
   const [output, setOutput] = useState<string | null>(null);
+  const [testResults, setTestResults] = useState<ITestResult[] | null>(null);
 
   const outputBufferRef = useRef("");
   const pyodideWorkerRef = useRef<IPyodideWorker | null>(null);
@@ -58,10 +59,10 @@ export default function usePyodideRunner() {
 
     worker.onmessage = (event: MessageEvent<WorkerToMainMessage>) => {
       const { cmd } = event.data;
+
       switch (cmd) {
         case "output":
-          const { msg } = event.data;
-          appendOutput(msg);
+          appendOutput(event.data.msg);
           break;
 
         case "ready":
@@ -74,9 +75,8 @@ export default function usePyodideRunner() {
           break;
 
         case "test_result":
-          const { result } = event.data;
           if (resolveTestRef.current) {
-            resolveTestRef.current(result!);
+            resolveTestRef.current(event.data.result!);
             resolveTestRef.current = null;
           }
           break;
@@ -86,7 +86,7 @@ export default function usePyodideRunner() {
           setRunning(false);
           if (!event.data.success && error) {
             const cleanMessage = extractPyodideErrorMessage(error);
-            appendOutput(`Execution failed: ${cleanMessage}`);
+            appendOutput(`Execution failed\n\t${cleanMessage}`);
           }
           break;
       }
@@ -140,8 +140,7 @@ export default function usePyodideRunner() {
           break;
         }
       }
-      console.log(results);
-      // setTestResults([...results]);
+      setTestResults([...results]);
       setRunning(false);
     },
     [pyodideReady, running, resolveTestRef, pyodideWorkerRef]
@@ -163,5 +162,7 @@ export default function usePyodideRunner() {
     running,
     interruptExecution,
     setOutput,
+    testResults,
+    setTestResults,
   };
 }
