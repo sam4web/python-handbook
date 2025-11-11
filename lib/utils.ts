@@ -16,14 +16,3 @@ export function splitNameAndOrder(name: string): { order: number; title: string 
   const title = toTitleCase(slug);
   return { order, title };
 }
-
-export function extractPyodideErrorMessage(traceback: string): string {
-  const lines = traceback.split("\n");
-  for (let i = lines.length - 1; i >= 0; i--) {
-    const line = lines[i].trim();
-    if (line.length > 0) {
-      return line;
-    }
-  }
-  return "An unexpected Python error occurred.";
-}

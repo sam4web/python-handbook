@@ -1,5 +1,7 @@
 export type DifficultyKey = "easy" | "medium" | "hard" | "expert";
 
+type JSONValue = string | number | boolean | { [key: string]: JSONValue } | JSONValue[] | null;
+
 export interface IDifficulty {
   key: DifficultyKey;
   label: string;
@@ -28,8 +30,16 @@ export interface IChallengeListItem extends IChallengeMetadata {
 }
 
 export interface ITestCase {
-  input: (number | string | boolean | number[] | string[] | Record<string, any>)[];
-  expected_output: number | string | boolean | number[] | string[] | Record<string, any>;
+  input: JSONValue[];
+  expected_output: JSONValue;
+}
+
+export interface ITestResult {
+  passed: boolean;
+  actualOutput: JSONValue;
+  expectedOutput: JSONValue;
+  inputArgs: JSONValue[];
+  errorMessage?: string;
 }
 
 export interface IChallenge extends IChallengeListItem {
@@ -43,4 +53,5 @@ export interface IChallenge extends IChallengeListItem {
     explanation?: string;
   }[];
   testcases: ITestCase[];
+  functionName: string;
 }

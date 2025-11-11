@@ -31,7 +31,7 @@ export default function ChallengeExecutionPanel({
   const timeoutIdRef = useRef<NodeJS.Timeout | null>(null);
   const [showStopExecutionBtn, setShowStopExecutionBtn] = useState(false);
   const { themeList, activeTheme } = useEditorTheme(themes);
-  const { output, pyodideReady, runAllTests, running, interruptExecution, setOutput } = usePyodideRunner();
+  const { pyodideReady, running, interruptExecution, runTests } = usePyodideRunner();
 
   const tabsOptions: { label: string; type: TabsOptions }[] = [
     { label: "Output", type: "output" },
@@ -52,16 +52,17 @@ export default function ChallengeExecutionPanel({
     };
   }, [running]);
 
-  const handleRunCode = () => {
+  const handleRunTests = async () => {
     if (!editorRef.current) {
       return;
     }
-    if (!editorRef.current.getValue().trim()) {
+    const code = editorRef.current.getValue();
+    if (!code.trim()) {
       // toast here
       console.log("The editor is empty.");
       return;
     }
-    runAllTests(editorRef.current.getValue(), challenge.testcases);
+    await runTests(code, challenge.testcases, challenge.functionName);
     setHasTestsRun(true);
     setActiveTab("output");
     setShowHint(false);
@@ -73,7 +74,6 @@ export default function ChallengeExecutionPanel({
     }
     setHasTestsRun(false);
     setShowHint(false);
-    setOutput("");
     editorRef.current.setValue(challenge.startercode);
   };
 
@@ -83,7 +83,6 @@ export default function ChallengeExecutionPanel({
     }
     setHasTestsRun(false);
     setShowHint(false);
-    setOutput("");
     editorRef.current.setValue(challenge.solution_code);
   };
 
@@ -158,12 +157,12 @@ export default function ChallengeExecutionPanel({
             </>
           ) : (
             <>
-              {/* Run Code Button */}
+              {/* Run Tests Button */}
               <Button
                 variant="primary"
                 className="code-editor-button outline outline-primary"
-                title="Run code"
-                onClick={handleRunCode}
+                title="Run tests"
+                onClick={handleRunTests}
                 disabled={!pyodideReady || running}
               >
                 {running ? (
@@ -174,7 +173,7 @@ export default function ChallengeExecutionPanel({
                 ) : (
                   <>
                     <Play />
-                    <span>Run Code</span>
+                    <span>Run Tests</span>
                   </>
                 )}
               </Button>

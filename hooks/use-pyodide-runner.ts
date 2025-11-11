@@ -1,6 +1,19 @@
-import { ITestCase } from "@/app/practice/utils/shared";
-import { extractPyodideErrorMessage } from "@/lib/utils";
+import { ITestCase, ITestResult } from "@/app/practice/utils/shared";
 import { useCallback, useEffect, useRef, useState } from "react";
+
+function extractPyodideErrorMessage(traceback: string): string {
+  const lines = traceback.split("\n");
+  for (let i = lines.length - 1; i >= 0; i--) {
+    const line = lines[i].trim();
+    if (line.length > 0) {
+      if (line.includes("KeyboardInterrupt")) {
+        return "Code execution was manually interrupted.";
+      }
+      return line;
+    }
+  }
+  return "An unexpected Python error occurred.";
+}
 
 export default function usePyodideRunner() {
   const [pyodideReady, setPyodideReady] = useState(false);
@@ -10,6 +23,7 @@ export default function usePyodideRunner() {
   const outputBufferRef = useRef("");
   const pyodideWorkerRef = useRef<Worker | null>(null);
   const interruptBufferRef = useRef<Uint8Array | null>(null);
+  const resolveTestRef = useRef<((result: ITestResult) => void) | null>(null);
 
   const appendOutput = useCallback((msg: string) => {
     outputBufferRef.current += `> ${msg} \n`;
@@ -17,32 +31,52 @@ export default function usePyodideRunner() {
   }, []);
 
   useEffect(() => {
-    pyodideWorkerRef.current = new Worker("/pyodide-worker.js");
+    const worker = new Worker("/pyodide-worker.js");
+    pyodideWorkerRef.current = worker;
     interruptBufferRef.current = new Uint8Array(new SharedArrayBuffer(1));
 
-    pyodideWorkerRef.current.onmessage = (event) => {
-      const { cmd, msg, error } = event.data;
+    worker.onmessage = (event) => {
+      const { cmd, msg, error, result } = event.data;
       if (cmd === "output") {
         appendOutput(msg);
-      } else if (cmd === "ready") {
-        pyodideWorkerRef.current?.postMessage({
+        return;
+      }
+
+      if (cmd === "ready") {
+        worker.postMessage({
           cmd: "setInterruptBuffer",
-          interrupt: interruptBufferRef.current,
+          interrupt: interruptBufferRef.current!,
         });
         setPyodideReady(true);
         setOutput(`> Click "Run Code" to see output...`);
-      } else if (cmd === "done") {
+        return;
+      }
+
+      if (cmd === "test_result") {
+        if (resolveTestRef.current) {
+          console.log("MAIN: Received test_result. Resolving promise.");
+          resolveTestRef.current(result!);
+          resolveTestRef.current = null;
+        } else {
+          console.warn("MAIN: Received 'test_result' but no promise resolver was set.");
+        }
+        return;
+      }
+
+      if (cmd === "done") {
         setRunning(false);
         if (!event.data.success && error) {
-          appendOutput(extractPyodideErrorMessage(error));
+          const cleanMessage = extractPyodideErrorMessage(error);
+          appendOutput(`Execution failed: ${cleanMessage}`);
         }
       }
+      return;
     };
-    pyodideWorkerRef.current.postMessage({ cmd: "init" });
+    worker.postMessage({ cmd: "init" });
     return () => {
-      pyodideWorkerRef.current?.terminate();
+      worker.terminate();
     };
-  }, []);
+  }, [appendOutput]);
 
   const runPythonCode = useCallback(
     async (code: string) => {
@@ -57,13 +91,51 @@ export default function usePyodideRunner() {
     [pyodideReady, running]
   );
 
-  const runAllTests = useCallback(
-    async (userCode: string, testCases: ITestCase[]) => {
+  const runTests = useCallback(
+    async (code: string, testCases: ITestCase[], functionName: string) => {
+      if (!pyodideReady || running || !pyodideWorkerRef.current) {
+        return;
+      }
+      setRunning(true);
+      const results: ITestResult[] = [];
+      const worker = pyodideWorkerRef.current!;
+
       console.log(testCases);
-      console.log(output);
-      await runPythonCode(userCode);
+
+      for (const test of testCases) {
+        console.log(`Sending test: ${functionName}`);
+        const resultPromise = new Promise<ITestResult>((resolve) => {
+          resolveTestRef.current = resolve;
+        });
+
+        if (!resolveTestRef.current) {
+          console.error("MAIN: FATAL ERROR: resolveTestRef is null immediately after setting. Check dependencies.");
+          break;
+        }
+
+        worker.postMessage({
+          cmd: "test",
+          code,
+          test,
+          functionName,
+        });
+
+        try {
+          console.log("MAIN: Awaiting result for current test...");
+          const result = await resultPromise;
+          console.log("MAIN: Received result and continuing loop.", result);
+          // 4. Update results
+          results.push(result);
+          // setTestResults([...results]);
+        } catch (error) {
+          console.error("MAIN: Promise rejection during test run.", error);
+        }
+      }
+      console.log("MAIN: All tests finished.");
+      // setIsTesting(false);
+      setRunning(false);
     },
-    [pyodideReady, running]
+    [pyodideReady, running, resolveTestRef, pyodideWorkerRef]
   );
 
   const interruptExecution = useCallback(() => {
@@ -77,7 +149,7 @@ export default function usePyodideRunner() {
   return {
     output,
     runPythonCode,
-    runAllTests,
+    runTests,
     pyodideReady,
     running,
     interruptExecution,
