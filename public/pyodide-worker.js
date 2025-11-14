@@ -75,6 +75,17 @@ self.onmessage = async (event) => {
     let passed = false;
 
     try {
+      pyodide.runPython(`
+            items_to_keep = set(dir(__builtins__)) | set(['pyodide', 'shiboken'])
+            for name in list(globals()):
+                if name not in items_to_keep:
+                    del globals()[name]
+          `);
+    } catch (e) {
+      console.error("Failed to clean up global state (full reset failed):", e);
+    }
+
+    try {
       await pyodide.runPythonAsync(code);
       try {
         const pythonFunction = pyodide.globals.get(functionName);
@@ -93,14 +104,14 @@ self.onmessage = async (event) => {
 
         if (pythonResult && pythonResult.toJs) {
           actualOutput = pythonResult.toJs({ dict_converter: Object.fromEntries });
-          if (pythonResult.destroy) pythonResult.destroy();
+          if (pythonResult.destroy) {
+            pythonResult.destroy();
+          }
         } else {
           actualOutput = pythonResult;
         }
         pythonFunction.destroy();
-        if (pythonResult && pythonResult.destroy) {
-          pythonResult.destroy();
-        }
+
         const expected = expected_output;
         if (typeof expected === "number" && typeof actualOutput === "number") {
           const tolerance = 0.01;

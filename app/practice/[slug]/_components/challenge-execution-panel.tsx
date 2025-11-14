@@ -265,11 +265,11 @@ export default function ChallengeExecutionPanel({
                             </span>
                           </p>
                           <p>
-                            <span>Output: </span>
+                            <span>Expected Output: </span>
                             <span className="text-primary font-medium">{JSON.stringify(test.expectedOutput)}</span>
                           </p>
                           <p>
-                            <span>Actual: </span>
+                            <span>Actual Output: </span>
                             <span className={cx("font-medium", test.passed ? "text-green-600" : "text-destructive")}>
                               {JSON.stringify(test.actualOutput)}
                             </span>
@@ -277,8 +277,9 @@ export default function ChallengeExecutionPanel({
                         </div>
                         {!test.passed ? (
                           <p className="text-sm space-y-1 text-destructive bg-destructive/10 py-1 px-2 rounded-sm">
-                            {test.errorMessage ? <p>{test.errorMessage}</p> : null}
-                            Expected: {JSON.stringify(test.expectedOutput)}, Got: {JSON.stringify(test.actualOutput)}
+                            {test.errorMessage
+                              ? test.errorMessage
+                              : `Expected: ${JSON.stringify(test.expectedOutput)}, Got: ${JSON.stringify(test.actualOutput)}`}
                           </p>
                         ) : null}
                       </div>

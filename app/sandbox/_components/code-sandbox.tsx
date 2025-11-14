@@ -155,13 +155,8 @@ export default function CodeSandbox({ themes }: { themes: IEditorTheme[] }) {
 
         {/* Theme and Templates Dropdowns */}
         <div className="flex-between gap-2.5">
-          <EditorThemeDropdown
-            themes={themeList}
-            activeTheme={activeTheme}
-            handleThemeChange={handleThemeChange}
-            dropSide="right"
-          />
-          <TemplatesDropdown handleSelectTemplate={handleSelectTemplate} dropSide="right" />
+          <EditorThemeDropdown themes={themeList} activeTheme={activeTheme} handleThemeChange={handleThemeChange} />
+          <TemplatesDropdown handleSelectTemplate={handleSelectTemplate} />
         </div>
       </div>
 

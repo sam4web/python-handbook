@@ -134,6 +134,9 @@ export default function usePyodideRunner() {
         });
         try {
           const result = await resultPromise;
+          if (result.errorMessage) {
+            result.errorMessage = extractPyodideErrorMessage(result.errorMessage);
+          }
           results.push(result);
         } catch (error) {
           console.error("Promise rejection during test run.", error);

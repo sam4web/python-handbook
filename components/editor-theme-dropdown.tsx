@@ -24,7 +24,7 @@ export default function EditorThemeDropdown({
       </button>
 
       {active ? (
-        <ul className={cx("dropdown-list styled-scrollbar-sm", dropSide === "right" ? "right-0" : "left-0 ")}>
+        <ul className="dropdown-list styled-scrollbar-sm left-0 ">
           {themes.map((theme) => {
             const selected = selectedTheme.name === theme.name;
             return (

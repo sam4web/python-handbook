@@ -20,7 +20,7 @@ export default function TemplatesDropdown({
       </button>
 
       {active ? (
-        <ul className={cx("dropdown-list styled-scrollbar-sm w-48", dropSide === "right" ? "right-0" : "left-0 ")}>
+        <ul className="dropdown-list styled-scrollbar-sm w-48 right-0">
           {templates.map((item) => {
             return (
               <li
