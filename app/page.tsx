@@ -1,13 +1,13 @@
-import Features from "./_components/features";
-import FeaturesDetailed from "./_components/features-detailed";
-import Hero from "./_components/hero";
+import FeaturesSection from "./_components/features-section";
+import HeroSection from "./_components/hero-section";
+import InteractiveEnvironmentSection from "./_components/interactive-environment-section";
 
 export default function HomePage() {
   return (
     <main>
-      <Hero />
-      <Features />
-      <FeaturesDetailed />
+      <HeroSection />
+      <FeaturesSection />
+      <InteractiveEnvironmentSection />
     </main>
   );
 }

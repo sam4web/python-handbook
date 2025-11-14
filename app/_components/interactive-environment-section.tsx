@@ -1,4 +1,4 @@
-export default function FeaturesDetailed() {
+export default function InteractiveEnvironmentSection() {
   return (
     <section className="py-2">
       <div className="section-container">

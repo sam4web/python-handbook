@@ -1,5 +1,5 @@
 import Icon from "@/components/icon";
-import { BookOpen, Code, icons, Terminal } from "lucide-react";
+import { icons } from "lucide-react";
 
 const features = [
   {
@@ -20,7 +20,7 @@ const features = [
   },
 ];
 
-export default function Features() {
+export default function FeaturesSection() {
   return (
     <section className="bg-muted py-2">
       <div className="section-container">

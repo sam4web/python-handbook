@@ -2,7 +2,7 @@ import Button from "@/components/ui/button";
 import { firacode } from "@/lib/fonts";
 import { ChevronRight, CodeXml, Sparkles } from "lucide-react";
 
-export default function Hero() {
+export default function HeroSection() {
   return (
     <section className="text-center min-h-[56dvh] flex-center">
       <div className="space-y-6 section-container">
