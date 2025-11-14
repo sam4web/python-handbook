@@ -1,7 +1,13 @@
+import Features from "./_components/features";
+import FeaturesDetailed from "./_components/features-detailed";
+import Hero from "./_components/hero";
+
 export default function HomePage() {
   return (
-    <main className="px-4 py-2">
-      <h1>Home page</h1>
+    <main>
+      <Hero />
+      <Features />
+      <FeaturesDetailed />
     </main>
   );
 }

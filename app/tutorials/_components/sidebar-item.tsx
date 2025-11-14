@@ -20,11 +20,13 @@ export default function SidebarItem({ title, items, closeTutorialSidebar }: Prop
   return (
     <div>
       <div
-        className="flex-between hover:bg-muted-foreground/20 py-1.5 px-2.5 rounded-lg"
+        className="flex-between py-1 px-2.5 rounded-lg group hover:text-primary"
         onClick={() => setActive((prev) => !prev)}
       >
         <p className="font-medium">{title}</p>
-        <ChevronRight className={cx("size-4 text-secondary-foreground", active ? "rotate-90" : "")} />
+        <ChevronRight
+          className={cx("size-4 text-secondary-foreground group-hover:text-primary", active ? "rotate-90" : "")}
+        />
       </div>
 
       {active ? (

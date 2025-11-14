@@ -108,6 +108,22 @@
 }
 
 @layer components {
+  .section-description {
+    @apply text-muted-foreground lg:text-lg max-w-lg lg:max-w-xl mx-auto text-center;
+  }
+
+  .section-title {
+    @apply text-3xl lg:text-4xl text-secondary-foreground text-center mb-2 lg:mb-3;
+  }
+
+  .section-container {
+    @apply md:max-w-4xl lg:max-w-7xl mx-auto px-2 md:px-4 py-10;
+  }
+
+  .section-title > span {
+    @apply text-primary;
+  }
+
   .page-overlay {
     @apply size-full fixed top-0 left-0 z-15 bg-background/40 backdrop-blur-xs;
   }
