@@ -42,7 +42,9 @@ export default function FeaturesSection() {
                 <Icon name={feature.icon as keyof typeof icons} className="text-primary size-6" />
               </div>
               <h3 className="text-lg md:text-xl mb-1">{feature.title}</h3>
-              <p className="text-muted-foreground max-w-64 lg:max-w-72 mx-auto">{feature.description}</p>
+              <p className="text-muted-foreground text-[15px] lg:text-base leading-snug max-w-64 lg:max-w-72 mx-auto">
+                {feature.description}
+              </p>
             </div>
           ))}
         </div>

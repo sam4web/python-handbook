@@ -4,7 +4,7 @@ import { ChevronRight, CodeXml, Sparkles } from "lucide-react";
 
 export default function HeroSection() {
   return (
-    <section className="text-center min-h-[56dvh] flex-center">
+    <section className="text-center min-h-[60dvh] flex-center">
       <div className="space-y-6 section-container">
         <div
           className={`bg-primary/10 border border-primary/50 px-2.5 py-1 rounded-full text-primary text-sm inline-flex items-center ${firacode.className}`}
@@ -27,11 +27,11 @@ export default function HeroSection() {
           </p>
         </div>
         <div className="flex-center gap-3 flex-wrap">
-          <Button variant="primary" title="Start Learning Python" className="flex-center gap-0.5 group px-3">
+          <Button variant="primary" title="Start Learning Python" className="flex-center gap-0.5 group py-1.5 px-3">
             Start Learning Python
             <ChevronRight className="group-hover:translate-x-1 size-5" />
           </Button>
-          <Button variant="outline" title="Try Sandbox" className="flex-center px-3 border!">
+          <Button variant="outline" title="Try Sandbox" className="flex-center py-1.5 px-3 border!">
             Try Sandbox
             <CodeXml className="ml-1.5 size-5" />
           </Button>
