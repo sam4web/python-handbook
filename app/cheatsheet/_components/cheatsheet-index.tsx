@@ -55,11 +55,11 @@ export default function CheatsheetIndex({ cheatsheetData, topics }: Props) {
           cheatsheetData.map((cheatsheet) => (
             <div id={cheatsheet.slug} className="my-4 md:my-6" key={`${cheatsheet.order} ${cheatsheet.slug}`}>
               <div className="flex-between w-full border-b px-0.5 py-1 md:py-2.5 border-primary">
-                <div className="flex items-center gap-2 md:gap-3">
-                  <p className={`text-2xl md:text-3xl font-medium text-primary ${poppins.className}`}>
+                <div className="flex items-center gap-2.5">
+                  <p className={`text-xl md:text-2xl font-medium text-primary ${poppins.className}`}>
                     {cheatsheet.title}
                   </p>
-                  <div className="bg-muted rounded-sm px-2.5 py-0.5 text-center">
+                  <div className="bg-muted rounded-sm px-2 text-center">
                     <p className="text-base font-semibold">{cheatsheet.items.length}</p>
                   </div>
                 </div>

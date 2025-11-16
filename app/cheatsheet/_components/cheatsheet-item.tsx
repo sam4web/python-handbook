@@ -12,17 +12,7 @@ export default function CheatsheetItem({ item }: { item: ICheatsheetItem }) {
     <div className="card border! group">
       <div className="mb-3">
         <div className={`flex-between ${firacode.className}`}>
-          {item.kind === "function" ? (
-            <span className="py-1">
-              <code className="bg-primary/10 px-2 py-1 rounded-sm text-accent">{item.title}</code>
-            </span>
-          ) : item.kind === "syntax" ? (
-            <span className="py-0.5">
-              <code className="text-accent">{item.title}</code>
-            </span>
-          ) : (
-            <p className="py-1 text-lg font-medium">{item.title}</p>
-          )}
+          <p className="py-1 text-secondary-foreground/90 font-medium">{item.title}</p>
 
           {/* Copy Code Button */}
           <Button

@@ -37,7 +37,7 @@ export default function PracticeIndex({ challenges }: { challenges: IChallengeLi
         {/* Difficulty Options List */}
         <div className="max-w-sm md:max-w-lg mx-auto flex items-start justify-center gap-2">
           <p className="font-medium text-sm text-muted-foreground">Difficulty:</p>
-          <div className="tag-container">
+          <div className="tag-container mx-0">
             {DIFFICULTY_MAP.map((item) => (
               <button
                 key={item.key}
