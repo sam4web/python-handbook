@@ -22,7 +22,7 @@ const features = [
 
 export default function FeaturesSection() {
   return (
-    <section className="bg-muted py-2">
+    <section className="bg-muted md:py-2">
       <div className="section-container">
         <h2 className="section-title">
           Learn Python <span>by Doing</span>

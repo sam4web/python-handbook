@@ -16,9 +16,9 @@ export default function HeroSection() {
           <h1 className="text-4xl lg:text-5xl leading-tight text-secondary-foreground">
             Learn Python the{" "}
             <span className="text-primary">
-              Easy
+              Easy and
               <br className="md:block" />
-              and Interactive Way
+              Interactive Way
             </span>
           </h1>
           <p className="section-description">

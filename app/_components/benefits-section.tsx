@@ -38,9 +38,9 @@ const benefits = [
 
 export default function BenefitsSection() {
   return (
-    <section className="py-2">
+    <section className="md:py-2">
       <div className="section-container">
-        <h2 className="section-title">
+        <h2 className="section-title max-w-md md:max-w-full mx-auto">
           Everything you need to learn python, <span>Built In</span>
         </h2>
         <div className="mt-10 space-y-5 lg:space-y-8">
@@ -76,7 +76,7 @@ export default function BenefitsSection() {
                 <div className="flex-1 w-full pt-0.5">
                   <Image
                     className={cx(
-                      "border border-secondary/50 outline outline-secondary/20 shadow-md rounded-xl overscroll-none sm:max-w-md xl:max-w-xl mx-auto",
+                      "border border-secondary/40 outline outline-secondary/20 shadow-md rounded-xl overscroll-none sm:max-w-md xl:max-w-xl mx-auto",
                       reverse ? "md:mr-auto md:ml-0" : "md:ml-auto md:mr-0"
                     )}
                     width={1500}

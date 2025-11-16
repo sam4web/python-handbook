@@ -109,15 +109,15 @@
 
 @layer components {
   .section-description {
-    @apply text-muted-foreground lg:text-lg max-w-lg lg:max-w-xl mx-auto text-center;
+    @apply text-muted-foreground lg:text-lg max-w-lg lg:max-w-2xl mx-auto text-center;
   }
 
   .section-title {
-    @apply text-3xl lg:text-4xl text-secondary-foreground text-center mb-2 lg:mb-3;
+    @apply text-3xl lg:text-4xl text-secondary-foreground text-center mb-2 lg:mb-3 leading-tight;
   }
 
   .section-container {
-    @apply md:max-w-4xl lg:max-w-7xl mx-auto px-2 md:px-4 py-10;
+    @apply md:max-w-4xl lg:max-w-7xl mx-auto px-2 md:px-4 py-7 md:py-10 text-[15px] lg:text-base;
   }
 
   .section-title > span {

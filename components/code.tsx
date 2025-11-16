@@ -1,9 +1,19 @@
+"use client";
+
 import { firacode } from "@/lib/fonts";
 import { useTheme } from "next-themes";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneDark, atomOneLight } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
-export default function Code({ language, content }: { language: string; content: string }) {
+export default function Code({
+  language,
+  content,
+  className = "",
+}: {
+  language: string;
+  content: string;
+  className?: string;
+}) {
   const { theme } = useTheme();
   const customStyle = {
     margin: 0,
@@ -18,7 +28,7 @@ export default function Code({ language, content }: { language: string; content:
       customStyle={customStyle}
       style={theme === "dark" ? atomOneDark : atomOneLight}
       PreTag="div"
-      className={`styled-scrollbar-sm text-sm overflow-auto ${firacode.className}`}
+      className={`styled-scrollbar-sm text-sm overflow-auto ${firacode.className} ${className}`}
     >
       {content}
     </SyntaxHighlighter>
