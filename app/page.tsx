@@ -247,8 +247,8 @@ export default function HomePage() {
         <div className="section-container py-5 md:py-6">
           <div className="flex-between flex-col md:flex-row gap-y-2">
             <ul className="flex space-x-2 md:space-x-3">
-              {footer_links.map((link) => (
-                <li>
+              {footer_links.map((link, idx) => (
+                <li key={idx}>
                   <Link href={link.href} className="hover:text-primary text-secondary-foreground">
                     {link.title}
                   </Link>

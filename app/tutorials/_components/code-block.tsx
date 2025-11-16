@@ -2,25 +2,12 @@
 
 import Code from "@/components/code";
 import Button from "@/components/ui/button";
+import useCopyToClipboard from "@/hooks/use-copy-to-clipboard";
 import { firacode } from "@/lib/fonts";
 import { Copy, CopyCheck } from "lucide-react";
-import { useState } from "react";
 
 export default function CodeBlock({ language, value }: { language: string; value: string }) {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopyCode = () => {
-    navigator.clipboard
-      .writeText(value)
-      .then(() => {
-        setCopied(true);
-        // alert here
-        setTimeout(() => setCopied(false), 2000);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  const { copied, copyContent } = useCopyToClipboard();
 
   return (
     <div className="bg-muted/65 border-muted-foreground/30 border rounded-lg shadow-muted my-4">
@@ -28,7 +15,7 @@ export default function CodeBlock({ language, value }: { language: string; value
         <p className={`text-muted-foreground text-sm ${firacode.className}`}>{language}</p>
         <Button
           variant="icon"
-          onClick={handleCopyCode}
+          onClick={() => copyContent(value)}
           disabled={copied}
           title="Copy code"
           className="border-none! hover:bg-muted-foreground/10! p-1.5! [&>svg]:size-3.5!"

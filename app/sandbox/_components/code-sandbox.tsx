@@ -13,33 +13,26 @@ import { editor } from "monaco-editor";
 import { useRef, useState } from "react";
 import usePanelResizer from "../_hooks/use-panel-resizer";
 import TemplatesDropdown from "./templates-dropdown";
+import useCopyToClipboard from "@/hooks/use-copy-to-clipboard";
+import { toast } from "sonner";
 
 export default function CodeSandbox({ themes }: { themes: IEditorTheme[] }) {
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const [theme, setTheme] = useState<string | null>(null);
-  const [copied, setCopied] = useState(false);
   const [saved, setSaved] = useState(false);
   const topPanelRef = useRef<HTMLDivElement | null>(null);
   const bottomPanelRef = useRef<HTMLDivElement | null>(null);
   const { activeTheme, themeList } = useEditorTheme(themes);
   const { handleDragStart } = usePanelResizer(topPanelRef, bottomPanelRef);
   const { output, pyodideReady, runPythonCode, running, interruptExecution, setOutput } = usePyodideRunner();
+  const { copied, copyContent } = useCopyToClipboard();
 
   const handleCopyCode = () => {
     if (!output) {
       return;
     }
     const textToCopy = output.replace("...Running Code...\n", "").replaceAll("> ", "");
-    navigator.clipboard
-      .writeText(textToCopy)
-      .then(() => {
-        setCopied(true);
-        // alert here
-        setTimeout(() => setCopied(false), 2000);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    copyContent(textToCopy);
   };
 
   const handleEditorDidMount: OnMount = (editor, monaco) => {
@@ -77,8 +70,7 @@ export default function CodeSandbox({ themes }: { themes: IEditorTheme[] }) {
       return;
     }
     if (!editorRef.current.getValue().trim()) {
-      // toast here
-      console.log("The editor is empty.");
+      toast.error("Editor content is required to run.");
       return;
     }
     runPythonCode(editorRef.current.getValue());

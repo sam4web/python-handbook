@@ -3,6 +3,7 @@ import ThemeProvider from "@/components/theme-provider";
 import { inter } from "@/lib/fonts";
 import type { Metadata } from "next";
 import "./globals.css";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Python Handbook",
@@ -18,6 +19,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} antialiased styled-scrollbar`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <Toaster richColors closeButton />
           <div className="w-full min-h-screen relative">
             <Navbar />
             {children}

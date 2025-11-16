@@ -13,6 +13,7 @@ import { Check, Lightbulb, Loader, OctagonX, Play, RotateCcw, WandSparkles, X } 
 import { editor } from "monaco-editor";
 import { useEffect, useRef, useState } from "react";
 import { IChallenge } from "../../utils/shared";
+import { toast } from "sonner";
 
 type TabsOptions = "output" | "test-cases";
 
@@ -57,8 +58,7 @@ export default function ChallengeExecutionPanel({
     }
     const code = editorRef.current.getValue();
     if (!code.trim()) {
-      // toast here
-      console.log("The editor is empty.");
+      toast.error("Editor content is required to run.");
       return;
     }
     await runTests(code, challenge.testcases, challenge.functionName);

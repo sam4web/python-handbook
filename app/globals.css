@@ -129,7 +129,7 @@
   }
 
   .card {
-    @apply bg-muted/60 px-2 md:px-3.5 pt-1.5 pb-2 md:pb-3.5 rounded-xl shadow-sm relative border-2 border-transparent hover:border-primary hover:-translate-y-1;
+    @apply bg-muted/60 px-2 md:px-3.5 pt-1.5 pb-2 md:pb-3.5 rounded-xl shadow-sm relative border-2 border-transparent hover:border-primary/80 hover:-translate-y-1;
   }
 
   .tag-container {

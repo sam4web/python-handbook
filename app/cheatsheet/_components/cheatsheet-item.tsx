@@ -1,28 +1,15 @@
 import Code from "@/components/code";
 import Button from "@/components/ui/button";
+import useCopyToClipboard from "@/hooks/use-copy-to-clipboard";
 import { firacode } from "@/lib/fonts";
 import { Copy, CopyCheck } from "lucide-react";
-import { useState } from "react";
 import { ICheatsheetItem } from "../utils/shared";
 
 export default function CheatsheetItem({ item }: { item: ICheatsheetItem }) {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopyCode = () => {
-    navigator.clipboard
-      .writeText(item.content)
-      .then(() => {
-        setCopied(true);
-        // alert here
-        setTimeout(() => setCopied(false), 2000);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  const { copied, copyContent } = useCopyToClipboard();
 
   return (
-    <div className="card group">
+    <div className="card border! group">
       <div className="mb-3">
         <div className={`flex-between ${firacode.className}`}>
           {item.kind === "function" ? (
@@ -40,7 +27,7 @@ export default function CheatsheetItem({ item }: { item: ICheatsheetItem }) {
           {/* Copy Code Button */}
           <Button
             variant="icon"
-            onClick={handleCopyCode}
+            onClick={() => copyContent(item.content)}
             disabled={copied}
             title="Copy code"
             className="border-none! hover:bg-muted-foreground/10! rounded-md! p-1.5! hidden group-hover:block [&>svg]:size-3.5!"
