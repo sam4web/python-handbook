@@ -1,0 +1,61 @@
+{
+    "id": "69d8dbcf-da78-4f17-b505-8ea8e9661f90",
+    "title": "Count Word Frequency",
+    "slug": "count-word-frequency",
+    "difficulty": "medium",
+    "description": "Given a string of text, return an object/map where keys are words and values are the frequency (count) of those words. Words should be lowercased and cleaned of punctuation.",
+    "constraints": [
+        "Input is a string.",
+        "Output is a dictionary (object/map).",
+        "Case and punctuation must be ignored."
+    ],
+    "category": [
+        "objects_maps",
+        "strings"
+    ],
+    "examples": [
+        {
+            "input_value": "'Apple banana apple orange.'",
+            "output_value": "{ \"apple\": 2, \"banana\": 1, \"orange\": 1 }",
+            "explanation": "Both 'Apple' and 'apple.' count as the same word, 'apple'."
+        }
+    ],
+    "hints": [
+        "Convert the text to lowercase.",
+        "Remove punctuation before splitting the text into words.",
+        "Use a dictionary to store and increment the count for each word."
+    ],
+    "startercode": "def count_word_frequency(text):\n\treturn {}\n",
+    "solution_code": "import re\nfrom collections import Counter\n\ndef count_word_frequency(text):\n    # Convert to lowercase\n    text = text.lower()\n    \n    # Remove punctuation and split into words (using re.findall to handle various separators)\n    words = re.findall(r'\\b\\w+\\b', text)\n    \n    # Use Counter for the most efficient word counting\n    return dict(Counter(words))\n    \n    # Alternative without Counter:\n    # frequency = {}\n    # for word in words:\n    #     frequency[word] = frequency.get(word, 0) + 1\n    # return frequency\n",
+    "testcases": [
+        {
+            "input": [
+                "Apple banana apple orange."
+            ],
+            "expected_output": {
+                "apple": 2,
+                "banana": 1,
+                "orange": 1
+            }
+        },
+        {
+            "input": [
+                "One two THREE one two."
+            ],
+            "expected_output": {
+                "one": 2,
+                "two": 2,
+                "three": 1
+            }
+        },
+        {
+            "input": [
+                "test"
+            ],
+            "expected_output": {
+                "test": 1
+            }
+        }
+    ],
+    "functionName": "count_word_frequency"
+}

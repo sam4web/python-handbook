@@ -1,0 +1,74 @@
+{
+    "id": "2418f977-6692-43d5-b703-068cf8d6d3f3",
+    "title": "Array Sum and Average",
+    "slug": "array-sum-and-average",
+    "difficulty": "easy",
+    "description": "Calculate the sum and average of all numbers in a given list of integers. Return the result as an object (dictionary) with keys 'sum' and 'average'.",
+    "constraints": [
+        "Input is a list of integers.",
+        "The list will not be empty.",
+        "Average should be a float."
+    ],
+    "category": [
+        "arrays",
+        "math"
+    ],
+    "examples": [
+        {
+            "input_value": "[1, 2, 3, 4, 5]",
+            "output_value": "{ \"sum\": 15, \"average\": 3.0 }",
+            "explanation": "Sum is 1+2+3+4+5=15. Average is 15/5 = 3.0."
+        }
+    ],
+    "hints": [
+        "Use a loop or built-in functions (`sum()`, `len()`) for calculation.",
+        "Ensure the average calculation performs floating-point division."
+    ],
+    "startercode": "def sum_and_average(numbers):\n\treturn { \"sum\": 0, \"average\": 0.0 }\n",
+    "solution_code": "def sum_and_average(numbers):\n    total_sum = sum(numbers)\n    count = len(numbers)\n    \n    # Ensure float division for the average\n    average = total_sum / count\n    \n    return {\n        \"sum\": total_sum,\n        \"average\": average\n    }\n",
+    "testcases": [
+        {
+            "input": [
+                [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                ]
+            ],
+            "expected_output": {
+                "sum": 15,
+                "average": 3.0
+            }
+        },
+        {
+            "input": [
+                [
+                    10,
+                    20,
+                    30
+                ]
+            ],
+            "expected_output": {
+                "sum": 60,
+                "average": 20.0
+            }
+        },
+        {
+            "input": [
+                [
+                    7,
+                    7,
+                    7,
+                    7
+                ]
+            ],
+            "expected_output": {
+                "sum": 28,
+                "average": 7.0
+            }
+        }
+    ],
+    "functionName": "sum_and_average"
+}

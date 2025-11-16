@@ -1,0 +1,52 @@
+{
+    "id": "06c75952-1cd5-47c2-aba2-251377289285",
+    "title": "Reverse a String",
+    "slug": "reverse-a-string",
+    "difficulty": "medium",
+    "description": "Given an input string, return the string with its characters in reverse order.",
+    "constraints": [
+        "Input is a string.",
+        "Output must be a string."
+    ],
+    "category": [
+        "strings"
+    ],
+    "examples": [
+        {
+            "input_value": "'programming'",
+            "output_value": "'gnimmargorp'",
+            "explanation": "The characters are arranged in the opposite order."
+        },
+        {
+            "input_value": "'racecar'",
+            "output_value": "'racecar'"
+        }
+    ],
+    "hints": [
+        "In Python, slicing can achieve this concisely.",
+        "Alternatively, you can iterate backward or use a built-in function like `reversed()`."
+    ],
+    "startercode": "def reverse_string(s):\n\treturn s\n",
+    "solution_code": "def reverse_string(s):\n    # Pythonic solution using slicing\n    return s[::-1]\n    \n    # Alternative using reversed and join:\n    # return \"\".join(reversed(s))\n",
+    "testcases": [
+        {
+            "input": [
+                "programming"
+            ],
+            "expected_output": "gnimmargorp"
+        },
+        {
+            "input": [
+                "hello"
+            ],
+            "expected_output": "olleh"
+        },
+        {
+            "input": [
+                "A"
+            ],
+            "expected_output": "A"
+        }
+    ],
+    "functionName": "reverse_string"
+}

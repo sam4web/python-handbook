@@ -1,0 +1,41 @@
+{
+  "id": "5984de04-6cbe-46b5-ad3f-d3d249629aec",
+  "title": "Rotate Array Left",
+  "slug": "rotate-array-left",
+  "difficulty": "hard",
+  "description": "Rotate the elements of an array to the left by `k` steps. The rotation should be done in-place or return a new rotated array.",
+  "constraints": [
+    "Input is a list of integers.",
+    "k is a non-negative integer.",
+    "If k > array length, k should wrap (k % len(array))."
+  ],
+  "category": ["arrays", "algorithms"],
+  "examples": [
+    {
+      "input_value": "array: [1, 2, 3, 4, 5], k: 2",
+      "output_value": "[3, 4, 5, 1, 2]",
+      "explanation": "Step 1: [2, 3, 4, 5, 1]. Step 2: [3, 4, 5, 1, 2]."
+    }
+  ],
+  "hints": [
+    "First, normalize `k` by taking `k % len(array)`.",
+    "Slicing is the easiest Pythonic solution, but for an in-place solution, consider using `list.pop()` and `list.append()` in a loop."
+  ],
+  "startercode": "def rotate_left(arr, k):\n\treturn arr\n",
+  "solution_code": "def rotate_left(arr, k):\n    n = len(arr)\n    if n == 0:\n        return []\n        \n    # Normalize k\n    k = k % n\n    \n    # Pythonic solution using slicing\n    # The slice from k to the end comes first, followed by the slice from the start up to k\n    return arr[k:] + arr[:k]\n    \n    # Note: For an in-place solution, you would use list.pop(0) and list.append()\n",
+  "testcases": [
+    {
+      "input": [[1, 2, 3, 4, 5], 2],
+      "expected_output": [3, 4, 5, 1, 2]
+    },
+    {
+      "input": [[-1, -100, 3, 99], 1],
+      "expected_output": [-100, 3, 99, -1]
+    },
+    {
+      "input": [[1, 2], 3],
+      "expected_output": [2, 1]
+    }
+  ],
+  "functionName": "rotate_left"
+}

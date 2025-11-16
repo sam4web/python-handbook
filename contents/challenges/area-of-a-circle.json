@@ -1,0 +1,41 @@
+{
+  "id": "994eca80-f5fe-4554-ab93-d4e69499a565",
+  "title": "Area of a Circle",
+  "slug": "area-of-a-circle",
+  "difficulty": "easy",
+  "description": "Calculate the area of a circle given its radius (`r`). Use $\\pi \\approx 3.14159$. Round the result to two decimal places.",
+  "constraints": [
+    "r is a positive float.",
+    "Use $\\pi = 3.14159$.",
+    "Result must be a float rounded to 2 decimal places."
+  ],
+  "category": ["basics", "math"],
+  "examples": [
+    {
+      "input_value": "r = 4.0",
+      "output_value": "50.27",
+      "explanation": "Area = 3.14159 * 4.0^2 = 50.26544. Rounded to two decimal places is 50.27."
+    }
+  ],
+  "hints": [
+    "The formula for the area of a circle is $A = \\pi r^2$.",
+    "Use the built-in `round()` function to handle precision."
+  ],
+  "startercode": "def calculate_area(r):\n\treturn 0.0\n",
+  "solution_code": "import math\n\ndef calculate_area(r):\n    PI = 3.14159\n    area = PI * (r ** 2)\n    return round(area, 2)\n",
+  "testcases": [
+    {
+      "input": [4.0],
+      "expected_output": 50.27
+    },
+    {
+      "input": [1.0],
+      "expected_output": 3.14
+    },
+    {
+      "input": [10.0],
+      "expected_output": 314.16
+    }
+  ],
+  "functionName": "calculate_area"
+}

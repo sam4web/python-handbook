@@ -85,31 +85,66 @@ self.onmessage = async (event) => {
       console.error("Failed to clean up global state (full reset failed):", e);
     }
 
+    const LINKED_LIST_SETUP_CODE = `
+    class ListNode:
+        def __init__(self, val=0, next=None):
+            self.val = val
+            self.next = next
+
+    def _build_list_from_array(arr):
+        if not arr:
+            return None
+        head = ListNode(arr[0])
+        current = head
+        for val in arr[1:]:
+            current.next = ListNode(val)
+            current = current.next
+        return head
+
+    def _convert_list_to_array(head):
+        arr = []
+        current = head
+        while current:
+            arr.append(current.val)
+            current = current.next
+        return arr
+    `;
+
     try {
+      const requiresLinkedListMarshalling = functionName === "reverse_list";
+      if (requiresLinkedListMarshalling) {
+        pyodide.runPython(LINKED_LIST_SETUP_CODE);
+      }
       await pyodide.runPythonAsync(code);
       try {
         const pythonFunction = pyodide.globals.get(functionName);
         if (!pythonFunction) {
           throw new Error(`Use the required function name: '${functionName}'.`);
         }
-
-        const pythonArgs = pyodide.toPy(input);
         let pythonResult = null;
 
-        try {
-          pythonResult = pythonFunction(...pythonArgs);
-        } finally {
-          pythonArgs.destroy();
+        if (requiresLinkedListMarshalling) {
+          const buildList = pyodide.globals.get("_build_list_from_array");
+          const convertList = pyodide.globals.get("_convert_list_to_array");
+          const pyListHead = buildList(input[0]);
+          const pythonResultHead = pythonFunction(pyListHead);
+          pythonResult = convertList(pythonResultHead);
+          buildList.destroy();
+          convertList.destroy();
+        } else {
+          pythonResult = pythonFunction(...input);
         }
 
         if (pythonResult && pythonResult.toJs) {
-          actualOutput = pythonResult.toJs({ dict_converter: Object.fromEntries });
-          if (pythonResult.destroy) {
-            pythonResult.destroy();
+          const resultProxy = pythonResult;
+          actualOutput = resultProxy.toJs({ dict_converter: Object.fromEntries });
+          if (resultProxy.destroy) {
+            resultProxy.destroy();
           }
         } else {
           actualOutput = pythonResult;
         }
+
         pythonFunction.destroy();
 
         const expected = expected_output;
@@ -139,5 +174,6 @@ self.onmessage = async (event) => {
         errorMessage: errorMessage,
       },
     });
+    return;
   }
 };

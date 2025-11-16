@@ -1,0 +1,49 @@
+{
+    "id": "fe590d69-ffe8-4143-9e3a-f1a09df8af9d",
+    "title": "Count Vowels",
+    "slug": "count-vowels",
+    "difficulty": "easy",
+    "description": "Write a function that counts and returns the number of vowels (a, e, i, o, u) in a given string. Case should not matter.",
+    "constraints": [
+        "Input is a string.",
+        "Vowels are 'a', 'e', 'i', 'o', 'u'.",
+        "Must be case-insensitive."
+    ],
+    "category": [
+        "strings"
+    ],
+    "examples": [
+        {
+            "input_value": "'Education'",
+            "output_value": "5",
+            "explanation": "The vowels are E, u, a, i, o. Total count is 5."
+        }
+    ],
+    "hints": [
+        "Convert the entire string to lowercase first.",
+        "Iterate through the string and check if each character is in the set of vowels."
+    ],
+    "startercode": "def count_vowels(text):\n\treturn 0\n",
+    "solution_code": "def count_vowels(text):\n    vowels = \"aeiou\"\n    count = 0\n    \n    # Convert to lowercase to handle case-insensitivity\n    for char in text.lower():\n        if char in vowels:\n            count += 1\n    return count\n",
+    "testcases": [
+        {
+            "input": [
+                "Education"
+            ],
+            "expected_output": 5
+        },
+        {
+            "input": [
+                "Rhythm"
+            ],
+            "expected_output": 0
+        },
+        {
+            "input": [
+                "AEIOU"
+            ],
+            "expected_output": 5
+        }
+    ],
+    "functionName": "count_vowels"
+}

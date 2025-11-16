@@ -1,0 +1,41 @@
+{
+  "id": "a94cd8b6-df59-4eb4-a21e-b453ff7a9845",
+  "title": "Remove Duplicates",
+  "slug": "remove-duplicates",
+  "difficulty": "medium",
+  "description": "Given a list of items, return a new list containing only the unique elements in their original order.",
+  "constraints": [
+    "Input is a list of primitives (integers, strings).",
+    "Output must be a list.",
+    "The order of first appearance must be maintained."
+  ],
+  "category": ["arrays"],
+  "examples": [
+    {
+      "input_value": "[1, 2, 2, 3, 4, 3]",
+      "output_value": "[1, 2, 3, 4]",
+      "explanation": "The second '2' and second '3' are removed, keeping the order of the first appearance."
+    }
+  ],
+  "hints": [
+    "Use a Set or a dictionary to keep track of elements already seen. This ensures O(1) lookups.",
+    "Iterate over the original list and only append to the new list if the element hasn't been seen."
+  ],
+  "startercode": "def remove_duplicates(items):\n\treturn items\n",
+  "solution_code": "def remove_duplicates(items):\n    seen = set()\n    result = []\n    for item in items:\n        if item not in seen:\n            seen.add(item)\n            result.append(item)\n    return result\n    \n    # Note: In Python 3.7+ using a dictionary is also a common trick:\n    # return list(dict.fromkeys(items))\n",
+  "testcases": [
+    {
+      "input": [[1, 2, 2, 3, 4, 3]],
+      "expected_output": [1, 2, 3, 4]
+    },
+    {
+      "input": [["a", "b", "a", "c"]],
+      "expected_output": ["a", "b", "c"]
+    },
+    {
+      "input": [[5, 5, 5, 5]],
+      "expected_output": [5]
+    }
+  ],
+  "functionName": "remove_duplicates"
+}

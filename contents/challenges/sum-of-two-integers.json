@@ -1,0 +1,42 @@
+{
+  "id": "2f476381-6d7f-437d-b128-f37698d84c07",
+  "title": "Sum of Two Integers (Bitwise)",
+  "slug": "sum-of-two-integers",
+  "difficulty": "easy",
+  "description": "Write a function that takes two integer inputs, `a` and `b`, and returns their sum without using the standard '+' or '-' operators. The solution must use bitwise operations.",
+  "constraints": ["-1000 <= a, b <= 1000", "No use of '+' or '-' operators.", "Solve using bitwise operations."],
+  "category": ["basics", "math", "bitwise"],
+  "examples": [
+    {
+      "input_value": "a = 5, b = 3",
+      "output_value": "8",
+      "explanation": "XOR finds the sum without carry, AND finds the carry, and the loop repeats until the carry is 0."
+    },
+    {
+      "input_value": "a = -10, b = 5",
+      "output_value": "-5"
+    }
+  ],
+  "hints": [
+    "Use XOR (^) for the sum without carry.",
+    "Use AND (&) and left shift (<< 1) for the carry.",
+    "Loop until the carry is zero."
+  ],
+  "startercode": "def getSum(a, b):\n\treturn a + b \n",
+  "solution_code": "def getSum(a, b):\n    while b != 0:\n        carry = (a & b) << 1\n        a = a ^ b\n        b = carry\n    return a\n",
+  "testcases": [
+    {
+      "input": [5, 3],
+      "expected_output": 8
+    },
+    {
+      "input": [2, 12],
+      "expected_output": 14
+    },
+    {
+      "input": [-10, 5],
+      "expected_output": -5
+    }
+  ],
+  "functionName": "getSum"
+}

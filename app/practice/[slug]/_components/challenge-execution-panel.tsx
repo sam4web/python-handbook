@@ -125,7 +125,7 @@ export default function ChallengeExecutionPanel({
               className="code-editor-button"
               title="Reset editor"
               onClick={handleResetEditor}
-              disabled={!pyodideReady || running}
+              disabled={running}
             >
               <RotateCcw />
               <span>Reset</span>

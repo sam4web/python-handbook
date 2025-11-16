@@ -1,0 +1,56 @@
+{
+    "id": "83b6391b-6de5-4ad5-b50f-7a11a1bd2f5b",
+    "title": "Longest Word in Sentence",
+    "slug": "longest-word-in-sentence",
+    "difficulty": "hard",
+    "description": "Find and return the longest word in a sentence. If there are ties in length, return the first longest word found. The result should be a cleaned word (no punctuation).",
+    "constraints": [
+        "Input is a string.",
+        "Output is a string.",
+        "Handle punctuation attached to words (e.g., 'word!' should be 'word')."
+    ],
+    "category": [
+        "strings",
+        "arrays"
+    ],
+    "examples": [
+        {
+            "input_value": "'Find the longest word here'",
+            "output_value": "'longest'",
+            "explanation": "The words are 'Find' (4), 'the' (3), 'longest' (7), 'word' (4), 'here' (4). Longest is 'longest'."
+        },
+        {
+            "input_value": "'Hello, world!'",
+            "output_value": "'Hello'",
+            "explanation": "Punctuation is ignored. Both 'Hello' and 'world' are length 5. 'Hello' comes first."
+        }
+    ],
+    "hints": [
+        "Split the sentence into a list of words.",
+        "Clean up punctuation from each word before measuring its length.",
+        "Keep track of the maximum length found so far."
+    ],
+    "startercode": "def find_longest_word(sentence):\n\treturn \"\"\n",
+    "solution_code": "import re\n\ndef find_longest_word(sentence):\n    # Remove punctuation and split into words\n    clean_sentence = re.sub(r'[^\\w\\s]', '', sentence)\n    words = clean_sentence.split()\n    \n    longest_word = \"\"\n    max_length = 0\n    \n    for word in words:\n        if len(word) > max_length:\n            max_length = len(word)\n            longest_word = word\n            \n    return longest_word\n",
+    "testcases": [
+        {
+            "input": [
+                "Find the longest word here"
+            ],
+            "expected_output": "longest"
+        },
+        {
+            "input": [
+                "A quick brown fox"
+            ],
+            "expected_output": "quick"
+        },
+        {
+            "input": [
+                "The longest one, is this word."
+            ],
+            "expected_output": "longest"
+        }
+    ],
+    "functionName": "find_longest_word"
+}

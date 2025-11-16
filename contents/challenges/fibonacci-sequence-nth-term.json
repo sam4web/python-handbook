@@ -1,0 +1,44 @@
+{
+  "id": "567a6dba-4f64-429b-99fa-2ff8d1367028",
+  "title": "Fibonacci Sequence (Nth Term)",
+  "slug": "fibonacci-sequence-nth-term",
+  "difficulty": "hard",
+  "description": "Find the nth term of the Fibonacci sequence, where F(0)=0 and F(1)=1. Optimize for performance using iteration or memoization to avoid redundant calculations.",
+  "constraints": [
+    "Input n is a non-negative integer (n must be between 0 and 30, inclusive, to prevent overflow).",
+    "The solution must be efficient (avoid simple recursion with a running time proportional to 2^n)."
+  ],
+  "category": ["recursion", "algorithms", "dynamic_programming"],
+  "examples": [
+    {
+      "input_value": "n = 7",
+      "output_value": "13",
+      "explanation": "Sequence: 0, 1, 1, 2, 3, 5, 8, **13** (7th term, 0-indexed)."
+    }
+  ],
+  "hints": [
+    "The iterative solution is the most efficient, using only two variables to track the previous two terms.",
+    "If using recursion, use a dictionary (memoization) to store computed results."
+  ],
+  "startercode": "def fibonacci(n):\n\treturn 0\n",
+  "solution_code": "def fibonacci(n):\n    if n <= 1:\n        return n\n    \n    # Iterative solution using dynamic programming approach\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b\n",
+  "testcases": [
+    {
+      "input": [0],
+      "expected_output": 0
+    },
+    {
+      "input": [1],
+      "expected_output": 1
+    },
+    {
+      "input": [7],
+      "expected_output": 13
+    },
+    {
+      "input": [10],
+      "expected_output": 55
+    }
+  ],
+  "functionName": "fibonacci"
+}

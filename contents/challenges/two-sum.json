@@ -1,0 +1,41 @@
+{
+  "id": "fd36b843-ca12-4df4-938b-ac68278685ab",
+  "title": "Two Sum",
+  "slug": "two-sum",
+  "difficulty": "hard",
+  "description": "Given an array of integers (`nums`) and a target sum, return the indices of the two numbers that add up to the target. Assume exactly one solution exists.",
+  "constraints": [
+    "Input is a list of integers.",
+    "Output must be a list of two indices.",
+    "Exactly one solution exists."
+  ],
+  "category": ["arrays", "objects_maps", "algorithms"],
+  "examples": [
+    {
+      "input_value": "nums: [2, 7, 11, 15], target: 9",
+      "output_value": "[0, 1]",
+      "explanation": "nums[0] + nums[1] = 2 + 7 = 9."
+    }
+  ],
+  "hints": [
+    "A brute-force solution is O(n^2), which is too slow.",
+    "Use a hash map (dictionary in Python) to store the value and its index. This reduces complexity to O(n)."
+  ],
+  "startercode": "def twoSum(nums, target):\n\treturn []\n",
+  "solution_code": "def twoSum(nums, target):\n    # Use a dictionary to store {value: index}\n    num_map = {}\n    \n    for i, num in enumerate(nums):\n        complement = target - num\n        \n        # Check if the complement needed is already in the map\n        if complement in num_map:\n            return [num_map[complement], i]\n        \n        # Add the current number and its index to the map\n        num_map[num] = i\n        \n    # As per constraints, a solution always exists, but good practice to handle errors\n    return []\n",
+  "testcases": [
+    {
+      "input": [[2, 7, 11, 15], 9],
+      "expected_output": [0, 1]
+    },
+    {
+      "input": [[3, 2, 4], 6],
+      "expected_output": [1, 2]
+    },
+    {
+      "input": [[3, 3], 6],
+      "expected_output": [0, 1]
+    }
+  ],
+  "functionName": "twoSum"
+}

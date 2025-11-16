@@ -1,0 +1,58 @@
+{
+    "id": "4ca2d37f-eaf8-4862-ad89-7e5d63501f52",
+    "title": "Check Palindrome",
+    "slug": "check-palindrome",
+    "difficulty": "medium",
+    "description": "Determine if a given string is a palindrome (reads the same forwards and backwards, ignoring case and non-alphanumeric characters).",
+    "constraints": [
+        "Must ignore case.",
+        "Must ignore spaces and punctuation/symbols."
+    ],
+    "category": [
+        "strings"
+    ],
+    "examples": [
+        {
+            "input_value": "'A man a plan a canal Panama'",
+            "output_value": "true",
+            "explanation": "After cleaning and lowercasing, the string is 'amanaplanacanalpanama', which is a palindrome."
+        },
+        {
+            "input_value": "'hello'",
+            "output_value": "false"
+        }
+    ],
+    "hints": [
+        "Pre-process the string: convert to lowercase and remove all non-alphanumeric characters.",
+        "Compare the cleaned string to its reversed version."
+    ],
+    "startercode": "def is_palindrome(text):\n\treturn False\n",
+    "solution_code": "import re\n\ndef is_palindrome(text):\n    # 1. Convert to lowercase\n    text = text.lower()\n    \n    # 2. Remove all non-alphanumeric characters (including spaces)\n    clean_text = re.sub(r'[^a-z0-9]', '', text)\n    \n    # 3. Compare with reversed string\n    return clean_text == clean_text[::-1]\n",
+    "testcases": [
+        {
+            "input": [
+                "A man a plan a canal Panama"
+            ],
+            "expected_output": true
+        },
+        {
+            "input": [
+                "madam"
+            ],
+            "expected_output": true
+        },
+        {
+            "input": [
+                "race car"
+            ],
+            "expected_output": true
+        },
+        {
+            "input": [
+                "not a palindrome"
+            ],
+            "expected_output": false
+        }
+    ],
+    "functionName": "is_palindrome"
+}

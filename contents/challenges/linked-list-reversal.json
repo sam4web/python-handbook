@@ -1,0 +1,40 @@
+{
+  "id": "0a32d6b8-43ad-4b60-b137-b5c73ca63b12",
+  "title": "Linked List Reversal",
+  "slug": "linked-list-reversal",
+  "difficulty": "expert",
+  "description": "Reverse a singly linked list in place and return the new head of the list. You will be given the head of the list.",
+  "constraints": [
+    "Must reverse the list in place (O(1) extra space complexity, excluding the input nodes).",
+    "Input is the head of the linked list."
+  ],
+  "category": ["data_structures", "linked_lists", "algorithms"],
+  "examples": [
+    {
+      "input_value": "Head -> 1 -> 2 -> 3 -> 4 -> null",
+      "output_value": "Head -> 4 -> 3 -> 2 -> 1 -> null",
+      "explanation": "The pointers are flipped, and the new head is the original tail."
+    }
+  ],
+  "hints": [
+    "You need three pointers: `prev` (initially null), `current` (initially head), and `next_node` (to save the link before breaking it).",
+    "In each iteration, update the `current` node's `next` pointer to point to `prev`."
+  ],
+  "startercode": "class ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\n\ndef reverse_list(head):\n\treturn head\n",
+  "solution_code": "class ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\n\ndef reverse_list(head):\n    prev = None\n    current = head\n    \n    while current:\n        # 1. Store the next node to avoid losing the rest of the list\n        next_node = current.next\n        \n        # 2. Reverse the current node's pointer\n        current.next = prev\n        \n        # 3. Move pointers one step forward\n        prev = current\n        current = next_node\n        \n    # 'prev' will be the new head when 'current' becomes None\n    return prev\n",
+  "testcases": [
+    {
+      "input": [[1, 2, 3, 4]],
+      "expected_output": [4, 3, 2, 1]
+    },
+    {
+      "input": [[1]],
+      "expected_output": [1]
+    },
+    {
+      "input": [[]],
+      "expected_output": []
+    }
+  ],
+  "functionName": "reverse_list"
+}
