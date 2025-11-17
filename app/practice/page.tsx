@@ -1,6 +1,11 @@
 import { Target } from "lucide-react";
+import { Metadata } from "next";
 import PracticeIndex from "./_components/practice-index";
 import { getAllChallengeListItems } from "./utils/server";
+
+export const metadata: Metadata = {
+  title: "Practice Challenge",
+};
 
 export default function PracticePage() {
   const challenges = getAllChallengeListItems();

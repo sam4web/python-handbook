@@ -1,6 +1,11 @@
 import { NotebookText } from "lucide-react";
+import type { Metadata } from "next";
 import CheatsheetIndex from "./_components/cheatsheet-index";
 import { getCheatsheetData, getCheatsheetTopics } from "./utils/server";
+
+export const metadata: Metadata = {
+  title: "Syntax & Code Reference",
+};
 
 export default function CheatsheetPage() {
   const cheatsheetData = getCheatsheetData();

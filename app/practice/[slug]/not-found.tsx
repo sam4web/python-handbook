@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "not found",
+  title: "Challenge Not Found",
 };
 
 export default function ChallengeNotFoundPage() {

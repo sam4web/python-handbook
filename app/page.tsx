@@ -182,10 +182,10 @@ export default function HomePage() {
                   <div className="flex-1 w-full pt-0.5">
                     <Image
                       className={cx(
-                        "border border-secondary/40 outline outline-secondary/20 shadow-md rounded-xl overscroll-none sm:max-w-md xl:max-w-xl mx-auto object-cover",
+                        "border border-secondary/40 outline outline-secondary/20 shadow-md rounded-xl overscroll-none sm:max-w-md xl:max-w-xl mx-auto aspect-auto object-cover",
                         reverse ? "md:mr-auto md:ml-0" : "md:ml-auto md:mr-0"
                       )}
-                      width={1500}
+                      width={1390}
                       height={800}
                       src={benefit.imageSource}
                       alt={benefit.imageAlt}

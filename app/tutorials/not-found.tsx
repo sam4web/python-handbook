@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "not found",
+  title: "Tutorial Not Found",
 };
 
 export default function TutorialNotFoundPage() {

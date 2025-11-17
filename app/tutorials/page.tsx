@@ -1,5 +1,10 @@
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { getAllTutorialSlugs, getSidebarItems } from "./utils/server";
+
+export const metadata: Metadata = {
+  title: "Tutorials",
+};
 
 export default function TutorialBaseRedirectPage() {
   let firstTutorialSlug;
