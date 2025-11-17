@@ -37,29 +37,29 @@ export default function PracticeIndex({ challenges }: { challenges: IChallengeLi
         {/* Difficulty Options List */}
         <div className="max-w-sm md:max-w-lg mx-auto flex items-start justify-center gap-2">
           <p className="font-medium text-sm text-muted-foreground">Difficulty:</p>
-          <div className="tag-container mx-0">
-            {DIFFICULTY_MAP.map((item) => (
+          <div className="flex-center gap-2">
+            <div className="tag-container mx-0">
+              {DIFFICULTY_MAP.map((item) => (
+                <button
+                  key={item.key}
+                  className={cx("tag cursor-pointer", difficulty === item.key ? "tag-active" : "")}
+                  onClick={() => setDifficulty((prev) => (prev === item.key ? null : item.key))}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+            {/* Clear Difficulty Filter Button */}
+            {difficulty ? (
               <button
-                key={item.key}
-                className={cx("tag cursor-pointer", difficulty === item.key ? "tag-active" : "")}
-                onClick={() => setDifficulty((prev) => (prev === item.key ? null : item.key))}
+                title="Clear difficulty filter"
+                onClick={() => setDifficulty(null)}
+                className="flex items-center gap-1 cursor-pointer bg-destructive rounded-full p-0.5"
               >
-                {item.label}
+                <X className="size-4 text-foreground" />
               </button>
-            ))}
+            ) : null}
           </div>
-          {/* Clear Difficulty Filter Button */}
-          {difficulty ? (
-            <button
-              title="Clear difficulty filter"
-              onClick={() => setDifficulty(null)}
-              className="flex items-center gap-1 cursor-pointer bg-destructive rounded-full p-1"
-            >
-              <X className="size-4 text-foreground" />
-            </button>
-          ) : (
-            ""
-          )}
         </div>
       </div>
 

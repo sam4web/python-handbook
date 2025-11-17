@@ -29,7 +29,7 @@ export default async function TutorialPage({ params }: { params: Promise<{ slug:
       const language = match ? match[1] : "text";
       if (!match) {
         return (
-          <code className={`bg-primary/10 px-2.5 py-1 rounded-sm text-accent ${firacode.className}`}>{children}</code>
+          <code className={`bg-primary/10 px-1.5 py-0.5 rounded-sm text-accent ${firacode.className}`}>{children}</code>
         );
       }
       const codeValue = String(children).replace(/\n$/, "");
@@ -40,18 +40,18 @@ export default async function TutorialPage({ params }: { params: Promise<{ slug:
         {children}
       </blockquote>
     ),
-    h1: ({ children }) => <h1 className="text-3xl font-bold my-4">{children}</h1>,
-    h2: ({ children }) => <h2 className="text-2xl font-semibold my-3">{children}</h2>,
-    h3: ({ children }) => <h3 className="text-xl font-semibold my-3">{children}</h3>,
-    h4: ({ children }) => <h4 className="text-lg font-semibold my-3">{children}</h4>,
-    p: ({ children }) => <p className="my-2 leading-relaxed">{children}</p>,
+    h1: ({ children }) => <h1 className="text-3xl font-bold mt-5 mb-3">{children}</h1>,
+    h2: ({ children }) => <h2 className="text-xl font-semibold mt-4 mb-2">{children}</h2>,
+    h3: ({ children }) => <h3 className="text-lg font-semibold mt-4 mb-2">{children}</h3>,
+    h4: ({ children }) => <h4 className="font-semibold mt-4 mb-2">{children}</h4>,
+    p: ({ children }) => <p className="mb-3 leading-relaxed">{children}</p>,
     a: ({ children, href }) => (
       <Link href={href || ""} className="text-primary underline hover:text-accent">
         {children}
       </Link>
     ),
-    ul: ({ children }) => <ul className="list-disc pl-6 my-2">{children}</ul>,
-    ol: ({ children }) => <ol className="list-decimal pl-6 my-2">{children}</ol>,
+    ul: ({ children }) => <ul className="list-disc pl-6 mb-3">{children}</ul>,
+    ol: ({ children }) => <ol className="list-decimal pl-6 mb-3">{children}</ol>,
     li: ({ children }) => <li className="my-1">{children}</li>,
     table: ({ children }) => (
       <div className="overflow-x-auto border-muted-foreground/30 border rounded-lg shadow-muted my-4">

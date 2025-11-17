@@ -13,9 +13,9 @@ interface Props {
   closeTutorialSidebar: () => void;
 }
 
-export default function SidebarItem({ title, items, closeTutorialSidebar }: Props) {
+export default function SidebarItem({ title, items, closeTutorialSidebar, active: isActive }: Props) {
   const pathname = usePathname();
-  const [active, setActive] = useState(true);
+  const [active, setActive] = useState(isActive || false);
 
   return (
     <div>
@@ -23,14 +23,14 @@ export default function SidebarItem({ title, items, closeTutorialSidebar }: Prop
         className="flex-between py-1 px-2.5 rounded-lg group hover:text-primary"
         onClick={() => setActive((prev) => !prev)}
       >
-        <p className="font-medium">{title}</p>
+        <p>{title}</p>
         <ChevronRight
           className={cx("size-4 text-secondary-foreground group-hover:text-primary", active ? "rotate-90" : "")}
         />
       </div>
 
       {active ? (
-        <div className="ml-5 ">
+        <div className="ml-5 mt-0.5 mb-2">
           {items.map((item, idx) => (
             <Link
               key={idx}
