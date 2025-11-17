@@ -29,7 +29,9 @@ export default async function TutorialPage({ params }: { params: Promise<{ slug:
       const language = match ? match[1] : "text";
       if (!match) {
         return (
-          <code className={`bg-primary/10 px-1.5 py-0.5 rounded-sm text-accent ${firacode.className}`}>{children}</code>
+          <code className={`bg-primary/10 px-1.5 py-0.5 rounded-sm text-accent text-base ${firacode.className}`}>
+            {children}
+          </code>
         );
       }
       const codeValue = String(children).replace(/\n$/, "");

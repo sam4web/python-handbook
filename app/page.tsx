@@ -10,19 +10,21 @@ import Link from "next/link";
 const features = [
   {
     icon: "BookOpen",
-    title: "Interactive Lessons",
+    title: "Interactive Tutorials",
     description:
-      "Step-by-step tutorials with clear explanations and real-world Python examples to build solid foundations.",
+      "Step-by-step tutorials, crafted by the community, with clear explanations and real-world Python examples to build a strong foundation.",
   },
   {
     icon: "Code",
-    title: "Hands-on Practice",
-    description: "Solve challenges, debug code, and get instant feedback. Learn Python by doing, not just reading.",
+    title: "Real-World Practice",
+    description:
+      "Solve practical challenges, debug your solutions, and get instant, structured feedback. We believe in learning Python by doing.",
   },
   {
     icon: "Terminal",
-    title: "Instant Execution",
-    description: "Write and run Python code directly in your browser. No installation needed. See results immediately.",
+    title: "Zero-Setup Execution",
+    description:
+      "Write and execute Python code directly in your browser. No installation or configuration needed just instant results and feedback.",
   },
 ];
 
@@ -32,9 +34,9 @@ const benefits = [
     title: "Structured Python Tutorials",
     icon: "BookOpen",
     description:
-      "Follow a carefully crafted tutorials from Python basics to advanced topics. Each lesson includes clear explanations, practical code examples, and exercises to reinforce your understanding.",
+      "A curated collection of Python topics from core fundamentals to advanced concepts. Each tutorial includes explanations, practical code examples, and step-by-step guidance designed to help you progress confidently.",
     listItems: ["Beginner to advanced", "Clear explanations", "Practical exercises"],
-    imageSource: "/placeholder/image.png",
+    imageSource: "/placeholder/tutorials.png",
     imageAlt: "Screenshot of the Structured Python Tutorials page.",
   },
   {
@@ -42,9 +44,9 @@ const benefits = [
     title: "Python Practice Challenges",
     icon: "Target",
     description:
-      "Test your Python skills with coding challenges at every level. Work with lists, dictionaries, functions, and more. Learn from detailed explanations when you get stuck.",
-    listItems: ["Multiple difficulty levels", "Instant validation", "Detailed hints"],
-    imageSource: "/placeholder/image.png",
+      "Improve your skills through challenges across difficulty levels. Work with lists, loops, functions, logic, and more. Each challenge comes with detailed solutions and explanations.",
+    listItems: ["Multiple difficulty levels", "Practical problem-solving", "Detailed breakdowns"],
+    imageSource: "/placeholder/practice.png",
     imageAlt: "Screenshot of the Python Practice Challenges page.",
   },
   {
@@ -52,9 +54,9 @@ const benefits = [
     title: "Python Sandbox",
     icon: "Code",
     description:
-      "Experiment freely with Python in our sandbox environment. Try different approaches, test your ideas, and build mini-projects without any restrictions.",
-    listItems: ["Unlimited coding", "Save your work", "Share snippets"],
-    imageSource: "/placeholder/image.png",
+      "Experiment freely with Python code in an isolated environment. Test ideas, debug snippets, explore the language, or build small interactive programs all directly in your browser.",
+    listItems: ["Unrestricted Environment", "Instant Playground", "Persistent Workspace"],
+    imageSource: "/placeholder/sandbox.png",
     imageAlt: "Screenshot of the Python Sandbox environment page.",
   },
 ];
@@ -64,7 +66,6 @@ const footer_links = [
   { title: "Cheatsheet", href: "/cheatsheet" },
   { title: "Practice", href: "/practice" },
   { title: "Sandbox", href: "/sandbox" },
-  { title: "Github", href: "http://github.com/sam4web/python-handbook/" },
 ];
 
 export default function HomePage() {
@@ -83,14 +84,14 @@ export default function HomePage() {
             <h1 className="text-4xl lg:text-5xl leading-tight text-secondary-foreground">
               Learn Python the{" "}
               <span className="text-primary">
-                Easy and
+                Easy
                 <br className="md:block" />
-                Interactive Way
+                and Interactive Way
               </span>
             </h1>
             <p className="section-description">
-              Master the fundamentals of Python from syntax to problem-solving all in one clean and structured place. No
-              setup required, just start learning.
+              A platform built for anyone curious about programming. Master Python fundamentals through clear lessons,
+              hands-on coding, and an environment designed for immediate learning and experimentation.
             </p>
           </div>
           <div className="flex-center gap-3 flex-wrap">
@@ -181,7 +182,7 @@ export default function HomePage() {
                   <div className="flex-1 w-full pt-0.5">
                     <Image
                       className={cx(
-                        "border border-secondary/40 outline outline-secondary/20 shadow-md rounded-xl overscroll-none sm:max-w-md xl:max-w-xl mx-auto",
+                        "border border-secondary/40 outline outline-secondary/20 shadow-md rounded-xl overscroll-none sm:max-w-md xl:max-w-xl mx-auto object-cover",
                         reverse ? "md:mr-auto md:ml-0" : "md:ml-auto md:mr-0"
                       )}
                       width={1500}
@@ -205,8 +206,8 @@ export default function HomePage() {
               Built-in Practice <span>Environment</span>
             </h2>
             <p className="section-description text-left ml-0 mr-auto max-w-xl mb-2 md:mb-3.5">
-              No setup required. Write Python code directly in your browser with syntax highlighting, instant feedback,
-              and a distraction-free interface designed for learning.
+              The sandbox is a lightweight, distraction-free Python environment tailored for learning. It includes
+              syntax highlighting, live output, and tools that help make coding simple and intuitive.
             </p>
             <Link href="/sandbox">
               <Button variant="primary">Try Sandbox</Button>
@@ -231,8 +232,8 @@ export default function HomePage() {
           </div>
           <h2 className="text-2xl lg:text-3xl section-title font-medium mb-2">Cheatsheets & References</h2>
           <p className="section-description md:max-w-2xl! mb-5">
-            Quick access to Python syntax, common patterns, and code snippets. Copy and use them in your projects
-            instantly.
+            Access concise Python references, syntax guides, patterns, and commonly used snippets all in one place.
+            Quickly look up information and use it directly in your learning or projects.
           </p>
           <Link href="/cheatsheet">
             <Button variant="outline" title="Try Sandbox" className="py-1.5 px-3 border!">
