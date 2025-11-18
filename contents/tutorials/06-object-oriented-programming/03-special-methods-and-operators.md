@@ -6,10 +6,10 @@ description: Customize object behavior using special methods like __init__, __re
 Special ("dunder") methods allow objects to interact with Python language features and operators.
 
 ## Common special methods
-- `__init__` — constructor
-- `__repr__` — unambiguous representation
-- `__str__` — user-friendly representation
-- `__len__`, `__iter__`, `__contains__` — sequence protocol
+- `__init__` : constructor
+- `__repr__` : unambiguous representation
+- `__str__` : user-friendly representation
+- `__len__`, `__iter__`, `__contains__` : sequence protocol
 
 ## Example: __repr__ and __str__
 ```python

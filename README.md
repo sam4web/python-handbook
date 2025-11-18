@@ -3,6 +3,7 @@
 <img src="app/favicon.ico" width="100" height="100" alt="Python Handbook Logo">
     
 **The Interactive Learning Environment**
+
 **Python Handbook** is a learning platform designed to help beginners and aspiring developers master Python programming. It provides a complete, integrated environment in the browser—no installation, no configuration, just instant coding and learning.
 
 
@@ -39,4 +40,4 @@ Built to support learners starting their Python journey.
 Special thanks to the open-source community for tools, libraries, and inspiration.
 
 
-[Explore the Python Handbook here!](https://pythonhandbook.vercel.io)
+[Explore the Python Handbook here!](https://pythonhandbook.vercel.app/)
