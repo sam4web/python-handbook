@@ -1,6 +1,6 @@
-# Python Handbook
-
 <img src="app/favicon.ico" width="100" height="100" alt="Python Handbook Logo">
+
+# Python Handbook
     
 **The Interactive Learning Environment**
 
