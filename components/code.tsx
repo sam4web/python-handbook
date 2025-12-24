@@ -13,8 +13,8 @@ export default function Code({
   language: string;
   content: string;
   className?: string;
-}) {
-  const { theme } = useTheme();
+}) {  
+  const { resolvedTheme: theme } = useTheme();
   const customStyle = {
     margin: 0,
     paddingLeft: 0,
